@@ -26,6 +26,9 @@ dependencies:
   '@hookform/resolvers':
     specifier: ^3.9.0
     version: 3.9.0(react-hook-form@7.53.0)
+  '@next/env':
+    specifier: ^14.2.11
+    version: 14.2.11
   '@prisma/client':
     specifier: ^5.19.1
     version: 5.19.1
