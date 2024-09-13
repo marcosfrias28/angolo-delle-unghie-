@@ -26,6 +26,11 @@ const nextConfig = {
       hostname: 'utfs.io',
       port: '',
       pathname: '/**'
+    }, {
+      protocol: 'https',
+      hostname: 'images.opencollective.com',
+      port: '',
+      pathname: '/**'
     }]
   }
 };

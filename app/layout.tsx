@@ -6,6 +6,9 @@ import { Analytics } from "@vercel/analytics/react";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
+import NavBar from "@/components/wrapper/navbar";
+import Footer from "@/components/wrapper/footer";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://starter.rasmic.xyz"),
@@ -44,7 +47,7 @@ export default function RootLayout({
 }) {
   return (
     <AuthWrapper>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="it" suppressHydrationWarning>
         <head>
           <link
             rel="preload"
@@ -65,6 +68,7 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
             >
+              <NavBar />
               {children}
               <Toaster />
             </ThemeProvider>

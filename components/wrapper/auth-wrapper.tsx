@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import config from "@/config";
+import { itIT } from "@clerk/localizations";
 
 interface AuthWrapperProps {
   children: ReactNode;
@@ -11,7 +12,14 @@ const AuthWrapper = ({ children }: AuthWrapperProps) => {
     return <>{children}</>;
   }
 
-  return <ClerkProvider>{children}</ClerkProvider>;
+  return (
+    <ClerkProvider
+      localization={itIT}
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
+      {children}
+    </ClerkProvider>
+  );
 };
 
 export default AuthWrapper;
