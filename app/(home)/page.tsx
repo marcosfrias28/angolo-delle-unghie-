@@ -22,9 +22,11 @@ export default function Home() {
       <div className="max-w-[1200px] p-8 mt-[2rem] lg:mt-[6rem] lg:mb-[5rem]">
         <BlogSample />
       </div>
-      {(config.auth.enabled && config.payments.enabled) && <div>
-        <Pricing />
-      </div>}
+      {config.auth.enabled && config.payments.enabled && (
+        <div>
+          <Pricing />
+        </div>
+      )}
       <div className="flex justify-center items-center w-full my-[8rem]">
         <AccordionComponent />
       </div>

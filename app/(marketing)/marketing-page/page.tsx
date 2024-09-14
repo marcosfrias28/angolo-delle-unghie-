@@ -3,9 +3,10 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { VideoPlayer } from "@/components/video-player";
 import PageWrapper from "@/components/wrapper/page-wrapper";
+import config from "@/config";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://starter.rasmic.xyz"),
+  metadataBase: new URL(config.baseUrl),
   keywords: [""],
   title: "Marketing page",
   openGraph: {

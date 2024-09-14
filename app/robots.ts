@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next'
+import config from "@/config";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -7,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/dashboard/',
     },
-    sitemap: 'https://starter.rasmic.xyz/sitemap.xml',
+    sitemap: config.baseUrl + '/sitemap.xml',
   }
 }

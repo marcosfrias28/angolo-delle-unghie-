@@ -10,7 +10,7 @@ import NavBar from "@/components/wrapper/navbar";
 import config from "@/config";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://starter.rasmic.xyz"),
+  metadataBase: new URL(config.baseUrl),
   title: {
     default: config.websiteName,
     template: `%s | ${config.websiteName}`,
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     images: [
       "https://utfs.io/f/8a428f85-ae83-4ca7-9237-6f8b65411293-eun6ii.png",
     ],
-    url: "https://starter.rasmic.xyz/",
+    url: config.baseUrl,
   },
   twitter: {
     card: "summary_large_image",

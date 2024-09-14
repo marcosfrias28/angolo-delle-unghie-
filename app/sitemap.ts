@@ -1,4 +1,5 @@
 import { getAllBlogs } from "../utils/functions/blog/get-all-blogs";
+import config from "@/config";
 
 type BlogPost = {
   slug: string;
@@ -9,18 +10,18 @@ type SitemapEntry = {
   url: string;
   lastModified: string;
   changeFrequency:
-    | "always"
-    | "hourly"
-    | "daily"
-    | "weekly"
-    | "monthly"
-    | "yearly"
-    | "never";
+  | "always"
+  | "hourly"
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "yearly"
+  | "never";
   priority?: number;
 };
 
 export default async function sitemap(): Promise<SitemapEntry[]> {
-  const baseUrl = "https://starter.rasmic.xyz";
+  const baseUrl = config.baseUrl;
 
   let blogPosts: SitemapEntry[] = [];
   try {

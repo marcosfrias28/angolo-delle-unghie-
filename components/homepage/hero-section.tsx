@@ -1,21 +1,27 @@
+"use client";
+
 import { ArrowRight, Github } from "lucide-react";
 import Link from "next/link";
 import { BorderBeam } from "../magicui/border-beam";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { TITLE_TAILWIND_CLASS } from "@/utils/constants";
 import config from "@/config";
+import HeroLogo from "@/app/(home)/_components/hero-logo";
 
 export default function HeroSection() {
   return (
     <section
-      className="flex flex-col items-center justify-center leading-6 mt-[3rem]"
-      aria-label="{config.websiteName} Hero"
+      className="flex flex-col items-center justify-center leading-6"
+      aria-label={`${config.websiteName} Hero`}
     >
+      <div className="-mt-10 w-screen flex flex-nowrap">
+        <HeroLogo direction="left" imageSrc="/hero-logo.svg" />
+        <HeroLogo direction="right" imageSrc="/hero-logo-rose.svg" />
+      </div>
       <h1
-        className={`${TITLE_TAILWIND_CLASS} scroll-m-20 font-semibold tracking-tight text-center max-w-[1120px] bg-gradient-to-b dark:text-white`}
+        className={`title-tailwind-class scroll-m-20 font-semibold tracking-tight text-center max-w-[1120px] bg-gradient-to-b dark:text-white`}
       >
-        {config.websiteName}: Build & Ship Fast
+        {config.websiteName}
       </h1>
       <p className="mx-auto max-w-[700px] text-gray-500 text-center mt-2 dark:text-gray-400">
         The Ultimate Nextjs 14 Starter Kit for quickly building your SaaS,
@@ -53,7 +59,7 @@ export default function HeroSection() {
           <div className="relative rounded-xl">
             <Image
               src="https://utfs.io/f/31dba2ff-6c3b-4927-99cd-b928eaa54d5f-5w20ij.png"
-              alt="{config.websiteName} Dashboard Preview"
+              alt={`${config.websiteName} Dashboard Preview`}
               width={1100}
               height={550}
               priority={true}
@@ -63,11 +69,11 @@ export default function HeroSection() {
               src="https://utfs.io/f/69a12ab1-4d57-4913-90f9-38c6aca6c373-1txg2.png"
               width={1100}
               height={550}
-              alt="{config.websiteName} Dark Mode Dashboard Preview"
+              alt={`${config.websiteName} Dark Mode Dashboard Preview`}
               priority={true}
               className="dark:block rounded-[inherit] border object-contain shadow-lg hidden"
             />
-            <BorderBeam size={250} duration={12} delay={9} />
+            <BorderBeam size={400} duration={12} delay={9} />
           </div>
         </div>
       </div>

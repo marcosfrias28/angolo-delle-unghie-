@@ -35,6 +35,22 @@ const config: Config = {
       },
       // Merging colors, borderRadius, keyframes, and animation from the second file
       colors: {
+        roseGold: {
+          light: 'rgb(244, 194, 194)', // Light Rose Gold
+          DEFAULT: 'rgb(183, 110, 121)', // Rose Gold Base
+          dark: 'rgb(161, 96, 114)', // Dark Rose Gold
+          metallic: 'rgb(228, 183, 180)', // Metallic Rose Gold
+          accent: 'rgb(255, 228, 225)', // Soft Pink Accent
+        },
+        warmWhite: 'rgb(253, 248, 246)', // Complementary White
+        softWhite: {
+          50: '#fafafa',   // Almost white
+          100: '#f5f5f5',   // Soft white
+          200: '#eeeeee',   // Light grayish white
+          300: '#e0e0e0',   // Soft gray
+          400: '#bdbdbd',   // Light gray
+          500: '#9e9e9e',   // Mid gray
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
