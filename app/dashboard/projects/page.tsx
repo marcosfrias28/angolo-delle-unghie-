@@ -1,5 +1,6 @@
-import { Button } from '@/components/ui/button'
-import React from 'react'
+import { Button } from "@/components/ui/button";
+import React from "react";
+import config from "@/config";
 
 export default function ProjectsPage() {
   return (
@@ -10,10 +11,11 @@ export default function ProjectsPage() {
             You have no projects
           </h1>
           <p className="text-sm text-muted-foreground mb-3">
-            Projects will show when you start using Nextjs Starter Kit
+            Projects will show when you start using {config.websiteName}
           </p>
           <Button>Create Project</Button>
         </div>
       </div>
-    </main>)
+    </main>
+  );
 }

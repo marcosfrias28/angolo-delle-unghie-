@@ -1,4 +1,12 @@
 const config = {
+  websiteName: "Angolo Delle Unghie",
+  websiteDescription:
+    "Angolo Delle Unghie è un'applicazione web che permette di gestire l'angolo delle unghie di un'azienda.",
+  websiteUrl: "https://angolodelleunghie.it",
+  websiteLogo: "/logo-lightmode.png",
+  websiteFavicon: "/favicon.ico",
+  githubUrl: "https://github.com/marcosfrias28/angolo-delle-unghie-",
+  email: "marcosmarcoscc@gmail.com",
   auth: {
     enabled: true,
   },
@@ -7,4 +15,6 @@ const config = {
   },
 };
 
-export default config;
+export default {
+  ...config,
+};

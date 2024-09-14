@@ -7,14 +7,13 @@ import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/wrapper/navbar";
-import Footer from "@/components/wrapper/footer";
-import Script from "next/script";
+import config from "@/config";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://starter.rasmic.xyz"),
   title: {
-    default: "Nextjs Starter Kit ",
-    template: `%s | Nextjs Starter Kit`,
+    default: config.websiteName,
+    template: `%s | ${config.websiteName}`,
   },
   description:
     "The Ultimate Nextjs 14 Starter Kit for quickly building your SaaS, giving you time to focus on what really matters",
@@ -28,12 +27,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nextjs Starter Kit",
-    description:
-      "The Ultimate Nextjs 14 Starter Kit for quickly building your SaaS, giving you time to focus on what really matters",
-    siteId: "",
-    creator: "@rasmic",
-    creatorId: "",
+    title: config.websiteName,
+    description: config.websiteDescription,
     images: [
       "https://utfs.io/f/8a428f85-ae83-4ca7-9237-6f8b65411293-eun6ii.png",
     ],

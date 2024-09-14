@@ -1,6 +1,19 @@
-"use client"
-import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
-import { Maximize, Minimize, Pause, Play, Volume2, VolumeX } from 'lucide-react';
+"use client";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
+import {
+  Maximize,
+  Minimize,
+  Pause,
+  Play,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
 
 interface CustomVideoPlayerProps {
   videoSrc: string;
@@ -100,16 +113,20 @@ export const VideoPlayer: React.FC<CustomVideoPlayerProps> = ({ videoSrc }) => {
 
   const togglePlay = useCallback(() => {
     if (!videoRef.current) return;
-    videoRef.current[isPlaying ? 'pause' : 'play']();
+    videoRef.current[isPlaying ? "pause" : "play"]();
     setIsPlaying(!isPlaying);
   }, [isPlaying]);
 
-  const handleProgressChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!videoRef.current) return;
-    const newTime = (Number(e.target.value) / 100) * videoRef.current.duration;
-    videoRef.current.currentTime = newTime;
-    setProgress(Number(e.target.value));
-  }, []);
+  const handleProgressChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!videoRef.current) return;
+      const newTime =
+        (Number(e.target.value) / 100) * videoRef.current.duration;
+      videoRef.current.currentTime = newTime;
+      setProgress(Number(e.target.value));
+    },
+    []
+  );
 
   const toggleMute = useCallback(() => {
     if (!videoRef.current) return;
@@ -118,14 +135,17 @@ export const VideoPlayer: React.FC<CustomVideoPlayerProps> = ({ videoSrc }) => {
     setVolume(isMuted ? currentVolume : 0);
   }, [isMuted, currentVolume]);
 
-  const handleVolumeChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!videoRef.current) return;
-    const newVolume = Number(e.target.value);
-    videoRef.current.volume = newVolume;
-    setVolume(newVolume);
-    setCurrentVolume(newVolume);
-    setIsMuted(newVolume === 0);
-  }, []);
+  const handleVolumeChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!videoRef.current) return;
+      const newVolume = Number(e.target.value);
+      videoRef.current.volume = newVolume;
+      setVolume(newVolume);
+      setCurrentVolume(newVolume);
+      setIsMuted(newVolume === 0);
+    },
+    []
+  );
 
   const toggleFullscreen = useCallback(() => {
     if (!playerRef.current) return;
@@ -137,7 +157,10 @@ export const VideoPlayer: React.FC<CustomVideoPlayerProps> = ({ videoSrc }) => {
   }, []);
 
   return (
-    <div ref={playerRef} className="flex flex-col justify-center items-center max-w-full relative mb-16">
+    <div
+      ref={playerRef}
+      className="flex flex-col justify-center items-center max-w-full relative mb-16"
+    >
       <div className="relative w-full">
         <video
           ref={videoRef}
@@ -148,22 +171,30 @@ export const VideoPlayer: React.FC<CustomVideoPlayerProps> = ({ videoSrc }) => {
           Your browser does not support the video tag.
         </video>
         {!isPlaying && (
-          <div className="absolute inset-0 flex items-center justify-center" onClick={togglePlay}>
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            onClick={togglePlay}
+          >
             <Play size={64} className="text-white opacity-50" />
           </div>
         )}
       </div>
-      <div className={`
+      <div
+        className={`
           text-white
          bg-black bg-opacity-50
           p-2 w-full absolute
           bottom-0
           left-0
           transition-opacity duration-300 ease-in-out
-          ${showControls ? 'opacity-100' : 'opacity-0'}
-        `}>
+          ${showControls ? "opacity-100" : "opacity-0"}
+        `}
+      >
         <div className="flex items-center justify-between">
-          <button onClick={togglePlay} className="p-1 bg-transparent border-none cursor-pointer flex items-center justify-center mr-0 text-inherit">
+          <button
+            onClick={togglePlay}
+            className="p-1 bg-transparent border-none cursor-pointer flex items-center justify-center mr-0 text-inherit"
+          >
             {isPlaying ? <Pause size={20} /> : <Play size={20} />}
           </button>
           <input
