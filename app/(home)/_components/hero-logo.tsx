@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { FC } from "react";
 import config from "@/config";
@@ -13,18 +15,24 @@ interface HeroLogoProps {
 const HeroLogo: FC<HeroLogoProps> = ({ direction, imageSrc }) => {
   const isLeft = direction === "left";
   useGSAP(() => {
-    gsap.to(".banner-letter", {
-      opacity: 1,
-      duration: 2,
-      ease: "power4.out",
-    });
+    gsap.fromTo(
+      ".banner-letter",
+      { scale: 0.1, opacity: 0.5 },
+      {
+        scale: 1,
+        opacity: 1,
+      }
+    );
   }, []);
 
   return (
     <div
       className={cn(
+        "hero-logo",
         "[width:50vw] h-screen overflow-hidden grid",
-        isLeft ? "bg-roseGold-metallic" : "bg-warmWhite"
+        isLeft
+          ? "bg-gradient-to-b from-roseGold-metallic from-70% to-transparent"
+          : "bg-gradient-to-b from-warmWhite from-70% to-transparent"
       )}
     >
       <div

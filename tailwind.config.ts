@@ -2,7 +2,6 @@ import type { Config } from "tailwindcss";
 
 const svgToDataUri = require("mini-svg-data-uri");
 
-const colors = require("tailwindcss/colors");
 const {
   default: flattenColorPalette,
 } = require("tailwindcss/lib/util/flattenColorPalette");
@@ -35,10 +34,11 @@ const config: Config = {
       },
       // Merging colors, borderRadius, keyframes, and animation from the second file
       colors: {
+        rose: 'rgb(183, 110, 121)',
         roseGold: {
           light: 'rgb(244, 194, 194)', // Light Rose Gold
           DEFAULT: 'rgb(183, 110, 121)', // Rose Gold Base
-          dark: 'rgb(161, 96, 114)', // Dark Rose Gold
+          dark: 'rgba(244, 194, 194, 0.7)', // Dark Rose Gold
           metallic: 'rgb(228, 183, 180)', // Metallic Rose Gold
           accent: 'rgb(255, 228, 225)', // Soft Pink Accent
         },
@@ -106,9 +106,8 @@ const config: Config = {
         },
         "logo-cloud": {
           from: { transform: "translateX(0)" },
-          to: { transform: "translateX(calc(-100% - 4rem))" },
+          to: { transform: "translateX(calc(-100% - 50rem))" },
         },
-
         orbit: {
           "0%": {
             transform:
@@ -117,6 +116,22 @@ const config: Config = {
           "100%": {
             transform:
               "rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)",
+          },
+        },
+        meteor: {
+          "0%": { transform: "rotate(290deg) translateX(0)", opacity: "1" },
+          "70%": { opacity: "1" },
+          "100%": {
+            transform: "rotate(290deg) translateX(-1440px)",
+            opacity: "0",
+          },
+        },
+        meteorMobile: {
+          "0%": { transform: "rotate(300deg) translateX(0)", opacity: "1" },
+          "70%": { opacity: "1" },
+          "100%": {
+            transform: "rotate(300deg) translateX(-1440px)",
+            opacity: "0",
           },
         },
         gradient: {
@@ -142,24 +157,28 @@ const config: Config = {
         },
         buttonheartbeat: {
           "0%": {
-            "box-shadow": '0 0 0 0 theme("colors.blue.500")',
-            transform: "scale(1)",
+            "box-shadow": '0 0 0 0 theme("colors.rose")',
           },
           "50%": {
-            "box-shadow": '0 0 0 7px theme("colors.blue.500/0")',
-            transform: "scale(1.05)",
+            "box-shadow": '0 0 0 7px theme("colors.rose/0")',
           },
           "100%": {
-            "box-shadow": '0 0 0 0 theme("colors.blue.500/0")',
-            transform: "scale(1)",
+            "box-shadow": '0 0 0 0 theme("colors.rose/0")',
           },
         },
+      },
+      transitionDuration: {
+        "400": "400ms",
+        "500": "500ms",
+        "600": "600ms",
       },
       animation: {
         "logo-cloud": "logo-cloud 30s linear infinite", // Adjust duration and timing as needed for your design.
         orbit: "orbit calc(var(--duration)*1s) linear infinite",
         gradient: "gradient 8s linear infinite",
         shimmer: "shimmer 8s infinite",
+        meteor: "meteor 5s linear infinite",
+        meteorMobile: "meteorMobile 5s linear infinite",
         buttonheartbeat: "buttonheartbeat 2s infinite ease-in-out",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
