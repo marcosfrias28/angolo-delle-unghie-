@@ -62,7 +62,6 @@ export default function SideBySide() {
           start: "top 400px",
           end: "200px top",
           scrub: true,
-          markers: true,
         },
       }
     );
