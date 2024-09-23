@@ -90,6 +90,7 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+
       keyframes: {
         "background-shine": {
           from: {
@@ -97,6 +98,17 @@ const config: Config = {
           },
           to: {
             backgroundPosition: "-200% 0",
+          },
+        },
+        "bounce-more": {
+          "0%": {
+            transform: "translateY(0px)"
+          },
+          "50%": {
+            transform: "translateY(30px)"
+          },
+          "100%": {
+            transform: "translateY(0px)"
           },
         },
         "border-beam": {
@@ -119,16 +131,14 @@ const config: Config = {
           },
         },
         meteor: {
-          "0%": { transform: "rotate(290deg) translateX(0)", opacity: "1" },
-          "70%": { opacity: "1" },
+          "0%": { transform: "rotate(290deg) translateX(0)" },
           "100%": {
             transform: "rotate(290deg) translateX(-1440px)",
             opacity: "0",
           },
         },
         meteorMobile: {
-          "0%": { transform: "rotate(300deg) translateX(0)", opacity: "1" },
-          "70%": { opacity: "1" },
+          "0%": { transform: "rotate(300deg) translateX(0)" },
           "100%": {
             transform: "rotate(300deg) translateX(-1440px)",
             opacity: "0",
@@ -179,7 +189,8 @@ const config: Config = {
         shimmer: "shimmer 8s infinite",
         meteor: "meteor 5s linear infinite",
         meteorMobile: "meteorMobile 5s linear infinite",
-        buttonheartbeat: "buttonheartbeat 2s infinite ease-in-out",
+        buttonheartbeat: "buttonheartbeat 2s infinite ease-in-out reverse",
+        "bounce-more": "bounce-more 3s infinite ease-in-out",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",

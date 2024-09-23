@@ -68,6 +68,11 @@
   }
 }
 
+.mask-gradient {
+  mask-image: linear-gradient(to bottom, black 70%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent);
+}
+
 .title-tailwind-class {
   @apply text-2xl sm:text-2xl md:text-3xl lg:text-4xl;
 }

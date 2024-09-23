@@ -58,7 +58,10 @@ export default function NavBar() {
   }
 
   return (
-    <div className="flex min-w-full fixed justify-between p-2 border-b z-10 dark:bg-black dark:bg-opacity-50 bg-white">
+    <div
+      id="navbar"
+      className=" flex min-w-full fixed justify-between p-2 border-b z-30 dark:bg-black dark:bg-opacity-50 bg-white"
+    >
       <div className="flex justify-between w-full min-[825px]:hidden">
         <Dialog>
           <SheetTrigger className="p-2 transition">

@@ -2,28 +2,33 @@ import {
   pgTable,
   serial,
   text,
-  uuid,
   varchar,
   numeric,
   timestamp,
+  boolean,
+  date,
 } from "drizzle-orm/pg-core";
+import { Phone } from "lucide-react";
 
-// Users Table
-export const users = pgTable("users", {
-  id: uuid("id").primaryKey(),
-  email: varchar("email", { length: 256 }),
-  fullName: text("full_name"),
-  phone: varchar("phone", { length: 256 }),
-  password: text("password"),
-  createdAt: timestamp("created_at").defaultNow(),
+// Definir la tabla de usuarios
+export const users = pgTable('users', {
+  user_id: varchar('user_id', { length: 256 }).primaryKey(), // id del usuario desde Clerk
+  first_name: text('first_name').notNull(), // Nombre
+  last_name: text('last_name').notNull(), // Apellido
+  email: text('email').notNull(), // Dirección de correo principal
+  profile_image_url: text('profile_image_url'), // URL de la imagen de perfil
+  gender: text('gender'), // Género (puede estar vacío)
+  id: serial('id'),
+  Phone: text('phone'),
 });
+
 
 // Posts Table
 export const posts = pgTable("posts", {
   id: serial("id").primaryKey(),
   title: text("title"),
   content: text("content"),
-  author: uuid("author").references(() => users.id),
+  author: varchar("author", { length: 256 }).references(() => users.user_id),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
@@ -38,7 +43,7 @@ export const portfolio = pgTable("portfolio", {
 // Appointments Table
 export const appointments = pgTable("appointments", {
   id: serial("id").primaryKey(),
-  userId: uuid("user_id").references(() => users.id),
+  userId: varchar("user_id", { length: 256 }).references(() => users.user_id),
   appointmentDate: timestamp("appointment_date"),
   serviceType: text("service_type"),
   status: text("status"),
@@ -55,7 +60,7 @@ export const services = pgTable("services", {
 // Reviews Table
 export const reviews = pgTable("reviews", {
   id: serial("id").primaryKey(),
-  userId: uuid("user_id").references(() => users.id),
+  userId: varchar("user_id", { length: 256 }).references(() => users.user_id),
   rating: numeric("rating"),
   comment: text("comment"),
   createdAt: timestamp("created_at").defaultNow(),
@@ -76,11 +81,11 @@ export const payments = pgTable('payments', {
   createdTime: timestamp('created_time').defaultNow(),
   stripeId: varchar('stripe_id', { length: 256 }),
   email: varchar('email', { length: 256 }),
-  amount: varchar('amount', { length: 256 }), // You can adjust this based on how you store the amount
-  paymentTime: varchar('payment_time', { length: 256 }), // Consider converting to `timestamp`
-  paymentDate: varchar('payment_date', { length: 256 }), // Consider converting to `date`
+  amount: varchar('amount', { length: 256 }),
+  paymentTime: timestamp('payment_time'),
+  paymentDate: date('payment_date').defaultNow(),
   currency: varchar('currency', { length: 256 }),
-  userId: varchar('user_id', { length: 256 }),
+  userId: varchar('user_id', { length: 256 }).references(() => users.user_id),
   customerDetails: varchar('customer_details', { length: 256 }),
   paymentIntent: varchar('payment_intent', { length: 256 }),
 });
@@ -92,12 +97,12 @@ export const subscriptions = pgTable('subscriptions', {
   subscriptionId: varchar('subscription_id', { length: 256 }),
   stripeUserId: varchar('stripe_user_id', { length: 256 }),
   status: varchar('status', { length: 256 }),
-  startDate: varchar('start_date', { length: 256 }), // Consider converting to `date`
-  endDate: varchar('end_date', { length: 256 }), // Nullable date
+  startDate: date('start_date').defaultNow(),
+  endDate: date('end_date'), // Nullable date
   planId: varchar('plan_id', { length: 256 }),
   defaultPaymentMethodId: varchar('default_payment_method_id', { length: 256 }),
   email: varchar('email', { length: 256 }),
-  userId: varchar('user_id', { length: 256 }),
+  userId: varchar('user_id', { length: 256 }).references(() => users.user_id),
 });
 
 // Subscription Plans Table
@@ -123,7 +128,7 @@ export const invoices = pgTable('invoices', {
   currency: varchar('currency', { length: 256 }),
   status: varchar('status', { length: 256 }),
   email: varchar('email', { length: 256 }),
-  userId: varchar('user_id', { length: 256 }),
+  userId: varchar('user_id', { length: 256 }).references(() => users.user_id),
 });
 
 // Type Inference

@@ -1,5 +1,5 @@
 {
-  "id": "205859cb-3eae-485b-bb92-0f02cea4a8e8",
+  "id": "4b626d67-eef9-4528-9234-a18063ed7647",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -16,7 +16,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "uuid",
+          "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
         },
@@ -41,15 +41,15 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "appointments_user_id_users_id_fk": {
-          "name": "appointments_user_id_users_id_fk",
+        "appointments_user_id_users_user_id_fk": {
+          "name": "appointments_user_id_users_user_id_fk",
           "tableFrom": "appointments",
           "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
           "columnsTo": [
-            "id"
+            "user_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -160,7 +160,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "invoices_user_id_users_user_id_fk": {
+          "name": "invoices_user_id_users_user_id_fk",
+          "tableFrom": "invoices",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -201,15 +215,16 @@
         },
         "payment_time": {
           "name": "payment_time",
-          "type": "varchar(256)",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         },
         "payment_date": {
           "name": "payment_date",
-          "type": "varchar(256)",
+          "type": "date",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "now()"
         },
         "currency": {
           "name": "currency",
@@ -237,7 +252,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "payments_user_id_users_user_id_fk": {
+          "name": "payments_user_id_users_user_id_fk",
+          "tableFrom": "payments",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -300,7 +329,7 @@
         },
         "author": {
           "name": "author",
-          "type": "uuid",
+          "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
         },
@@ -314,15 +343,15 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "posts_author_users_id_fk": {
-          "name": "posts_author_users_id_fk",
+        "posts_author_users_user_id_fk": {
+          "name": "posts_author_users_user_id_fk",
           "tableFrom": "posts",
           "tableTo": "users",
           "columnsFrom": [
             "author"
           ],
           "columnsTo": [
-            "id"
+            "user_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -343,7 +372,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "uuid",
+          "type": "varchar(256)",
           "primaryKey": false,
           "notNull": false
         },
@@ -369,15 +398,15 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "reviews_user_id_users_id_fk": {
-          "name": "reviews_user_id_users_id_fk",
+        "reviews_user_id_users_user_id_fk": {
+          "name": "reviews_user_id_users_user_id_fk",
           "tableFrom": "reviews",
           "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
           "columnsTo": [
-            "id"
+            "user_id"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -516,13 +545,14 @@
         },
         "start_date": {
           "name": "start_date",
-          "type": "varchar(256)",
+          "type": "date",
           "primaryKey": false,
-          "notNull": false
+          "notNull": false,
+          "default": "now()"
         },
         "end_date": {
           "name": "end_date",
-          "type": "varchar(256)",
+          "type": "date",
           "primaryKey": false,
           "notNull": false
         },
@@ -552,7 +582,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "subscriptions_user_id_users_user_id_fk": {
+          "name": "subscriptions_user_id_users_user_id_fk",
+          "tableFrom": "subscriptions",
+          "tableTo": "users",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "user_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -560,42 +604,53 @@
       "name": "users",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
+        "user_id": {
+          "name": "user_id",
+          "type": "varchar(256)",
           "primaryKey": true,
+          "notNull": true
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "text",
+          "primaryKey": false,
           "notNull": true
         },
         "email": {
           "name": "email",
-          "type": "varchar(256)",
+          "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
-        "full_name": {
-          "name": "full_name",
+        "profile_image_url": {
+          "name": "profile_image_url",
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "gender": {
+          "name": "gender",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": false,
+          "notNull": true
         },
         "phone": {
           "name": "phone",
-          "type": "varchar(256)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "password": {
-          "name": "password",
           "type": "text",
           "primaryKey": false,
           "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
         }
       },
       "indexes": {},

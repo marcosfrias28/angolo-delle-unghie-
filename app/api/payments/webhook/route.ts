@@ -67,7 +67,7 @@ async function handleSubscriptionEvent(
       .select());
     if (!error) {
       const { error: userError } = await supabase
-        .from("user")
+        .from("users")
         .update({ subscription: null })
         .eq("email", customerEmail);
       if (userError) {
@@ -81,9 +81,9 @@ async function handleSubscriptionEvent(
   } else {
     ({ data, error } = await supabase
       .from("subscriptions")
-      [type === "created" ? "insert" : "update"](
-        type === "created" ? [subscriptionData] : subscriptionData
-      )
+    [type === "created" ? "insert" : "update"](
+      type === "created" ? [subscriptionData] : subscriptionData
+    )
       .match({ subscription_id: subscription.id })
       .select());
   }
@@ -165,7 +165,7 @@ async function handleCheckoutSessionCompleted(
       if (invoiceError) throw new Error("Error updating invoice");
 
       const { error: userError } = await supabase
-        .from("user")
+        .from("users")
         .update({ subscription: session.id })
         .eq("user_id", metadata?.userId);
       if (userError) throw new Error("Error updating user subscription");
@@ -185,7 +185,7 @@ async function handleCheckoutSessionCompleted(
     const dateTime = new Date(session.created * 1000).toISOString();
     try {
       const { data: user, error: userError } = await supabase
-        .from("user")
+        .from("users")
         .select("*")
         .eq("user_id", metadata?.userId);
       if (userError) throw new Error("Error fetching user");
@@ -209,7 +209,7 @@ async function handleCheckoutSessionCompleted(
       const updatedCredits =
         Number(user?.[0]?.credits || 0) + (session.amount_total || 0) / 100;
       const { data: updatedUser, error: userUpdateError } = await supabase
-        .from("user")
+        .from("users")
         .update({ credits: updatedCredits })
         .eq("user_id", metadata?.userId);
       if (userUpdateError) throw new Error("Error updating user credits");

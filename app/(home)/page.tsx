@@ -3,6 +3,7 @@ import BlogSample from "@/components/homepage/blog-samples";
 import HeroSection from "@/components/homepage/hero-section";
 import Pricing from "@/components/homepage/pricing";
 import SideBySide from "@/components/homepage/side-by-side";
+import Stars from "@/components/homepage/stars";
 import Meteors from "@/components/magicui/meteors";
 import PageWrapper from "@/components/wrapper/page-wrapper";
 import config from "@/config";
@@ -10,13 +11,8 @@ import config from "@/config";
 export default function Home() {
   return (
     <PageWrapper>
-      <div className="flex flex-col justify-center items-center w-full">
-        <HeroSection />
-        <Meteors number={7} />
-      </div>
-      <div className="relative flex flex-col justify-center items-center w-screen mt-[1rem] p-3">
-        <SideBySide />
-      </div>
+      <HeroSection />
+      <SideBySide />
       <div className="max-w-[1200px] p-8 mt-[2rem] lg:mt-[6rem] lg:mb-[5rem]">
         <BlogSample />
       </div>

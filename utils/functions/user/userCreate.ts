@@ -25,7 +25,7 @@ export const userCreate = async ({
 
   try {
     const { data, error } = await supabase
-      .from("user")
+      .from("users")
       .insert([
         {
           email,
