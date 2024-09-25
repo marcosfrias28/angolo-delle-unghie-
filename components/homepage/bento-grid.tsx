@@ -106,13 +106,17 @@ const BentoGridSection = () => {
     features.map((_, i) => {
       gsap.fromTo(
         `.feature${i}`,
-        { y: 10, opacity: 0 },
+        { y: 300, opacity: 0 },
         {
           opacity: 1,
           y: 0,
-          duration: 1.5,
+          duration: 1,
           ease: "power4.out",
-          scrollTrigger: `.feature${i}`,
+          stagger: 1,
+          scrollTrigger: {
+            trigger: `.feature${i}`,
+            scrub: true,
+          },
         }
       );
     });
@@ -122,7 +126,7 @@ const BentoGridSection = () => {
     <BentoGrid className="p-5">
       {features.map((feature, i) => (
         <BentoCard
-          key={feature.name}
+          key={i}
           className={cn(feature.class, `feature${i} group`)}
           {...feature}
         />

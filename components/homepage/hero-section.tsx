@@ -102,6 +102,7 @@ export default function HeroSection() {
         <h1 className="sr-only">{config.websiteName}</h1>
         {[...Array(2)].map((_, i) => (
           <HeroLogo
+            key={crypto.randomUUID()}
             className={cn(i === 0 ? "hidden dark:block" : "block dark:hidden")}
             imageSrc={i === 0 ? "/hero-logo-rose.svg" : "/hero-logo.svg"}
           />

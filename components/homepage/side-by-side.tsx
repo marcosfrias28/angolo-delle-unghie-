@@ -58,7 +58,6 @@ export default function SideBySide() {
         start: "top center",
         end: "bottom bottom",
         scrub: true,
-        markers: true,
       },
     }).to(dialog, {
       opacity: 1,
