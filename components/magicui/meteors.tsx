@@ -15,7 +15,7 @@ export const Meteors = ({ meteorQuantity = 7 }: MeteorsProps) => {
   useEffect(() => {
     const styles = [...new Array(meteorQuantity)].map(() => ({
       top: -5,
-      right: Math.floor(Math.random() * window.innerWidth + 1) + "px",
+      right: Math.floor(Math.random() * window.innerWidth - 400) + "px",
       animationDelay: Math.random() * 1 + 1 + "s",
       animationDuration: Math.floor(Math.random() * 8 + 3) + "s",
     }));

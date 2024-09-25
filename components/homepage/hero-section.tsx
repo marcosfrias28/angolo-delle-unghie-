@@ -92,7 +92,7 @@ export default function HeroSection() {
       <div id="stars">
         <Stars />
       </div>
-      <Meteors meteorQuantity={7} />
+      <Meteors meteorQuantity={12} />
       <div
         className={cn(
           "flex items-center justify-center flex-col lg:flex-row-reverse max-sm:mt-20 gap-10",
