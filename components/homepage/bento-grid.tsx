@@ -123,11 +123,12 @@ const BentoGridSection = () => {
         {
           opacity: 1,
           y: 0,
-          duration: 1,
           ease: "power4.out",
-          stagger: 1,
           scrollTrigger: {
             trigger: `.feature${i}`,
+            start: "-30% bottom",
+            end: "center 70%",
+            markers: true,
             scrub: true,
           },
         }
