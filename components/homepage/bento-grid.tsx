@@ -32,6 +32,7 @@ const features = [
           className={cn(imageCustomClass)}
           width={400}
           height={400}
+          alt="smalto"
         />
         <div
           className="hidden lg:block h-[800px] w-1 bg-gradient-to-b from-roseGold-dark to-roseGold-light/10
@@ -49,7 +50,12 @@ const features = [
     href: "/",
     cta: "Scopri di più",
     background: (
-      <Image src="/nail-bg.jpg" className={cn(imageCustomClass)} fill />
+      <Image
+        src="/nail-bg.jpg"
+        className={cn(imageCustomClass)}
+        fill
+        alt="nails"
+      />
     ),
     class: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
   },
@@ -61,7 +67,12 @@ const features = [
     href: "/",
     cta: "Scopri di più",
     background: (
-      <Image src="/estetica-bg.jpg" className={cn(imageCustomClass)} fill />
+      <Image
+        src="/estetica-bg.jpg"
+        className={cn(imageCustomClass)}
+        fill
+        alt="estetica"
+      />
     ),
     class: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
   },
@@ -78,6 +89,7 @@ const features = [
         sizes="(max-width: 768px) 100vw, 33vw"
         width={1000}
         height={1000}
+        alt="smalti"
       />
     ),
     class: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
@@ -93,6 +105,7 @@ const features = [
       <Image
         placeholder="blur"
         src={lamizaione}
+        alt="laminazione"
         className={cn(imageCustomClass)}
         fill
       />
