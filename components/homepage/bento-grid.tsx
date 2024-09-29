@@ -63,7 +63,7 @@ const features = [
     Icon: Icons.EsteticaIcon,
     name: "Estetica Base",
     description:
-      "Cerette, massaggi e trattamenti viso e corpo per il tuo benessere e bellezza.",
+      "Trattamenti viso e corpo, massaggi e depilazione per il tuo benessere e bellezza.",
     href: "/",
     cta: "Scopri di più",
     background: (
@@ -127,8 +127,7 @@ const BentoGridSection = () => {
           scrollTrigger: {
             trigger: `.feature${i}`,
             start: "-30% bottom",
-            end: "center 70%",
-            markers: true,
+            end: "bottom 70%",
             scrub: true,
           },
         }

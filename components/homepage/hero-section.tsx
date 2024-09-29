@@ -11,7 +11,7 @@ import ScrollIcon from "./scroll-animation";
 const homepageText = {
   cta: {
     title: "Riscopri la bellezza delle tue unghie",
-    subtitle: "Prenota ora un trattamento su misura per mani perfette.",
+    subtitle: "Prenota un trattamento su misura per mani perfette.",
     button: "Prenota Ora",
   },
   services: {
@@ -104,7 +104,9 @@ export default function HeroSection() {
           <HeroLogo
             key={crypto.randomUUID()}
             className={cn(i === 0 ? "hidden dark:block" : "block dark:hidden")}
-            imageSrc={i === 0 ? "/hero-logo-rose.svg" : "/hero-logo.svg"}
+            imageSrc={
+              i === 0 ? "/hero-logo-new-rose.svg" : "/hero-logo-new.svg"
+            }
           />
         ))}
         <CTASection />

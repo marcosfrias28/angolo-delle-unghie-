@@ -8,22 +8,29 @@ import Meteors from "@/components/magicui/meteors";
 import PageWrapper from "@/components/wrapper/page-wrapper";
 import config from "@/config";
 import BentoGridSection from "@/components/homepage/bento-grid";
+import FallingPetals from "@/components/homepage/unghie";
+import CTASection from "@/components/CTASection/cta-section";
+import GalleriaImmagini from "@/components/GalleriaImmagini/GalleriaImmagini";
+import TestimonialSection from "@/components/TestimonialSection/TestimonialSection";
 
 export default function Home() {
   return (
     <PageWrapper>
-      <div>
-        <HeroSection />
-      </div>
-      <div>
+      <HeroSection />
+      <div className="w-full min-h-screen">
         <SideBySide />
       </div>
-      <div className="w-full max-w-[1920px] lg:mt-96">
+      <div className="w-full max-w-[1920px] min-h-screen lg:mt-96">
         <BentoGridSection />
       </div>
-      <div className="max-w-[1200px] p-8 mt-[2rem] lg:mt-[6rem] lg:mb-[5rem]">
-        <BlogSample />
+      <div className="w-full min-h-screen bg-roseGold-light dark:bg-roseGold-dark lg:mt-96">
+        <CTASection />
       </div>
+      <div className="w-full min-h-screen bg-transparent ">
+        <GalleriaImmagini />
+      </div>
+      <TestimonialSection />
+      <FallingPetals />
       {config.auth.enabled && config.payments.enabled && (
         <div>
           <Pricing />
