@@ -1,28 +1,39 @@
 "use client";
 import React from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollToPlugin } from "gsap/all";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
+import { useGalleryStore } from "@/utils/store/gallery-store";
+import { cn } from "@/utils/cn";
 
 gsap.registerPlugin(ScrollToPlugin);
 
 interface ImageGridProps {
-  images: string[];
-  currentPosition: number;
+  images: StaticImageData[];
 }
 
-const ImageGrid: React.FC<ImageGridProps> = ({ images, currentPosition }) => {
+const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
   const galleryRef = useRef<HTMLDivElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
-  const [isMaximized, setIsMaximized] = useState<number | null>(null);
+  const { currentPosition, setIsPaused } = useGalleryStore();
+  const isVisible = useInView(galleryRef);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (isVisible) {
+      setIsPaused(false);
+    } else {
+      setIsPaused(true);
+    }
+  }, [isVisible]);
 
   useGSAP(() => {
-    gsap.to(galleryRef.current, {
+    const gallery = galleryRef.current;
+    if (!gallery) return;
+
+    gsap.to(gallery, {
       duration: 2,
       ease: "power2",
       scrollTo: imagesRef.current[currentPosition],
@@ -32,30 +43,8 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images, currentPosition }) => {
   return (
     <div
       ref={galleryRef}
-      className="flex flex-nowrap gap-10 items-start max-md:max-w-full py-5 pr-[800px] overflow-hidden px-20"
+      className="flex flex-nowrap gap-5 lg:gap-10 items-start w-screen py-5 pr-0 ml-2 md:ml-10 lg:ml-28 lg:pr-[800px] overflow-hidden pl-36 "
     >
-      <AnimatePresence>
-        {isMaximized && (
-          <motion.div
-            key={isMaximized}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            onClick={() => setIsMaximized(NaN)}
-            className="fixed top-0 left-0 w-full h-full z-[999] flex items-center justify-center backdrop:blur-3xl"
-          >
-            <Image
-              loading="lazy"
-              src={images[isMaximized]}
-              alt={`Nail art design ${isMaximized + 1}`}
-              width={1000}
-              height={1000}
-              className="object-contain shrink-0 aspect-square rounded-2xl"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
       {images.map((src, index) => (
         <Image
           key={index}
@@ -65,13 +54,15 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images, currentPosition }) => {
               imagesRef.current[index] = el as HTMLImageElement;
             }
           }}
-          onClick={() => setIsMaximized(index)}
-          loading="lazy"
+          placeholder="blur"
           src={src}
           alt={`Nail art design ${index + 1}`}
-          width={700}
-          height={700}
-          className="object-contain shrink-0 aspect-square rounded-2xl hover:scale-105 transition-transform transform-gpu duration-500 cursor-pointer"
+          width={600}
+          height={800}
+          className={cn(
+            "h-[750px] max-md:min-w-[350px] md:min-w-[500px] w-auto object-cover object-center shrink-0 aspect-auto rounded-xl transition-all duration-500 transform-gpu ease-in-out",
+            currentPosition === index ? "grayscale-0" : " grayscale"
+          )}
         />
       ))}
     </div>

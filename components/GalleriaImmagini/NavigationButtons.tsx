@@ -2,19 +2,17 @@
 import { useEffect, FC, useState, Dispatch, SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useGalleryStore } from "@/utils/store/gallery-store";
+import { ArrowLeft, ArrowRight, Play, Pause } from "lucide-react";
 
 interface NavigationButtonsProps {
-  setCurrentPosition: Dispatch<SetStateAction<number>>;
   length: number;
-  currentPosition: number;
 }
 
-const NavigationButtons: FC<NavigationButtonsProps> = ({
-  setCurrentPosition,
-  length,
-  currentPosition,
-}) => {
+const NavigationButtons: FC<NavigationButtonsProps> = ({ length }) => {
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const { setCurrentPosition, currentPosition, isPaused, setIsPaused } =
+    useGalleryStore();
 
   useEffect(() => {
     if (currentPosition > 0) {
@@ -24,58 +22,69 @@ const NavigationButtons: FC<NavigationButtonsProps> = ({
     }
   }, [currentPosition]);
 
-  const previousImage = () => {
-    setCurrentPosition((prev) => {
-      if (prev === 0) {
-        setIsDisabled(true);
-        return 0;
+  useEffect(() => {
+    if (isPaused) return;
+    const autoPlay = setTimeout(() => {
+      if (currentPosition + 1 === length) {
+        setCurrentPosition(0);
+        return;
       }
-      return prev - 1;
-    });
+      setCurrentPosition(currentPosition + 1);
+    }, 3000);
+    return () => clearTimeout(autoPlay);
+  }, [isPaused, currentPosition]);
+
+  const previousImage = () => {
+    if (currentPosition === 0) {
+      setIsDisabled(true);
+      setCurrentPosition(0);
+    } else {
+      setCurrentPosition(currentPosition - 1);
+    }
   };
 
   const nextImage = () => {
     if (isDisabled) {
       setIsDisabled(false);
     }
-
-    setCurrentPosition((prev) => {
-      if (prev + 1 === length) {
-        return 0;
-      }
-      return prev + 1;
-    });
+    if (currentPosition + 1 === length) {
+      setCurrentPosition(0);
+    } else {
+      setCurrentPosition(currentPosition + 1);
+    }
   };
   return (
-    <div className="flex gap-4 items-start self-stretch my-auto">
+    <div className="flex gap-4 items-start self-stretch my-auto px-5">
       <Button
         variant="ringHover"
         onClick={previousImage}
         className={cn(
-          "flex gap-2 justify-center items-center px-3 w-12 h-12 bg-white border border-black border-solid rounded-[50px]",
+          "flex gap-2 justify-center items-center px-3 w-12 h-12 bg-white border border-black border-solid rounded-[50px] text-black dark:hover:text-white",
           isDisabled ? "opacity-50 cursor-not-allowed pointer-events-none" : ""
         )}
         aria-label="Previous"
       >
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/3841f420e4edfdc173cc2149d377fa621246da26e67fffb2dc86ea5ee22b81ac?placeholderIfAbsent=true&apiKey=d61f4ae53a074f4cb6bf4f3af87d0234"
-          alt=""
-          className="object-contain self-stretch my-auto w-6 aspect-square"
-        />
+        <ArrowLeft className="object-contain self-stretch my-auto w-6 aspect-square" />
       </Button>
       <Button
         variant="ringHover"
         onClick={nextImage}
-        className="flex gap-2 justify-center items-center px-3 w-12 h-12 bg-white border border-black border-solid rounded-[50px]"
+        className="flex gap-2 justify-center items-center px-3 w-12 h-12 bg-white border border-black border-solid rounded-[50px] text-black dark:hover:text-white"
         aria-label="Next"
       >
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/d54fe5f9fd50db6211a001135f66c986549b8b8b5d065a75f6f0f460ae58c03e?placeholderIfAbsent=true&apiKey=d61f4ae53a074f4cb6bf4f3af87d0234"
-          alt=""
-          className="object-contain self-stretch my-auto w-6 aspect-square"
-        />
+        <ArrowRight className="object-contain self-stretch my-auto w-6 aspect-square" />
+      </Button>
+      <Button
+        variant="ringHover"
+        onClick={() => setIsPaused(!isPaused)}
+        className="flex gap-2 justify-center items-center px-3 w-12 h-12 bg-white border border-black border-solid rounded-[50px] text-black dark:hover:text-white"
+        aria-label="Next"
+      >
+        {isPaused ? (
+          <Play className="object-contain self-stretch my-auto w-6 aspect-square" />
+        ) : (
+          <Pause className="object-contain self-stretch my-auto w-6 aspect-square" />
+        )}
       </Button>
     </div>
   );

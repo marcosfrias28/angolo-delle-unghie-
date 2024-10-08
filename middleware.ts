@@ -1,38 +1,48 @@
-import { NextResponse } from "next/server";
-import config from "./config";
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { signToken, verifyToken } from '@/lib/auth/session';
 
-let clerkMiddleware: (arg0: (auth: any, req: any) => any) => { (arg0: any): any; new(): any; }, createRouteMatcher;
+const protectedRoutes = '/dashboard';
 
-if (config.auth.enabled) {
-  try {
-    ({ clerkMiddleware, createRouteMatcher } = require("@clerk/nextjs/server"));
-  } catch (error) {
-    console.warn("Clerk modules not available. Auth will be disabled.");
-    config.auth.enabled = false;
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const sessionCookie = request.cookies.get('session');
+  const isProtectedRoute = pathname.startsWith(protectedRoutes);
+
+  if (isProtectedRoute && !sessionCookie) {
+    return NextResponse.redirect(new URL('/sign-in', request.url));
   }
-}
 
-const isProtectedRoute = config.auth.enabled
-  ? createRouteMatcher(["/dashboard(.*)"])
-  : () => false;
+  let res = NextResponse.next();
 
-export default function middleware(req: any) {
-  if (config.auth.enabled) {
-    return clerkMiddleware((auth, req) => {
-      if (!auth().userId && isProtectedRoute(req)) {
-        return auth().redirectToSignIn();
-      } else {
-        return NextResponse.next();
+  if (sessionCookie) {
+    try {
+      const parsed = await verifyToken(sessionCookie.value);
+      const expiresInOneDay = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+      res.cookies.set({
+        name: 'session',
+        value: await signToken({
+          ...parsed,
+          expires: expiresInOneDay.toISOString(),
+        }),
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax',
+        expires: expiresInOneDay,
+      });
+    } catch (error) {
+      console.error('Error updating session:', error);
+      res.cookies.delete('session');
+      if (isProtectedRoute) {
+        return NextResponse.redirect(new URL('/sign-in', request.url));
       }
-    })(req);
-  } else {
-    return NextResponse.next();
+    }
   }
+
+  return res;
 }
 
-export const middlewareConfig = {
-  matcher: [
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
-  ],
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 };

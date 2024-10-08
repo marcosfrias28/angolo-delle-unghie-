@@ -13,7 +13,7 @@ const Stars = () => {
 
   if (!isBrowser) return null; // Se non è il browser, non eseguire il rendering
 
-  const stars = [...Array(100)].map((_, i) => {
+  return [...Array(100)].map((_, i) => {
     let size = Math.random() * 2 + 3; // Dimensione random delle stelle (in px) (6 - 12)
     let opacity = Math.random() * 0.6 + 0.1; // Varie intensità di luminosità (0.2 - 0.8)
     let duration = Math.random() * 5 + 2; // Durata casuale tra 2 e 7 secondi (2 - 7)
@@ -51,6 +51,5 @@ const Stars = () => {
       />
     );
   });
-  return stars;
 };
 export default Stars;

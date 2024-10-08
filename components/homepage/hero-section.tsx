@@ -1,12 +1,14 @@
+"use client";
+
 import config from "@/config";
 import HeroLogo from "@/app/(home)/_components/hero-logo";
 import Meteors from "../magicui/meteors";
 import Stars from "./stars";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
 import Link from "next/link";
 import { BorderBeam } from "../magicui/border-beam";
 import ScrollIcon from "./scroll-animation";
+import { motion } from "framer-motion";
 
 const homepageText = {
   cta: {
@@ -89,9 +91,7 @@ export default function HeroSection() {
       )}
       aria-label={`${config.websiteName} Hero`}
     >
-      <div id="stars">
-        <Stars />
-      </div>
+      <Stars />
       <Meteors meteorQuantity={12} />
       <div
         className={cn(
@@ -100,6 +100,7 @@ export default function HeroSection() {
         )}
       >
         <h1 className="sr-only">{config.websiteName}</h1>
+
         {[...Array(2)].map((_, i) => (
           <HeroLogo
             key={crypto.randomUUID()}
@@ -118,8 +119,11 @@ export default function HeroSection() {
 
 const CTASection = () => {
   return (
-    <section
+    <motion.section
       id="cta"
+      initial={{ opacity: 0, scale: 0.1 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
       className={cn("flex flex-col items-center justify-center", "opacity-0")}
     >
       <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white dark:text-white mb-6 text-center">
@@ -141,6 +145,6 @@ const CTASection = () => {
           colorTo="rgb(255, 228, 225)"
         />
       </Link>
-    </section>
+    </motion.section>
   );
 };

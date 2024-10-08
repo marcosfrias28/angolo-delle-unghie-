@@ -8,7 +8,9 @@ import { cn } from "@/lib/utils";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import lamizaione from "@/public/9beb8f114e8d8f7613bab34100cfd4d9.jpg";
+import unghie from "@/public/grid/1.webp";
+import laminazione from "@/public/grid/2.webp";
+import estetica from "@/public/grid/3.webp";
 import { GiEyelashes } from "react-icons/gi";
 import { Icons } from "@/components/Icons";
 
@@ -51,7 +53,8 @@ const features = [
     cta: "Scopri di più",
     background: (
       <Image
-        src="/nail-bg.jpg"
+        src={unghie}
+        placeholder="blur"
         className={cn(imageCustomClass)}
         fill
         alt="nails"
@@ -68,7 +71,8 @@ const features = [
     cta: "Scopri di più",
     background: (
       <Image
-        src="/estetica-bg.jpg"
+        src={estetica}
+        placeholder="blur"
         className={cn(imageCustomClass)}
         fill
         alt="estetica"
@@ -104,7 +108,7 @@ const features = [
     background: (
       <Image
         placeholder="blur"
-        src={lamizaione}
+        src={laminazione}
         alt="laminazione"
         className={cn(imageCustomClass)}
         fill
@@ -136,11 +140,11 @@ const BentoGridSection = () => {
   }, []);
 
   return (
-    <BentoGrid className="p-5">
+    <BentoGrid className="p-5 mx-auto">
       {features.map((feature, i) => (
         <BentoCard
           key={i}
-          className={cn(feature.class, `feature${i} group`)}
+          className={cn(feature.class, `feature${i} group`, "min-h-96")}
           {...feature}
         />
       ))}

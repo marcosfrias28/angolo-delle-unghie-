@@ -10,6 +10,7 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,7 +42,6 @@ export default function SideBySide() {
 
   useGSAP(() => {
     const section = sectionRef.current;
-    const dialog = dialogRef.current;
     const image = imageRef.current;
 
     const tl = gsap.timeline();
@@ -51,21 +51,13 @@ export default function SideBySide() {
     tl.to(image, {
       opacity: 1,
       y: 0,
-      duration: 4,
       ease: "power1.inOut",
       scrollTrigger: {
         trigger: section,
         start: "top center",
         end: "bottom bottom",
         scrub: true,
-      },
-    }).to(dialog, {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: image,
-        start: "top +=200px",
-        end: "+=50px",
-        scrub: true,
+        markers: true,
       },
     });
   }, []);
@@ -82,10 +74,14 @@ export default function SideBySide() {
         alt="Hands with nails french style"
         width={1000}
         height={1000}
-        className="absolute bottom left-1/2 -translate-x-1/2 mask-gradient opacity-0"
+        className="absolute bottom left-1/2 -translate-x-1/2 mask-gradient opacity-0 w-auto h-auto max-md:mb-40"
       />
 
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0.1 }}
+        transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
         ref={dialogRef}
         className="opacity-0 w-full lg:w-1/2 p-6 lg:p-8 rounded-2xl shadow-xl bg-white/60 dark:bg-black/50 backdrop-blur-lg transition-all duration-500 hover:shadow-2xl hover:shadow-black/20 hover:scale-105"
       >
@@ -122,7 +118,7 @@ export default function SideBySide() {
             </div>
           ))}
         </dl>
-      </div>
+      </motion.div>
     </section>
   );
 }
