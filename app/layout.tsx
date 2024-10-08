@@ -40,18 +40,16 @@ export default function RootLayout({
     <AuthWrapper>
       <html lang="it" suppressHydrationWarning>
         <body className={GeistSans.className}>
-          <Provider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <NavBar />
-              {children}
-              <Toaster />
-            </ThemeProvider>
-          </Provider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NavBar />
+            {children}
+            <Toaster />
+          </ThemeProvider>
           <Analytics />
         </body>
       </html>
