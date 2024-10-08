@@ -3,11 +3,9 @@
 import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useGSAP } from "@gsap/react";
 import { ScrollToPlugin } from "gsap/all";
-import { gsap } from "gsap";
 import { cn } from "@/lib/utils";
+import gsap from "gsap";
 
 gsap.registerPlugin(ScrollToPlugin);
 

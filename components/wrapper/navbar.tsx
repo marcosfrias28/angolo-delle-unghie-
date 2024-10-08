@@ -9,7 +9,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { UserProfile } from "../user-profile";
 import ModeToggle from "../mode-toggle";
 import { BlocksIcon } from "lucide-react";
 import {
@@ -20,9 +19,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import config from "@/config";
 import { cn } from "@/lib/utils";
-import { useAuth } from "@clerk/nextjs";
 import { Dialog, DialogClose } from "@radix-ui/react-dialog";
 import { usePathname } from "next/navigation";
 
@@ -49,12 +46,6 @@ export default function NavBar() {
 
   if (path.includes("/dashboard")) {
     return null;
-  }
-
-  let userId = null;
-  if (config?.auth?.enabled) {
-    const user = useAuth();
-    userId = user?.userId;
   }
 
   return (
@@ -136,7 +127,6 @@ export default function NavBar() {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="flex items-center gap-2 max-[825px]:hidden">
-        {userId && <UserProfile />}
         <ModeToggle />
       </div>
     </div>

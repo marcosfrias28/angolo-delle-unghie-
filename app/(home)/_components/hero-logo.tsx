@@ -3,10 +3,8 @@
 import Image from "next/image";
 import { FC } from "react";
 import config from "@/config";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { cn } from "@/utils/cn";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 interface HeroLogoProps {
   imageSrc: string;

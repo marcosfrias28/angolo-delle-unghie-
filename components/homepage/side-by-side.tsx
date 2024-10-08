@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import { Computer, Network } from "lucide-react";
 import { FaBusinessTime } from "react-icons/fa";
-import { TITLE_TAILWIND_CLASS } from "@/utils/constants";
 import config from "@/config";
 import { BorderBeam } from "../magicui/border-beam";
 import Image from "next/image";
@@ -11,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
+import { TITLE_TAILWIND_CLASS } from "@/lib/constants";
 
 gsap.registerPlugin(ScrollTrigger);
 

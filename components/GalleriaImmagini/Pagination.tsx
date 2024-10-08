@@ -1,7 +1,7 @@
 "use client";
-import { Dispatch, SetStateAction } from "react";
+
 import { cn } from "@/lib/utils";
-import { useGalleryStore } from "@/utils/store/gallery-store";
+import { useGalleryStore } from "@/lib/store/gallery-store";
 import { motion } from "framer-motion";
 
 interface PaginationProps {

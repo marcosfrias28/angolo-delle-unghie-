@@ -25,11 +25,6 @@ export default function Home() {
       <div className="relative w-full min-h-screen max-w-[1920px] max-md:px-7 px-10 mb-20 lg:mt-40 overflow-hidden">
         <BeautyServices />
       </div>
-      {config.auth.enabled && config.payments.enabled && (
-        <div>
-          <Pricing />
-        </div>
-      )}
       <div className="w-full min-h-screen bg-roseGold-light dark:bg-roseGold-dark lg:mt-40">
         <CTASection />
       </div>

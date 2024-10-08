@@ -4,8 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { cn } from "@/utils/cn";
-import { TITLE_TAILWIND_CLASS } from "@/utils/constants";
+import { cn } from "@/lib/utils";
 
 const domandeERisposteEstetista = [
   {

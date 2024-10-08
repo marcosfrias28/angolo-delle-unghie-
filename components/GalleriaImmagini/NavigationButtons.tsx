@@ -2,7 +2,7 @@
 import { useEffect, FC, useState, Dispatch, SetStateAction } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useGalleryStore } from "@/utils/store/gallery-store";
+import { useGalleryStore } from "@/lib/store/gallery-store";
 import { ArrowLeft, ArrowRight, Play, Pause } from "lucide-react";
 
 interface NavigationButtonsProps {

@@ -1,13 +1,14 @@
 "use client";
+
 import React from "react";
 import Image, { StaticImageData } from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollToPlugin } from "gsap/all";
-import { motion, AnimatePresence, useInView } from "framer-motion";
-import { useGalleryStore } from "@/utils/store/gallery-store";
-import { cn } from "@/utils/cn";
+import { useInView } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { useGalleryStore } from "@/lib/store/gallery-store";
 
 gsap.registerPlugin(ScrollToPlugin);
 

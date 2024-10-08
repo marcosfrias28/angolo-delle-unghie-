@@ -1,13 +1,12 @@
-import Provider from "@/app/provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import AuthWrapper from "@/components/wrapper/auth-wrapper";
-import { Analytics } from "@vercel/analytics/react";
-import { GeistSans } from "geist/font/sans";
+import { Lora } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/wrapper/navbar";
 import config from "@/config";
+
+const LoraFont = Lora({ subsets: ["latin"], weight: ["500", "700"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.baseUrl),
@@ -37,22 +36,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <AuthWrapper>
-      <html lang="it" suppressHydrationWarning>
-        <body className={GeistSans.className}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <NavBar />
-            {children}
-            <Toaster />
-          </ThemeProvider>
-          <Analytics />
-        </body>
-      </html>
-    </AuthWrapper>
+    <html lang="it" suppressHydrationWarning>
+      <body className={LoraFont.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NavBar />
+          {children}
+          <Toaster />
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
