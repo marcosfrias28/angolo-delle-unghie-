@@ -12,7 +12,7 @@ import { Phone } from "lucide-react";
 
 // Definir la tabla de usuarios
 export const users = pgTable('users', {
-  user_id: varchar('user_id', { length: 256 }).primaryKey(), // id del usuario desde Clerk
+  user_id: varchar('user_id', { length: 256 }).primaryKey(),
   first_name: text('first_name').notNull(), // Nombre
   last_name: text('last_name').notNull(), // Apellido
   email: text('email').notNull(), // Dirección de correo principal

@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <PageWrapper>
       <HeroSection />
-      <div className="w-full min-h-screen">
+      <div className="w-full md:min-h-screen">
         <SideBySide />
       </div>
       <div className="w-full h-fit max-w-[1920px] min-h-screen lg:mt-40 overflow-hidden">

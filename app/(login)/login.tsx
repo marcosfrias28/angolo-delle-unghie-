@@ -1,47 +1,53 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useActionState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { CircleIcon, Loader2 } from 'lucide-react';
-import { signIn, signUp } from './actions';
-import { ActionState } from '@/lib/auth/middleware';
+import Link from "next/link";
+import { useActionState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Loader2, TriangleIcon } from "lucide-react";
+import { signIn, signUp } from "./actions";
+import { ActionState } from "@/lib/auth/middleware";
+import Image from "next/image";
 
-export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
+export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
   const searchParams = useSearchParams();
-  const redirect = searchParams.get('redirect');
-  const priceId = searchParams.get('priceId');
-  const inviteId = searchParams.get('inviteId');
+  const redirect = searchParams.get("redirect");
+  const priceId = searchParams.get("priceId");
+  const inviteId = searchParams.get("inviteId");
   const [state, formAction, pending] = useActionState<ActionState, FormData>(
-    mode === 'signin' ? signIn : signUp,
-    { error: '' }
+    mode === "signin" ? signIn : signUp,
+    { error: "" }
   );
 
   return (
     <div className="min-h-[100dvh] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-          <CircleIcon className="h-12 w-12 text-orange-500" />
+          <Image
+            src={"/logo-lightmode.svg"}
+            priority
+            alt="Logo angolo delle unghie"
+            width={300}
+            height={300}
+            className="text-roseGold-light dark:text-rose"
+          />
         </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          {mode === 'signin'
-            ? 'Sign in to your account'
-            : 'Create your account'}
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-700">
+          {mode === "signin" ? "Accedi al tuo account" : "Crea il tuo account"}
         </h2>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <form className="space-y-6" action={formAction}>
-          <input type="hidden" name="redirect" value={redirect || ''} />
-          <input type="hidden" name="priceId" value={priceId || ''} />
-          <input type="hidden" name="inviteId" value={inviteId || ''} />
+          <input type="hidden" name="redirect" value={redirect || ""} />
+          <input type="hidden" name="priceId" value={priceId || ""} />
+          <input type="hidden" name="inviteId" value={inviteId || ""} />
           <div>
             <Label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 ml-1"
             >
               Email
             </Label>
@@ -53,8 +59,8 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
                 autoComplete="email"
                 required
                 maxLength={50}
-                className="appearance-none rounded-full relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your email"
+                className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-roseGold-light focus:border-roseGold-light focus:z-10 sm:text-sm"
+                placeholder="Inserisci la tua email"
               />
             </div>
           </div>
@@ -62,7 +68,7 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
           <div>
             <Label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-700 ml-1"
             >
               Password
             </Label>
@@ -72,13 +78,13 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
                 name="password"
                 type="password"
                 autoComplete={
-                  mode === 'signin' ? 'current-password' : 'new-password'
+                  mode === "signin" ? "current-password" : "new-password"
                 }
                 required
                 minLength={8}
                 maxLength={100}
-                className="appearance-none rounded-full relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-orange-500 focus:border-orange-500 focus:z-10 sm:text-sm"
-                placeholder="Enter your password"
+                className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-roseGold-light focus:border-roseGold-light focus:z-10 sm:text-sm"
+                placeholder="Inserisci la tua password"
               />
             </div>
           </div>
@@ -90,18 +96,18 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
           <div>
             <Button
               type="submit"
-              className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              className="w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-sm shadow-sm text-sm font-medium text-black bg-roseGold-light dark:bg-rose dark:text-white hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-roseGold-light"
               disabled={pending}
             >
               {pending ? (
                 <>
                   <Loader2 className="animate-spin mr-2 h-4 w-4" />
-                  Loading...
+                  Caricamento in corso...
                 </>
-              ) : mode === 'signin' ? (
-                'Sign in'
+              ) : mode === "signin" ? (
+                "Accedi"
               ) : (
-                'Sign up'
+                "Registrati"
               )}
             </Button>
           </div>
@@ -114,23 +120,23 @@ export function Login({ mode = 'signin' }: { mode?: 'signin' | 'signup' }) {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-gray-50 text-gray-500">
-                {mode === 'signin'
-                  ? 'New to our platform?'
-                  : 'Already have an account?'}
+                {mode === "signin"
+                  ? "Nuov@ su Angolo Delle Unghie?"
+                  : "Hai già un account?"}
               </span>
             </div>
           </div>
 
           <div className="mt-6">
             <Link
-              href={`${mode === 'signin' ? '/sign-up' : '/sign-in'}${
-                redirect ? `?redirect=${redirect}` : ''
-              }${priceId ? `&priceId=${priceId}` : ''}`}
-              className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-full shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+              href={`${mode === "signin" ? "/sign-up" : "/sign-in"}${
+                redirect ? `?redirect=${redirect}` : ""
+              }${priceId ? `&priceId=${priceId}` : ""}`}
+              className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-sm shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-roseGold-light"
             >
-              {mode === 'signin'
-                ? 'Create an account'
-                : 'Sign in to existing account'}
+              {mode === "signin"
+                ? "Crea un account"
+                : "Accedi a un account esistente"}
             </Link>
           </div>
         </div>

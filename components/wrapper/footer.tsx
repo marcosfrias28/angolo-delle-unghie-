@@ -29,7 +29,6 @@ export default function Footer() {
         start: "-=500 center",
         end: "bottom bottom",
         scrub: true,
-        markers: true,
       },
     });
   }, []);
