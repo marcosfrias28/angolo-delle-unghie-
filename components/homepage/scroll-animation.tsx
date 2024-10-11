@@ -14,7 +14,7 @@ function ScrollIcon() {
       ease: "power1.inOut",
       scrollTrigger: {
         trigger: "#cta",
-        start: "top 300px",
+        start: "top +=300px",
         end: "200px top",
         scrub: true,
       },

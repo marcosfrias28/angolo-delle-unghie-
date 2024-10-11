@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import config from "@/config";
+import { useUser } from "@/lib/auth";
 import { CreditCard, LogOut, Settings, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,12 +21,11 @@ export function UserProfile() {
   if (!config?.auth?.enabled) {
     router.back();
   }
-  const { user } = useUser();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="w-[2.25rem] h-[2.25rem]">
         <Avatar>
-          <AvatarImage src={user?.imageUrl} alt="User Profile" />
+          <AvatarImage alt="User Profile" />
           <AvatarFallback></AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>

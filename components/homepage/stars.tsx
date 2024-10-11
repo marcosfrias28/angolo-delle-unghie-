@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, MotionStyle } from "framer-motion";
 
 const Stars = () => {
   const [isBrowser, setIsBrowser] = useState(false);
@@ -30,8 +30,10 @@ const Stars = () => {
       backgroundColor, // Colore basato sulla posizione
       position: "absolute",
       borderRadius: "50%",
+      zIndex: 20,
+      pointerEvents: "none",
       boxShadow, // Effetto aura luminosa
-    } as React.CSSProperties;
+    } as MotionStyle;
 
     return (
       <motion.span

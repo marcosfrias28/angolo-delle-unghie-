@@ -13,7 +13,7 @@ const Pagination: React.FC<PaginationProps> = ({ length }) => {
   const { currentPosition, setCurrentPosition } = useGalleryStore();
 
   return (
-    <div className="flex gap-2 items-start self-stretch my-auto px-5">
+    <div className="flex gap-2 items-start self-stretch my-auto">
       {[...Array(length)].map((_, index) => (
         <div
           key={index}

@@ -9,7 +9,7 @@ const GalleriaImmagini: React.FC = () => {
       <header
         aria-labelledby="gallery-header"
         id="gallery-header"
-        className="flex flex-col max-w-full text-black dark:text-white max-md:pl-5 md:pl-36"
+        className="flex flex-col max-w-full text-black dark:text-white max-md:pl-0 pl-36"
       >
         <h2 className="text-5xl font-bold leading-tight max-md:max-w-full max-md:text-4xl">
           Ultimi lavori realizzati
@@ -21,7 +21,7 @@ const GalleriaImmagini: React.FC = () => {
       <section className="flex flex-col mt-20 max-md:mt-10 max-md:max-w-full">
         <ImageGrid images={galleryImagesSrc} />
       </section>
-      <div className="flex flex-nowrap gap-5 justify-between lg:justify-center lg:gap-10 items-center mt-12 w-full mx-auto">
+      <div className="flex flex-nowrap justify-between md:justify-center lg:gap-10 items-center mt-12 w-full mx-auto">
         <Pagination length={galleryImagesSrc.length} />
         <NavigationButtons length={galleryImagesSrc.length} />
       </div>

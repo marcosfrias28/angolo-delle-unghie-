@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/wrapper/navbar";
 import config from "@/config";
+import { UserProvider } from "@/lib/auth";
+import { cn } from "@/lib/utils";
+import { getUser } from "@/lib/db/queries";
 
 const LoraFont = Lora({ subsets: ["latin"], weight: ["500", "700"] });
 
@@ -35,18 +38,23 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  let userPromise = getUser();
+
   return (
     <html lang="it" suppressHydrationWarning>
-      <body className={LoraFont.className}>
+      <body className={cn(LoraFont.className, "relative")}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <NavBar />
-          {children}
-          <Toaster />
+          <UserProvider userPromise={userPromise}>
+            <NavBar />
+
+            {children}
+            <Toaster />
+          </UserProvider>
         </ThemeProvider>
       </body>
     </html>

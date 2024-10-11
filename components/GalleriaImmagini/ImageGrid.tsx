@@ -44,7 +44,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
   return (
     <div
       ref={galleryRef}
-      className="flex flex-nowrap gap-5 lg:gap-10 items-start w-screen py-5 pr-0 ml-2 md:ml-10 lg:ml-28 lg:pr-[800px] overflow-hidden pl-36 "
+      className="flex flex-nowrap gap-5 lg:gap-10 items-start w-screen max-md:p-0 py-5 pr-0 mx-auto md:ml-10 lg:ml-28 lg:pr-[800px] overflow-hidden pl-36 "
     >
       {images.map((src, index) => (
         <Image
@@ -61,7 +61,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
           width={600}
           height={800}
           className={cn(
-            "h-[750px] max-md:min-w-[350px] md:min-w-[500px] w-auto object-cover object-center shrink-0 aspect-auto rounded-xl transition-all duration-500 transform-gpu ease-in-out",
+            "max-md:h-[500px] h-[750px] max-md:min-w-[350px] md:min-w-[500px] w-auto object-cover object-center shrink-0 aspect-auto rounded-xl transition-all duration-500 transform-gpu ease-in-out",
             currentPosition === index ? "grayscale-0" : " grayscale"
           )}
         />

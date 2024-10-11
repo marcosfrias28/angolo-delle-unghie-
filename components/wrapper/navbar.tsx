@@ -51,7 +51,7 @@ export default function NavBar() {
   return (
     <div
       id="navbar"
-      className=" flex min-w-full fixed justify-between p-2 border-b z-30 dark:bg-black dark:bg-opacity-50 bg-white"
+      className=" flex min-w-full fixed justify-between p-2 border-b z-30 dark:bg-black dark:bg-opacity-60 bg-white/60 backdrop-blur-3xl"
     >
       <div className="flex justify-between w-full min-[825px]:hidden">
         <Dialog>

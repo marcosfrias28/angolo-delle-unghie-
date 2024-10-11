@@ -7,6 +7,12 @@ import {
   updateTeamSubscription,
 } from '@/lib/db/queries';
 
+const key = process.env.STRIPE_SECRET_KEY!;
+
+if (!key) {
+  throw new Error('Missing STRIPE_SECRET_KEY environment variable');
+}
+
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-06-20',
 });

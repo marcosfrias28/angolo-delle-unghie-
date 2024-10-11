@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ScrollToPlugin } from "gsap/all";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
+import { useTheme } from "next-themes";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -30,7 +31,7 @@ const services: Service[] = [
     name: "Manicure",
     image: "/placeholder.svg?height=1080&width=1920",
     icon: "💅",
-    accent: { light: "rgb(183,110,121)", dark: "rgb(143,86,95)" },
+    accent: { light: "rgb(201,138,147)", dark: "rgb(157,108,115)" },
     note: "Cura delle mani di lusso",
   },
   {
@@ -104,7 +105,7 @@ const BeautyServices: React.FC = () => {
   return (
     <section
       ref={containerRef}
-      className="max-w-[1800px] h-[1000px] overflow-y-scroll rounded-2xl mx-auto bg-white dark:bg-gray-900 snap-y snap-mandatory scrollbar-hide"
+      className="max-w-[1800px] h-[1000px] overflow-y-scroll z-20 rounded-2xl mx-auto bg-white dark:bg-gray-900 snap-y snap-mandatory scrollbar-hide"
     >
       <Pagination
         length={services.length}
@@ -121,11 +122,25 @@ const BeautyServices: React.FC = () => {
 };
 
 const Section: React.FC<SectionProps> = ({ service, index }) => {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // After mounting, we have access to the theme
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    // Render nothing on the server and until the theme is mounted
+    return null;
+  }
+
   return (
     <motion.section
-      className="h-[1000px] w-full flex items-center justify-center p-8 snap-start relative overflow-hidden"
+      className={cn(
+        "h-[1000px] max-md:h-[500px] w-full flex items-center justify-center p-8 snap-start relative overflow-hidden"
+      )}
       style={{
-        backgroundColor: `var(--accent-color, ${service.accent.light})`,
+        backgroundColor:
+          theme === "dark" ? service.accent.dark : service.accent.light,
       }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -133,17 +148,17 @@ const Section: React.FC<SectionProps> = ({ service, index }) => {
     >
       <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-gray-800/20 dark:to-transparent" />
 
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-7xl mx-auto">
+      <div className="relative z-10 md:flex md:flex-row items-center justify-between w-full max-w-7xl mx-auto h-fit">
         <motion.div
           className="w-full md:w-1/2 mb-8 md:mb-0"
           initial={{ x: -50, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h2 className="text-6xl font-extrabold mb-4 text-white dark:text-gray-200 drop-shadow-lg">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-roseGold dark:text-white drop-shadow-md shadow-black">
             {service.name}
           </h2>
-          <p className="text-xl text-white dark:text-gray-300 mb-6 max-w-md text-pretty">
+          <p className="text-xl text-gray-700 mb-6 max-w-md text-pretty">
             Concediti i nostri lussuosi servizi di {service.name.toLowerCase()}.
             Vivi il massimo del relax e del comfort con i nostri esperti tecnici
             che utilizzano prodotti di prima qualità.
@@ -154,7 +169,7 @@ const Section: React.FC<SectionProps> = ({ service, index }) => {
         </motion.div>
 
         <motion.div
-          className="w-full md:w-1/2 relative h-[400px] md:h-[600px]"
+          className="max-md:hidden w-full md:w-1/2 relative h-[300px] md:h-400px]"
           initial={{ x: 50, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
@@ -189,7 +204,7 @@ const Section: React.FC<SectionProps> = ({ service, index }) => {
       </AnimatePresence>
 
       <motion.div
-        className="absolute bottom-8 left-8 bg-white dark:bg-gray-800 p-4 rounded-full shadow-lg"
+        className="max-md:hidden absolute bottom-8 left-8 p-4 rounded-full shadow-lg"
         initial={{ y: 50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.6 }}

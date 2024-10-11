@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   createContext,
@@ -6,9 +6,9 @@ import {
   ReactNode,
   useState,
   useEffect,
-} from 'react';
-import { use } from 'react';
-import { User } from '@/lib/db/schema';
+} from "react";
+import { use } from "react";
+import { User } from "@/lib/db/schema";
 
 type UserContextType = {
   user: User | null;
@@ -20,7 +20,7 @@ const UserContext = createContext<UserContextType | null>(null);
 export function useUser(): UserContextType {
   let context = useContext(UserContext);
   if (context === null) {
-    throw new Error('useUser must be used within a UserProvider');
+    throw new Error("useUser must be used within a UserProvider");
   }
   return context;
 }

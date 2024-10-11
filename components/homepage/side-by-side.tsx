@@ -46,6 +46,21 @@ export default function SideBySide() {
 
     const tl = gsap.timeline();
 
+    tl.set(sectionRef?.current, { opacity: 0, scale: 0.1 });
+
+    tl.to(sectionRef?.current, {
+      opacity: 1,
+      scale: 1,
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        start: "-=300 center",
+        end: "bottom bottom",
+        scrub: true,
+        markers: true,
+      },
+    });
+
     gsap.set(image, { y: 300, opacity: 0 });
 
     tl.to(image, {
@@ -54,12 +69,33 @@ export default function SideBySide() {
       ease: "power1.inOut",
       scrollTrigger: {
         trigger: section,
-        start: "top center",
+        start: "-=300 center",
         end: "bottom bottom",
         scrub: true,
         markers: true,
       },
+    }).then(() => {
+      tl.to(imageRef.current, {
+        scale: 1.8,
+        duration: 2,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: section,
+          start: "-=300 center",
+          end: "bottom bottom",
+          scrub: true,
+          markers: true,
+        },
+      });
     });
+
+    return () => {
+      tl.to(imageRef.current, {
+        scale: 0,
+        duration: 2,
+        ease: "power2.inOut",
+      });
+    };
   }, []);
 
   return (
@@ -74,14 +110,9 @@ export default function SideBySide() {
         alt="Hands with nails french style"
         width={1000}
         height={1000}
-        className="absolute bottom left-1/2 -translate-x-1/2 mask-gradient opacity-0 w-auto h-auto max-md:mb-40"
+        className="absolute bottom left-1/2 -translate-x-1/2 mask-gradient opacity-0 w-full h-auto max-md:mb-40"
       />
-
       <motion.div
-        initial={{ opacity: 0, scale: 0.1 }}
-        transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true }}
         ref={dialogRef}
         className="opacity-0 w-full lg:w-1/2 p-6 lg:p-8 rounded-2xl shadow-xl bg-white/60 dark:bg-black/50 backdrop-blur-lg transition-all duration-500 hover:shadow-2xl hover:shadow-black/20 hover:scale-105"
       >
@@ -111,7 +142,7 @@ export default function SideBySide() {
                   aria-hidden="true"
                 />
                 {feature.name}
-              </dt>{" "}
+              </dt>
               <dd className="inline dark:text-gray-400">
                 {feature.description}
               </dd>

@@ -90,9 +90,8 @@ const features = [
       <Image
         src="/smalti-blob.webp"
         className={cn(imageCustomClass)}
-        sizes="(max-width: 768px) 100vw, 33vw"
-        width={1000}
-        height={1000}
+        width={300}
+        height={300}
         alt="smalti"
       />
     ),
@@ -140,11 +139,11 @@ const BentoGridSection = () => {
   }, []);
 
   return (
-    <BentoGrid className="p-5 mx-auto">
+    <BentoGrid className="w-full p-5 mx-auto max-w-[1600px]">
       {features.map((feature, i) => (
         <BentoCard
           key={i}
-          className={cn(feature.class, `feature${i} group`, "min-h-96")}
+          className={cn(feature.class, `feature${i} group`, "h-full")}
           {...feature}
         />
       ))}

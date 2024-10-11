@@ -51,7 +51,7 @@ const domandeERisposteEstetista = [
 
 export function AccordionComponent() {
   return (
-    <div className="flex flex-col w-[70%] lg:w-[50%]">
+    <div className="flex flex-col w-full relative">
       <h2
         className={cn(
           `mt-2 font-semibold text-center tracking-tight dark:text-white text-gray-900`,
@@ -60,18 +60,20 @@ export function AccordionComponent() {
       >
         Frequently Asked Questions (FAQs)
       </h2>
-      <Accordion type="single" collapsible className="w-full mt-2">
-        {domandeERisposteEstetista.map((faq) => (
-          <AccordionItem key={faq.question} value={faq.question}>
-            <AccordionTrigger>
-              <span className="font-medium">{faq.question}</span>
-            </AccordionTrigger>
-            <AccordionContent>
-              <p>{faq.answer}</p>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      <div className={cn("w-full max-w-[70%] lg:max-w-[50%]", "mx-auto")}>
+        <Accordion type="single" collapsible className="w-full mt-2">
+          {domandeERisposteEstetista.map((faq) => (
+            <AccordionItem key={faq.question} value={faq.question}>
+              <AccordionTrigger>
+                <span className="font-medium">{faq.question}</span>
+              </AccordionTrigger>
+              <AccordionContent>
+                <p>{faq.answer}</p>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
     </div>
   );
 }
