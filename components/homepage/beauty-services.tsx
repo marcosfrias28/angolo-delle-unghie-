@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ScrollToPlugin } from "gsap/all";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
@@ -81,25 +81,27 @@ const services: Service[] = [
 const BeautyServices: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [currentSection, setCurrentSection] = useState(0);
+  const isInView = useInView(containerRef, { amount: 1 });
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
+    const handleScroll = () => {
+      if (!isInView) return;
+      setCurrentSection(currentSection + 1);
+    };
+
     const scrollPosition = container.scrollTop;
     const sectionHeight = container.clientHeight;
     const newSection = Math.round(scrollPosition / sectionHeight);
+
     if (newSection !== currentSection) {
       setCurrentSection(newSection);
     }
 
-    container.addEventListener("scroll", () =>
-      setCurrentSection(currentSection + 1)
-    );
-    return () =>
-      container.removeEventListener("scroll", () =>
-        setCurrentSection(currentSection + 1)
-      );
+    container.addEventListener("scroll", handleScroll);
+    return () => container.removeEventListener("scroll", handleScroll);
   }, [currentSection]);
 
   return (

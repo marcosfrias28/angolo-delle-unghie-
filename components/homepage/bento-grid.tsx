@@ -139,7 +139,7 @@ const BentoGridSection = () => {
   }, []);
 
   return (
-    <BentoGrid className="w-full p-5 mx-auto max-w-[1600px]">
+    <BentoGrid className="p-5 mx-auto">
       {features.map((feature, i) => (
         <BentoCard
           key={i}

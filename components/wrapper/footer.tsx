@@ -7,13 +7,17 @@ import Marquee from "@/components/ui/marquee";
 import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { FaInstagram, FaFacebook } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa6";
+import Stars from "../homepage/stars";
+import Meteors from "../magicui/meteors";
 
-const scrollTrigger = gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
   const path = usePathname();
 
-  if (path.includes("sign") || path.includes("user-profile")) {
+  if (path.includes("accedi") || path.includes("profilo-utente")) {
     return null;
   }
 
@@ -32,6 +36,7 @@ export default function Footer() {
       },
     });
   }, []);
+
   const {
     register,
     handleSubmit,
@@ -39,26 +44,31 @@ export default function Footer() {
     reset,
   } = useForm();
 
-  const onSubmit = async (data: any) => {};
+  const onSubmit = async (data: any) => {
+    // Gestione dell'invio della newsletter
+  };
+
   return (
     <>
       <footer className="dark:bg-black bg-roseGold w-full relative">
-        <Marquee className="title-marquee z-50 absolute -top-40 text-center bg-clip-text bg-gradient-to-b from-roseGold dark:from-black from-80% to-white w-full h-[300px] bg-transparent over">
+        <Stars />
+        <Meteors meteorQuantity={12} />
+        <Marquee className="title-marquee -z-0 absolute -top-40 text-center px-20">
           <h1 className="text-[150px] font-black text-roseGold dark:text-black">
             L'Angolo Delle Unghie
           </h1>
         </Marquee>
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2">
-            <div className="border-b   py-8 lg:order-last lg:border-b-0 lg:border-s lg:py-16 lg:ps-16">
+            <div className="border-b py-8 lg:order-last lg:border-b-0 lg:border-s lg:py-16 lg:ps-16 z-20">
               <div className="mt-8 space-y-4 lg:mt-0">
                 <div>
                   <h3 className="text-2xl font-medium">
-                    This is a fake newsletter title
+                    Iscriviti alla nostra newsletter
                   </h3>
-                  <p className="mt-4 max-w-lg  ">
-                    This is not a real newsletter email input. This is for you
-                    to build upon
+                  <p className="mt-4 max-w-lg">
+                    Ricevi le ultime novità, offerte speciali e consigli di
+                    bellezza direttamente nella tua casella di posta.
                   </p>
                 </div>
                 <form
@@ -67,10 +77,12 @@ export default function Footer() {
                 >
                   <Input
                     {...register("email", { required: true })}
-                    placeholder="Enter your email"
+                    placeholder="Inserisci la tua email"
                     type="email"
                   />
-                  <Button type="submit">Sign Up</Button>
+                  <Button className="text-black dark:text-white" type="submit">
+                    Iscriviti
+                  </Button>
                 </form>
               </div>
             </div>
@@ -78,78 +90,97 @@ export default function Footer() {
             <div className="py-8 lg:py-16 lg:pe-16">
               <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
                 <div>
-                  <p className="font-medium ">Socials</p>
+                  <p className="font-medium">Social</p>
 
                   <ul className="mt-6 space-y-4 text-sm">
                     <li>
                       <a
-                        href="https://twitter.com/rasmickyy"
+                        href="https://www.instagram.com/angolodelleunghie_/"
                         target="_blank"
-                        className="transition hover:opacity-75"
+                        referrerPolicy="no-referrer"
+                        className="transition hover:opacity-75 flex items-center"
                       >
-                        Twitter
+                        <FaInstagram className="size-5 mr-2 text-white dark:text-rose" />{" "}
+                        Instagram
                       </a>
                     </li>
                     <li>
                       <a
-                        href="https://www.youtube.com/@rasmic"
+                        href="https://www.facebook.com"
                         target="_blank"
-                        className="  transition hover:opacity-75"
+                        referrerPolicy="no-referrer"
+                        className="transition hover:opacity-75 flex items-center"
                       >
-                        YouTube
+                        <FaFacebook className="size-5 mr-2 text-white dark:text-rose" />
+                        Facebook
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.tiktok.com/"
+                        target="_blank"
+                        referrerPolicy="no-referrer"
+                        className="transition hover:opacity-75 flex items-center"
+                      >
+                        <FaTiktok className="size-5 mr-2 text-white dark:text-rose" />
+                        TikTok
                       </a>
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <p className="font-medium ">Helpful Links</p>
+                  <p className="font-medium">Link Utili</p>
 
                   <ul className="mt-6 space-y-4 text-sm">
                     <li>
                       <a
-                        target="_blank"
-                        href="/"
-                        rel="noopener noreferrer"
-                        className="  transition hover:opacity-75"
+                        href="/servizi"
+                        className="transition hover:opacity-75"
                       >
-                        Docs
+                        I Nostri Servizi
                       </a>
                     </li>
                     <li>
-                      <a href="/" className="  transition hover:opacity-75">
-                        Methodology
+                      <a
+                        href="/prenota"
+                        className="transition hover:opacity-75"
+                      >
+                        Prenota un Appuntamento
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/galleria"
+                        className="transition hover:opacity-75"
+                      >
+                        Galleria Lavori
                       </a>
                     </li>
                   </ul>
                 </div>
               </div>
 
-              <div className="mt-8 border-t   pt-8">
+              <div className="mt-8 border-t pt-8">
                 <ul className="flex flex-wrap gap-4 text-xs">
                   <li>
                     <a
-                      href="/"
-                      target="_blank"
+                      href="/termini-e-condizioni"
                       className="transition hover:opacity-75"
                     >
-                      Terms & Conditions
+                      Termini e Condizioni
                     </a>
                   </li>
 
                   <li>
-                    <a
-                      href="/"
-                      target="_blank"
-                      className="transition hover:opacity-75"
-                    >
-                      Privacy Policy
+                    <a href="/privacy" className="transition hover:opacity-75">
+                      Informativa sulla Privacy
                     </a>
                   </li>
                 </ul>
 
-                <p className="mt-8 text-xs  ">
-                  &copy; 2024. SomeCompany LLC. All rights reserved.
+                <p className="mt-8 text-xs text-white">
+                  &copy; 2024. L'Angolo Delle Unghie.
                 </p>
               </div>
             </div>
