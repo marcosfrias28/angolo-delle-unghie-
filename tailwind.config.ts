@@ -130,7 +130,7 @@ const config: Config = {
 						transform: 'rotate(290deg) translateX(0)'
 					},
 					'100%': {
-						transform: 'rotate(290deg) translateX(-1440px)',
+						transform: 'rotate(290deg) translateX(100%)',
 						opacity: '0'
 					}
 				},

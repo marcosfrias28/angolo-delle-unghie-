@@ -23,7 +23,7 @@ export const Meteors = ({ meteorQuantity = 7 }: MeteorsProps) => {
   }, [meteorQuantity]);
 
   return (
-    <div className="absolute top-0 w-screen h-screen stars overflow-hidden">
+    <div className="absolute top-0 w-screen h-full stars overflow-hidden">
       {[...meteorStyles].map((style, idx) => (
         // Meteor Head
         <span

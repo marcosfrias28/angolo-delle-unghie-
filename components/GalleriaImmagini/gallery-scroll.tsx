@@ -3,13 +3,13 @@ import Pagination from "./Pagination";
 import NavigationButtons from "./NavigationButtons";
 import { galleryImagesSrc } from "@/config";
 
-const GalleriaImmagini: React.FC = () => {
+const GalleryScroll: React.FC = () => {
   return (
     <section className="flex flex-col items-start w-full">
       <header
         aria-labelledby="gallery-header"
         id="gallery-header"
-        className="flex flex-col max-w-full text-black dark:text-white max-md:pl-0 pl-36"
+        className="flex flex-col max-w-full text-black dark:text-white max-md:pl-0 pl-8"
       >
         <h2 className="text-5xl font-bold leading-tight max-md:max-w-full max-md:text-4xl">
           Ultimi lavori realizzati
@@ -29,4 +29,4 @@ const GalleriaImmagini: React.FC = () => {
   );
 };
 
-export default GalleriaImmagini;
+export default GalleryScroll;

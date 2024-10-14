@@ -15,6 +15,12 @@ import ShineBorder from "../ui/shine-border";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const petalos = [
+  {
+    src: "/petalo-1.webp",
+  },
+];
+
 const features = [
   {
     name: "Esperienza",
@@ -62,7 +68,7 @@ export default function SideBySide() {
 
     const tl = gsap.timeline();
 
-    gsap.set(image, { y: 100, opacity: 0 });
+    gsap.set(image, { y: 100 });
 
     gsap.set(divRef.current, {
       y: isMobile ? 200 : 0,
@@ -71,16 +77,13 @@ export default function SideBySide() {
     });
 
     tl.to(image, {
-      opacity: 1,
       y: 0,
-      scale: isMobile ? 1.8 : 1.3,
       ease: "power1.inOut",
       scrollTrigger: {
         trigger: section,
         start: "-=700px center",
         end: "center bottom",
         scrub: true,
-        markers: true,
       },
     }).to(divRef.current, {
       opacity: 1,
@@ -101,15 +104,6 @@ export default function SideBySide() {
       ref={sectionRef}
       className="relative flex flex-col justify-center items-center min-h-[1200px] p-4"
     >
-      <Image
-        ref={imageRef}
-        id="hero-nail-2"
-        src="/hand-nail-red-2.webp"
-        alt="Hands with nails french style"
-        width={1000}
-        height={1000}
-        className="absolute bottom-0 left-0 mask-gradient w-auto h-auto max-md:mb-40"
-      />
       <ShineBorder
         ref={divRef}
         borderWidth={4}
@@ -119,8 +113,19 @@ export default function SideBySide() {
           "rgb(255, 228, 225)",
           "rgb(190, 120, 120)",
         ]}
+        className="mx-10 shadow-2xl"
       >
-        <div className="relative z-10 w-full max-w-6xl mx-auto p-8 rounded-2xl max-md:my-10">
+        <Image
+          ref={imageRef}
+          id="hero-nail"
+          src="/hand-nail-red.png"
+          alt="Hands with nails french style"
+          width={800}
+          height={800}
+          className="max-md:hidden absolute bottom-0 -right-36 mask-gradient w-auto h-auto max-xl:opacity-45"
+        />
+
+        <div className="relative z-10 w-full max-w-6xl mx-auto p-3 rounded-2xl max-md:my-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={isInViewDiv ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -170,7 +175,7 @@ export default function SideBySide() {
                   "w-full h-auto max-h-80 max-w-80 max-md:max-w-60 max-md:max-h-60 dark:text-white",
 
                   //spacing
-                  "lg:ml-20 max-md:mx-auto max-md:my-10",
+                  "lg:ml-20 max-lg:mx-auto max-md:my-10",
 
                   //colors
                   "bg-gradient-to-b from-roseGold-light to-roseGold-light dark:from-rose dark:to-roseGold-dark ring-rose dark:ring-white ring-offset-[#f7f7f7] dark:ring-offset-black",
@@ -183,29 +188,29 @@ export default function SideBySide() {
                   src="/miry-image.webp"
                   placeholder="blur"
                   blurDataURL="/miry-image.webp"
-                  alt="Il mio spazio di lavoro"
+                  alt="Foto di Miryam"
                   objectFit="cover"
                   loading="lazy"
                   width={300}
                   height={300}
-                  className="object-cover object-center scale-150 mt-36 mr-10"
+                  className="object-cover object-center scale-150 mt-36 lg:mr-10 max-lg:mb-20"
                 />
               </motion.div>
-              <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-300 max-md:text-center text-pretty">
-                Ciao, sono{" "}
-                <span className="bg-gradient-to-r from-rose to-roseGold-light bg-clip-text text-transparent dark:from-rose dark:to-rose via-roseGold-light">
+              <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-300 max-md:text-center text-pretty mt-10">
+                Ciao, sono
+                <span className="bg-gradient-to-r ml-2 from-rose to-roseGold-light bg-clip-text text-transparent dark:from-rose dark:to-rose via-roseGold-light">
                   Miryam
                 </span>
                 !
               </h3>
-              <p className="text-xl [&>span]:font-bold text-gray-700 dark:text-gray-300 max-md:text-center text-pretty font-medium pl-3 border-l-4 border-rose dark:border-roseGold-light mt-7">
+              <p className="text-xl [&>span]:font-bold text-gray-700 dark:text-gray-300 text-pretty font-medium pl-3 border-l-4 border-rose dark:border-roseGold-light mt-7">
                 Benvenuta nel mio spazio dedicato alla cura e alla bellezza
                 delle tue unghie. Qui, in un ambiente
                 <span> accogliente</span> e<span> personalizzato</span> , potrai
                 goderti trattamenti di alta qualità e momenti di puro relax.
               </p>
               <br />
-              <p className="text-xl [&>span]:font-bold text-gray-700 dark:text-gray-300 max-md:text-center text-pretty font-medium pl-3 border-l-4 border-rose dark:border-roseGold-light">
+              <p className="text-xl [&>span]:font-bold text-gray-700 dark:text-gray-300 text-pretty font-medium pl-3 border-l-4 border-rose dark:border-roseGold-light">
                 La mia passione per l'arte delle unghie si unisce all'attenzione
                 per il benessere di ogni cliente. Ogni trattamento è
                 un'opportunità per <span>prendersi cura di sé</span> e sentirsi
@@ -225,7 +230,7 @@ export default function SideBySide() {
                 key={feature.name}
                 className="max-md:p-2 p-6 text-center transform transition-all duration-300 hover:scale-105"
               >
-                <feature.icon className="w-12 h-12 text-roseGold-light mb-4 mx-auto" />
+                <feature.icon className="w-12 h-12 text-rose mb-4 mx-auto" />
                 <h4 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
                   {feature.name}
                 </h4>

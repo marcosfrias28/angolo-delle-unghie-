@@ -4,26 +4,36 @@ import SideBySide from "@/components/homepage/side-by-side";
 import PageWrapper from "@/components/wrapper/page-wrapper";
 import BentoGridSection from "@/components/homepage/bento-grid";
 import CTASection from "@/components/CTASection/cta-section";
-import Gallery from "@/components/GalleriaImmagini/galleria-immagini";
-import BeautyServices from "@/components/homepage/beauty-services";
+import GalleryScroll from "@/components/GalleriaImmagini/gallery-scroll";
 import ReviewsMarquee from "@/components/homepage/reviews";
+import { cn } from "@/lib/utils";
+import Meteors from "@/components/magicui/meteors";
+import Stars from "@/components/homepage/stars";
+import BeautyServices from "@/components/homepage/beauty-services";
 export default function Home() {
   return (
     <PageWrapper>
-      <HeroSection />
-      <div className="w-full md:min-h-screen">
+      <div
+        className={cn(
+          "w-full h-auto min-h-screen relative",
+          "bg-gradient-to-b from-roseGold-metallic dark:from-roseGold-metallic/20 from-70% to-transparent"
+        )}
+      >
+        <Stars />
+        <Meteors meteorQuantity={12} />
+        <HeroSection />
         <SideBySide />
       </div>
       <div className="w-full h-fit max-w-[1920px] min-h-screen lg:mt-40 overflow-hidden">
         <BentoGridSection />
       </div>
-      <div className="w-full max-w-[1920px] min-h-screen py-28 max-md:py-24 max-md:pl-3 mb-20 md:mb-24 lg:mb-28 overflow-hidden">
-        <Gallery />
+      <div className="relative w-full max-w-[1920px] min-h-screen my-28 max-md:my-24 max-md:pl-3 overflow-hidden">
+        <GalleryScroll />
       </div>
-      <div className="relative w-full max-md:min-h-full min-h-screen max-w-[1920px] max-md:px-5 px-10 lg:mt-40 overflow-hidden">
+      <div className="relative w-full max-md:min-h-full min-h-screen max-w-[1920px] max-md:px-5 px-10 overflow-hidden">
         <BeautyServices />
       </div>
-      <div className="w-full bg-roseGold-light dark:bg-roseGold-dark">
+      <div className="w-full bg-roseGold-light dark:bg-roseGold-dark mt-40">
         <CTASection />
       </div>
       <section

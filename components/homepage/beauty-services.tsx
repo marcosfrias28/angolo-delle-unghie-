@@ -1,12 +1,20 @@
 "use client";
 
-import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  Dispatch,
+  SetStateAction,
+  MutableRefObject,
+} from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence, useInView, useScroll } from "framer-motion";
 import { ScrollToPlugin } from "gsap/all";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
 import { useTheme } from "next-themes";
+import ScrollIcon from "./scroll-animation";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -14,11 +22,13 @@ interface Service {
   name: string;
   image: string;
   icon: string;
-  accent: {
-    light: string;
-    dark: string;
-  };
   note: string;
+}
+
+interface PaginationProps {
+  length: number;
+  currentPosition: number;
+  setCurrentPosition: Dispatch<SetStateAction<number>>;
 }
 
 interface SectionProps {
@@ -26,54 +36,52 @@ interface SectionProps {
   index: number;
 }
 
+const accent = {
+  light: "bg-[rgb(201,138,147)]",
+  dark: "bg-[rgb(157,108,115)]",
+};
+
 const services: Service[] = [
   {
     name: "Manicure",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/materials.jpg",
     icon: "💅",
-    accent: { light: "rgb(201,138,147)", dark: "rgb(157,108,115)" },
     note: "Cura delle mani di lusso",
   },
   {
     name: "Pedicure",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/materials.jpg",
     icon: "👣",
-    accent: { light: "rgb(201,138,147)", dark: "rgb(157,108,115)" },
     note: "Relax per i tuoi piedi",
   },
   {
     name: "Ceretta",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/materials.jpg",
     icon: "✨",
-    accent: { light: "rgb(219,166,173)", dark: "rgb(171,130,135)" },
     note: "Pelle liscia e setosa",
   },
   {
     name: "Laminazione",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/materials.jpg",
     icon: "🌟",
-    accent: { light: "rgb(237,194,199)", dark: "rgb(185,151,155)" },
     note: "Ciglia e sopracciglia perfette",
   },
   {
     name: "Unghie",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/materials.jpg",
     icon: "💅",
-    accent: { light: "rgb(246,211,215)", dark: "rgb(192,165,168)" },
     note: "Nail art straordinaria",
   },
   {
     name: "Massaggi",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/materials.jpg",
     icon: "💆‍♀️",
-    accent: { light: "rgb(251,220,223)", dark: "rgb(196,172,174)" },
     note: "Rilassamento profondo",
   },
   {
     name: "Trattamenti",
-    image: "/placeholder.svg?height=1080&width=1920",
+    image: "/materials.jpg",
     icon: "🧖‍♀️",
-    accent: { light: "rgb(255,228,225)", dark: "rgb(199,178,176)" },
     note: "Ringiovanimento della pelle",
   },
 ];
@@ -81,75 +89,93 @@ const services: Service[] = [
 const BeautyServices: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [currentSection, setCurrentSection] = useState(0);
-  const isInView = useInView(containerRef, { amount: 1 });
+  const sectionRef = useRef<HTMLElement[] | null>(null);
+  const isInView = useInView(containerRef, { amount: 0.95 });
 
   useEffect(() => {
+    if (!isInView) return;
+
     const container = containerRef.current;
     if (!container) return;
 
     const handleScroll = () => {
-      if (!isInView) return;
       setCurrentSection(currentSection + 1);
     };
 
-    const scrollPosition = container.scrollTop;
-    const sectionHeight = container.clientHeight;
-    const newSection = Math.round(scrollPosition / sectionHeight);
-
-    if (newSection !== currentSection) {
-      setCurrentSection(newSection);
-    }
-
     container.addEventListener("scroll", handleScroll);
     return () => container.removeEventListener("scroll", handleScroll);
-  }, [currentSection]);
+  }, []);
 
   return (
     <section
       ref={containerRef}
-      className="max-w-[1800px] h-[1000px] overflow-y-scroll z-20 rounded-2xl mx-auto bg-white dark:bg-gray-900 snap-y snap-mandatory scrollbar-hide"
+      className={cn(
+        "max-w-[1800px] h-[600px] lg:h-[1000px] min-h-[600px] z-20 rounded-2xl mx-auto bg-white dark:bg-gray-900 snap-y snap-mandatory scrollbar-hide",
+        isInView ? "overflow-y-scroll" : "overflow-hidden"
+      )}
     >
-      <Pagination
-        length={services.length}
-        currentPosition={currentSection}
-        setCurrentPosition={setCurrentSection}
-      />
-      <div className="relative w-full h-full">
-        {services.map((service, index) => (
-          <Section key={index} service={service} index={index} />
+      {/* Pagination */}
+      <div className="absolute z-20 right-0 bottom-auto flex flex-col gap-4 p-4">
+        {[...Array(services.length)].map((_, index) => (
+          <motion.div
+            key={index}
+            onClick={() => setCurrentSection(index)}
+            className={cn(
+              "flex shrink-0 rounded-lg overflow-hidden transition-all duration-300 cursor-pointer",
+              index === currentSection
+                ? "w-10 h-4 bg-white dark:bg-softWhite-50"
+                : "w-4 h-4 bg-white/30 dark:bg-gray-700/30"
+            )}
+          ></motion.div>
         ))}
       </div>
+
+      {/* Services */}
+      <div id="services-scroll">
+        {services.map((service, index) => (
+          <section
+            key={index}
+            className="relative"
+            ref={(el) => {
+              if (el && sectionRef.current) {
+                sectionRef.current[index] = el;
+              }
+            }}
+          >
+            <Section service={service} index={index} />
+          </section>
+        ))}
+      </div>
+      {/*scollabile */}
+      <ScrollIcon animationOff={true} />
     </section>
   );
 };
 
-const Section: React.FC<SectionProps> = ({ service, index }) => {
+const Section: React.FC<SectionProps> = ({ service, index }: SectionProps) => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
-  // After mounting, we have access to the theme
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    // Render nothing on the server and until the theme is mounted
     return null;
   }
 
   return (
-    <motion.section
+    <motion.div
       className={cn(
-        "h-[1000px] max-md:h-[500px] w-full flex items-center justify-center p-8 snap-start relative overflow-hidden"
+        "h-[600px] lg:h-[1000px] min-h-[600px] w-full flex items-center justify-center p-8 snap-start relative overflow-hidden",
+        accent.light,
+        accent.dark
       )}
       style={{
-        backgroundColor:
-          theme === "dark" ? service.accent.dark : service.accent.light,
+        backgroundColor: theme === "dark" ? accent.dark : accent.light,
       }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent dark:from-gray-800/20 dark:to-transparent" />
-
       <div className="relative z-10 md:flex md:flex-row items-center justify-between w-full max-w-7xl mx-auto h-fit">
         <motion.div
           className="w-full md:w-1/2 mb-8 md:mb-0"
@@ -157,7 +183,7 @@ const Section: React.FC<SectionProps> = ({ service, index }) => {
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-roseGold dark:text-white drop-shadow-md shadow-black">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-4 text-white dark:text-white drop-shadow-md shadow-black">
             {service.name}
           </h2>
           <p className="text-xl text-gray-700 mb-6 max-w-md text-pretty">
@@ -180,7 +206,7 @@ const Section: React.FC<SectionProps> = ({ service, index }) => {
             src={service.image}
             alt={service.name}
             loading="lazy"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+            blurDataURL={service.image}
             fill
             style={{ objectFit: "cover" }}
             className="rounded-3xl shadow-2xl"
@@ -219,46 +245,7 @@ const Section: React.FC<SectionProps> = ({ service, index }) => {
           className="w-16 h-16"
         />
       </motion.div>
-    </motion.section>
-  );
-};
-
-interface PaginationProps {
-  length: number;
-  currentPosition: number;
-  setCurrentPosition: Dispatch<SetStateAction<number>>;
-}
-
-export const Pagination: React.FC<PaginationProps> = ({
-  length,
-  currentPosition,
-  setCurrentPosition,
-}) => {
-  if (!length) return null;
-
-  return (
-    <div className="absolute z-20 my-auto right-8 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 p-4">
-      {Array.from({ length }).map((_, index) => (
-        <motion.div
-          key={index}
-          onClick={() => setCurrentPosition(index)}
-          className={cn(
-            "flex shrink-0 h-6 w-8 rounded-lg overflow-hidden transition-all duration-300 cursor-pointer",
-            "bg-white/30 dark:bg-gray-700/30"
-          )}
-        >
-          <motion.div
-            initial={{ height: 0 }}
-            animate={
-              index === currentPosition ? { height: "100%" } : { height: 0 }
-            }
-            transition={{ duration: 0.3 }}
-          >
-            <div className="w-full bg-white dark:bg-gray-200" />
-          </motion.div>
-        </motion.div>
-      ))}
-    </div>
+    </motion.div>
   );
 };
 
