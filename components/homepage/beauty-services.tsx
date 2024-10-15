@@ -1,20 +1,12 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useRef,
-  Dispatch,
-  SetStateAction,
-  MutableRefObject,
-} from "react";
+import { useState, useEffect, useRef, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence, useInView, useScroll } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import { ScrollToPlugin } from "gsap/all";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
 import { useTheme } from "next-themes";
-import ScrollIcon from "./scroll-animation";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -89,44 +81,51 @@ const services: Service[] = [
 const BeautyServices: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [currentSection, setCurrentSection] = useState(0);
-  const sectionRef = useRef<HTMLElement[] | null>(null);
+  const sectionRef = useRef<HTMLDivElement[] | null>(null);
   const isInView = useInView(containerRef, { amount: 0.95 });
 
   useEffect(() => {
-    if (!isInView) return;
-
     const container = containerRef.current;
-    if (!container) return;
-
-    const handleScroll = () => {
-      setCurrentSection(currentSection + 1);
-    };
+    if (!isInView || !container || !sectionRef.current) return;
 
     container.addEventListener("scroll", handleScroll);
-    return () => container.removeEventListener("scroll", handleScroll);
+    function handleScroll(e: any) {
+      console.log("scrolling");
+      if (!sectionRef.current) return;
+      gsap.to(container, {
+        duration: 2,
+        ease: "power2",
+        scrollTo: sectionRef.current[currentSection + 1],
+        onComplete: () => {
+          setCurrentSection(currentSection + 1);
+        },
+      });
+    }
+
+    if (typeof window === undefined) return;
   }, []);
 
   return (
     <section
       ref={containerRef}
       className={cn(
-        "max-w-[1800px] h-[600px] lg:h-[1000px] min-h-[600px] z-20 rounded-2xl mx-auto bg-white dark:bg-gray-900 snap-y snap-mandatory scrollbar-hide",
+        "max-w-[1800px] h-[600px] lg:h-[1000px] max-h-screen min-h-[600px] z-20 rounded-2xl mx-auto snap-y snap-mandatory scrollbar-hide",
         isInView ? "overflow-y-scroll" : "overflow-hidden"
       )}
     >
       {/* Pagination */}
-      <div className="absolute z-20 right-0 bottom-auto flex flex-col gap-4 p-4">
+      <div className="absolute z-20 right-14 top-1/2 -translate-y-1/2 bottom-auto flex flex-col gap-4 p-4">
         {[...Array(services.length)].map((_, index) => (
-          <motion.div
+          <div
             key={index}
             onClick={() => setCurrentSection(index)}
             className={cn(
-              "flex shrink-0 rounded-lg overflow-hidden transition-all duration-300 cursor-pointer",
+              "flex shrink-0 rounded-sm overflow-hidden transition-all duration-300 cursor-pointer",
               index === currentSection
-                ? "w-10 h-4 bg-white dark:bg-softWhite-50"
-                : "w-4 h-4 bg-white/30 dark:bg-gray-700/30"
+                ? "w-8 h-8 bg-white dark:bg-softWhite-50"
+                : "w-8 h-4 bg-white/30 dark:bg-gray-700/30"
             )}
-          ></motion.div>
+          ></div>
         ))}
       </div>
 
@@ -136,9 +135,9 @@ const BeautyServices: React.FC = () => {
           <section
             key={index}
             className="relative"
-            ref={(el) => {
+            ref={(el: HTMLDivElement | null) => {
               if (el && sectionRef.current) {
-                sectionRef.current[index] = el;
+                sectionRef.current[index] = el as HTMLDivElement;
               }
             }}
           >
@@ -147,7 +146,21 @@ const BeautyServices: React.FC = () => {
         ))}
       </div>
       {/*scollabile */}
-      <ScrollIcon animationOff={true} />
+      <motion.div
+        style={{
+          opacity: isInView ? 1 : 0,
+          y: isInView ? 0 : 20,
+        }}
+        className={cn(
+          "hero-link-to-base absolute bottom-1 max-md:right-10 max-md:-translate-x-0 right-1/2 -translate-x-1/2 mb-5 rounded-full flex items-start justify-center w-[30px] h-[60px] z-20",
+          "border-2 border-white bg-transparent",
+          "transition-all duration-200 ease-linear"
+        )}
+      >
+        <div className="bright">
+          <div className="size-3 rounded-full bg-white animate-bounce-more"></div>
+        </div>
+      </motion.div>
     </section>
   );
 };
@@ -197,7 +210,7 @@ const Section: React.FC<SectionProps> = ({ service, index }: SectionProps) => {
         </motion.div>
 
         <motion.div
-          className="max-md:hidden w-full md:w-1/2 relative h-[300px] md:h-400px]"
+          className="max-md:hidden w-full relative h-[600px] md:h-[400px]"
           initial={{ x: 50, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}

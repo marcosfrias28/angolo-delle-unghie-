@@ -42,6 +42,7 @@ export default function RootLayout({
 
   return (
     <html lang="it" suppressHydrationWarning>
+      <link rel="icon" type="image/x-icon" href={config.websiteFavicon} />
       <body className={cn(LoraFont.className, "relative")}>
         <ThemeProvider
           attribute="class"

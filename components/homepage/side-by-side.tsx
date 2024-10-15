@@ -85,24 +85,41 @@ export default function SideBySide() {
         end: "center bottom",
         scrub: true,
       },
-    }).to(divRef.current, {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      ease: "power1.inOut",
-      scrollTrigger: {
-        trigger: section,
-        start: "-=500px center",
-        end: "center bottom",
-        scrub: true,
-      },
-    });
+    })
+      .to(divRef.current, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        ease: "power1.inOut",
+        scrollTrigger: {
+          trigger: section,
+          start: "-=500px center",
+          end: "center bottom",
+          scrub: true,
+        },
+      })
+      .fromTo(
+        divRef.current,
+        { opacity: 1, x: 0 },
+        {
+          opacity: 0,
+          x: -600,
+          duration: 3,
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: divRef.current,
+            start: `center ${isMobile ? "-=500px" : "top"}`,
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
   }, [isMobile]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col justify-center items-center min-h-[1200px] p-4"
+      className="relative flex flex-col justify-center items-center min-h-[1200px] my-20 max-lg:max-h-fit max-h-screen"
     >
       <ShineBorder
         ref={divRef}
@@ -122,7 +139,7 @@ export default function SideBySide() {
           alt="Hands with nails french style"
           width={800}
           height={800}
-          className="max-md:hidden absolute bottom-0 -right-36 mask-gradient w-auto h-auto max-xl:opacity-45"
+          className="max-md:hidden absolute bottom-0 -right-36 mask-gradient w-auto h-auto opacity-45"
         />
 
         <div className="relative z-10 w-full max-w-6xl mx-auto p-3 rounded-2xl max-md:my-10">
@@ -189,11 +206,10 @@ export default function SideBySide() {
                   placeholder="blur"
                   blurDataURL="/miry-image.webp"
                   alt="Foto di Miryam"
-                  objectFit="cover"
                   loading="lazy"
                   width={300}
                   height={300}
-                  className="object-cover object-center scale-150 mt-36 lg:mr-10 max-lg:mb-20"
+                  className="object-cover object-center scale-150 mt-36 lg:mr-10 max-lg:mb-20 w-auto h-auto"
                 />
               </motion.div>
               <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-300 max-md:text-center text-pretty mt-10">
@@ -228,13 +244,13 @@ export default function SideBySide() {
             {features.map((feature, index) => (
               <div
                 key={feature.name}
-                className="max-md:p-2 p-6 text-center transform transition-all duration-300 hover:scale-105"
+                className="max-md:p-2 p-3 text-center transform transition-all duration-300 hover:scale-105"
               >
                 <feature.icon className="w-12 h-12 text-rose mb-4 mx-auto" />
                 <h4 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
                   {feature.name}
                 </h4>
-                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-48 mx-auto">
+                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-64 mx-auto">
                   {feature.description}
                 </p>
               </div>

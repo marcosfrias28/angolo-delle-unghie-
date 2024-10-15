@@ -26,7 +26,7 @@ export default function HeroSection() {
     >
       <div
         className={cn(
-          "flex items-center justify-center flex-col lg:flex-row-reverse max-sm:mt-20 gap-10",
+          "flex items-center justify-center flex-col mt-20 lg:flex-row-reverse max-sm:mt-20 gap-10 mx-auto",
           "container"
         )}
       >

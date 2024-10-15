@@ -54,8 +54,8 @@ export function AccordionComponent() {
     <div className="flex flex-col w-full relative">
       <h2
         className={cn(
-          `mt-2 font-semibold text-center tracking-tight dark:text-white text-gray-900`,
-          `title-tailwind-class`
+          `my-2 font-semibold text-center tracking-tight dark:text-white text-gray-900`,
+          `title-tailwind-class mx-5`
         )}
       >
         Frequently Asked Questions (FAQs)

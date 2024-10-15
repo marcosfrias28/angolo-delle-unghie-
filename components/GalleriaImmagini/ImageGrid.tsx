@@ -44,7 +44,7 @@ const ImageGrid: React.FC<ImageGridProps> = ({ images }) => {
   return (
     <div
       ref={galleryRef}
-      className="flex flex-nowrap gap-5 lg:gap-10 items-start w-screen max-md:p-0 py-5 pr-0 mx-auto md:ml-10 lg:ml-10 lg:pr-[800px] overflow-hidden pl-36 "
+      className="flex flex-nowrap gap-5 lg:gap-10 items-start w-screen mt-20 pr-0 mx-auto lg:pr-[1500px] overflow-hidden "
     >
       {images.map((src, index) => (
         <Image

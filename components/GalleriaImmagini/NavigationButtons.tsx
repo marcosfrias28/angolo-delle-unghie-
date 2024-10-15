@@ -37,7 +37,6 @@ const NavigationButtons: FC<NavigationButtonsProps> = ({ length }) => {
   const previousImage = () => {
     if (currentPosition === 0) {
       setIsDisabled(true);
-      setCurrentPosition(0);
     } else {
       setCurrentPosition(currentPosition - 1);
     }

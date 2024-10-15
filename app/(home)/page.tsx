@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import Meteors from "@/components/magicui/meteors";
 import Stars from "@/components/homepage/stars";
 import BeautyServices from "@/components/homepage/beauty-services";
+import { Suspense } from "react";
 export default function Home() {
   return (
     <PageWrapper>
@@ -22,16 +23,20 @@ export default function Home() {
         <Stars />
         <Meteors meteorQuantity={12} />
         <HeroSection />
-        <SideBySide />
+        <div className="max-md:px-5 px-10">
+          <SideBySide />
+        </div>
       </div>
-      <div className="w-full h-fit max-w-[1920px] min-h-screen lg:mt-40 overflow-hidden">
+      <div className="w-full h-fit max-w-[1920px] min-h-screen lg:mt-40 max-md:px-5 px-10 overflow-hidden">
         <BentoGridSection />
       </div>
-      <div className="relative w-full max-w-[1920px] min-h-screen my-28 max-md:my-24 max-md:pl-3 overflow-hidden">
+      <div className="relative w-full max-w-[1920px] min-h-screen my-28 max-md:my-24 max-md:pl-3 max-md:px-5 px-10 overflow-hidden">
         <GalleryScroll />
       </div>
-      <div className="relative w-full max-md:min-h-full min-h-screen max-w-[1920px] max-md:px-5 px-10 overflow-hidden">
-        <BeautyServices />
+      <div className="relative w-full max-w-[1920px] max-md:px-5 px-10 overflow-hidden">
+        <Suspense fallback={<div>Loading...</div>}>
+          <BeautyServices />
+        </Suspense>
       </div>
       <div className="w-full bg-roseGold-light dark:bg-roseGold-dark mt-40">
         <CTASection />

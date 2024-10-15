@@ -5,6 +5,7 @@ import { FC } from "react";
 import config from "@/config";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "usehooks-ts";
 
 interface HeroLogoProps {
   imageSrc: string;
@@ -12,6 +13,8 @@ interface HeroLogoProps {
 }
 
 const HeroLogo: FC<HeroLogoProps> = ({ imageSrc, className }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   return (
     <motion.div
       initial={{
@@ -30,8 +33,8 @@ const HeroLogo: FC<HeroLogoProps> = ({ imageSrc, className }) => {
     >
       <Image
         src={imageSrc}
-        width={800}
-        height={800}
+        width={isMobile ? 500 : 700}
+        height={isMobile ? 500 : 700}
         alt={`${config.websiteName} Logo`}
       />
     </motion.div>
