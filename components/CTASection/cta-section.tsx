@@ -26,30 +26,30 @@ const CTASection: React.FC<CTASectionProps> = () => {
   ];
 
   return (
-    <main className="flex overflow-hidden flex-col justify-center px-16 py-28 max-lg:px-5 max-lg:py-24">
-      <div className="flex flex-wrap gap-10 items-center w-full max-lg:max-w-full">
-        <Image
-          loading="lazy"
-          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-          src="/materials.jpg"
-          width={1000}
-          height={1000}
-          alt="Nail expert at work"
-          className="object-contain flex-1 shrink self-stretch my-auto w-full aspect-[0.96] basis-0 min-w-[240px] max-lg:max-w-full"
-        />
-        <section className="flex flex-col flex-1 shrink self-stretch my-auto basis-0 min-w-[240px] max-lg:max-w-full">
-          <Header />
-          <div className="flex flex-col mt-8 w-full max-lg:max-w-full">
-            <div className="flex flex-wrap gap-6 items-start py-2 w-full max-lg:max-w-full">
-              {services.map((service, index) => (
-                <ServiceCard key={index} {...service} />
-              ))}
-            </div>
+    <section className="flex overflow-hidden max-lg:flex-col flex-row justify-center w-screen h-[50vh] min-h-fit">
+      <Image
+        loading="lazy"
+        blurDataURL="/materials.jpg"
+        placeholder="blur"
+        src="/materials.jpg"
+        width={1000}
+        height={1000}
+        alt="Nail expert at work"
+        className="object-contain w-1/2 flex-1 h-auto"
+      />
+
+      <section className="flex flex-col flex-1 self-stretch my-auto basis-0 w-1/2 px-16 max-lg:px-5 py-28 max-lg:py-24">
+        <Header />
+        <div className="flex flex-col mt-8 w-full max-lg:max-w-full">
+          <div className="flex flex-wrap gap-6 items-start py-2 w-full max-lg:max-w-full">
+            {services.map((service, index) => (
+              <ServiceCard key={index} {...service} />
+            ))}
           </div>
-          <ActionButtons />
-        </section>
-      </div>
-    </main>
+        </div>
+        <ActionButtons />
+      </section>
+    </section>
   );
 };
 

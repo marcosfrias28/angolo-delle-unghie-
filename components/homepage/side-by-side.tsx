@@ -12,6 +12,7 @@ import { useMediaQuery } from "usehooks-ts";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import ShineBorder from "../ui/shine-border";
+import FallingPetalsBackground from "../NailsSection/petals-falling";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -121,6 +122,15 @@ export default function SideBySide() {
       ref={sectionRef}
       className="relative flex flex-col justify-center items-center min-h-[1200px] my-20 max-lg:max-h-fit max-h-screen"
     >
+      <Image
+        ref={imageRef}
+        id="hero-nail"
+        src="/hand-nail-red.png"
+        alt="Hands with nails french style"
+        width={800}
+        height={800}
+        className="max-md:hidden absolute bottom-0 -right-36 mask-gradient w-auto h-auto opacity-45"
+      />
       <ShineBorder
         ref={divRef}
         borderWidth={4}
@@ -130,16 +140,10 @@ export default function SideBySide() {
           "rgb(255, 228, 225)",
           "rgb(190, 120, 120)",
         ]}
-        className="mx-10 shadow-2xl"
+        className="mx-10 shadow-2xl relative"
       >
-        <Image
-          ref={imageRef}
-          id="hero-nail"
-          src="/hand-nail-red.png"
-          alt="Hands with nails french style"
-          width={800}
-          height={800}
-          className="max-md:hidden absolute bottom-0 -right-36 mask-gradient w-auto h-auto opacity-45"
+        <FallingPetalsBackground
+          className={cn("absolute flex flex-col z-0 overflow-hidden")}
         />
 
         <div className="relative z-10 w-full max-w-6xl mx-auto p-3 rounded-2xl max-md:my-10">

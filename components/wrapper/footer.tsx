@@ -7,8 +7,7 @@ import Marquee from "@/components/ui/marquee";
 import { ScrollTrigger } from "gsap/all";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { FaInstagram, FaFacebook } from "react-icons/fa";
-import { FaTiktok } from "react-icons/fa6";
+import { FaTiktok, FaInstagram, FaFacebook } from "react-icons/fa6";
 import Stars from "../homepage/stars";
 import Meteors from "../magicui/meteors";
 

@@ -9,17 +9,17 @@ const Header: React.FC<HeaderProps> = () => {
   return (
     <header className="flex flex-col w-full text-black max-md:max-w-full">
       <div className="flex flex-col w-full max-md:max-w-full">
-        <h1 className="self-start text-base font-semibold whitespace-nowrap">
+        <h4 className="self-start text-base font-semibold whitespace-nowrap">
           Bellezza
-        </h1>
+        </h4>
         <div className="flex flex-col mt-4 w-full max-md:max-w-full">
           <h2 className="text-5xl font-bold leading-[58px] max-md:max-w-full max-md:text-4xl max-md:leading-[54px]">
-            Il tuo esperto di unghie di fiducia
+            La tua esperta di unghie di fiducia
           </h2>
           <p className="mt-6 text-lg leading-7 max-md:max-w-full">
-            Con anni di esperienza nel settore della bellezza, il nostro esperto
-            di unghie offre servizi di alta qualità. La sua passione per il
-            lavoro si riflette in ogni trattamento.
+            Con anni di esperienza nel settore della bellezza, ti offro servizi
+            di alta qualità. La mia passione per il lavoro si riflette in ogni
+            trattamento.
           </p>
         </div>
       </div>

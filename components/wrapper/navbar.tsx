@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import * as React from "react";
+import { forwardRef, useContext } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Button } from "../ui/button";
 import {
@@ -43,6 +43,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 export default function NavBar() {
   const path = usePathname();
+  const user = useContext;
 
   if (path.includes("/dashboard")) {
     return null;
@@ -133,7 +134,7 @@ export default function NavBar() {
   );
 }
 
-const ListItem = React.forwardRef<
+const ListItem = forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {

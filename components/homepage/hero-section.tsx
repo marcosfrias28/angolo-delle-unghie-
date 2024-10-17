@@ -7,6 +7,7 @@ import Link from "next/link";
 import { BorderBeam } from "../magicui/border-beam";
 import ScrollIcon from "./scroll-animation";
 import { motion } from "framer-motion";
+import FallingPetalsBackground from "../NailsSection/petals-falling";
 
 const homepageText = {
   cta: {

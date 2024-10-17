@@ -1,5 +1,5 @@
 import { desc, and, eq, isNull } from 'drizzle-orm';
-import { db } from './drizzle';
+import db from './drizzle';
 import { activityLogs, teamMembers, teams, users } from './schema';
 import { cookies } from 'next/headers';
 import { verifyToken } from '@/lib/auth/session';
@@ -100,30 +100,22 @@ export async function getActivityLogs() {
 }
 
 export async function getTeamForUser(userId: number) {
-  const result = await db.query.users.findFirst({
-    where: eq(users.id, userId),
-    with: {
-      teamMembers: {
-        with: {
-          team: {
-            with: {
-              teamMembers: {
-                with: {
-                  user: {
-                    columns: {
-                      id: true,
-                      name: true,
-                      email: true,
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  });
+  const result = await db
+    .select({
+      id: teams.id,
+      name: teams.name,
+      createdAt: teams.createdAt,
+      updatedAt: teams.updatedAt,
+      stripeCustomerId: teams.stripeCustomerId,
+      stripeSubscriptionId: teams.stripeSubscriptionId,
+      stripeProductId: teams.stripeProductId,
+      planName: teams.planName,
+      subscriptionStatus: teams.subscriptionStatus,
+    })
+    .from(users)
+    .innerJoin(teamMembers, eq(teamMembers.userId, users.id))
+    .innerJoin(teams, eq(teamMembers.teamId, teams.id))
+    .where(eq(users.id, userId));
 
-  return result?.teamMembers[0]?.team || null;
+  return result.length > 0 ? result[0] : null;
 }
