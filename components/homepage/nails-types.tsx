@@ -55,7 +55,7 @@ const services: Service[] = [
   },
   {
     name: "Unghie naturali",
-    image: "/unghie/unghie-naturali.jpg",
+    image: "/unghie/unghie-naturali.webp",
     note: "Eleganza e versatilità con tonalità nude",
     description:
       "Svela la tua bellezza autentica con unghie naturali e nude, perfette per ogni occasione. Clicca per scoprire come un look minimalista possa esaltare la tua femminilità!",
