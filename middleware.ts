@@ -1,62 +1,48 @@
-import { NextRequest, NextResponse } from "next/server"
-import { JWTPayload } from "jose"
-import { drizzle } from "drizzle-orm/vercel-postgres"
-import { sql } from "@vercel/postgres"
-import { and, eq } from "drizzle-orm"
-import { users } from "@/lib/db/schema"
-import { decrypt } from "./lib/token"
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { signToken, verifyToken } from '@/lib/auth/session';
 
-const db = drizzle(sql) // Configura la connessione al database.
+const protectedRoutes = '/dashboard';
 
-export async function middleware(req: NextRequest) {
-  let payload = null,
-    username = null,
-    password = null,
-    user = null
-  const url = new URL(req.url)
-  const path = url.pathname
-  const method = req.method
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const sessionCookie = request.cookies.get('session');
+  const isProtectedRoute = pathname.startsWith(protectedRoutes);
 
-  if (path.startsWith("/api/user/login")) return NextResponse.next()
-
-  const token = req.cookies.get("access-token")?.value // Estrae il token dalla richiesta.
-  if (!token && path.startsWith("/admin/dashboard"))
-    return NextResponse.redirect(new URL("/admin", req.url)) // Se non c'è token, reindirizza al login se sta cercando di accedere a una pagina protetta.
-
-  try {
-    payload = (await decrypt(token as string)) as JWTPayload
-    username = payload?.username as string
-    password = payload?.password as string
-
-      // Verifica se l'utente esiste nel database con le credenziali del token.
-      ;[user] = await db
-        .select()
-        .from(users)
-        .where(
-          and(
-            eq(users.email, username),
-            eq(users.passwordHash, password)
-          )
-        )
-  } catch (error) {
-    console.log(error)
+  if (isProtectedRoute && !sessionCookie) {
+    return NextResponse.redirect(new URL('/login', request.url));
   }
-  if (user && path === "/admin")
-    return NextResponse.redirect(new URL("/admin/dashboard", req.url)) // Reindirizza alla dashboard se l'utente è già autenticato.
 
-  // Se l'utente non è autenticato e sta cercando di accedere a una pagina protetta
-  if (!user && path.startsWith("/admin/dashboard"))
-    return NextResponse.redirect(new URL("/admin", req.url))
+  let res = NextResponse.next();
 
-  // Se l'utente non è autenticato e sta cercando di accedere a una rotta API
-  if (!user && path.startsWith("/api") && method !== "GET")
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 }) // Risponde con un errore di autorizzazione.
+  if (sessionCookie) {
+    try {
+      const parsed = await verifyToken(sessionCookie.value);
+      const expiresInOneDay = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-  // Permette l'accesso alle altre rotte
-  return NextResponse.next()
+      res.cookies.set({
+        name: 'session',
+        value: await signToken({
+          ...parsed,
+          expires: expiresInOneDay.toISOString(),
+        }),
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax',
+        expires: expiresInOneDay,
+      });
+    } catch (error) {
+      console.error('Error updating session:', error);
+      res.cookies.delete('session');
+      if (isProtectedRoute) {
+        return NextResponse.redirect(new URL('/login', request.url));
+      }
+    }
+  }
+
+  return res;
 }
 
-// Configura le rotte su cui il middleware deve essere applicato
 export const config = {
-  matcher: ["/admin/dashboard/:path*", "/api/:path*", "/admin"],
-}
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+};

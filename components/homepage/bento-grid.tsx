@@ -19,7 +19,7 @@ import { Icons } from "@/components/Icons";
 gsap.registerPlugin(ScrollTrigger);
 
 const imageCustomClass =
-  "-right-20 -top-20 opacity-70 group-hover:opacity-30 dark:group-hover:opacity-30 transition-all duration-500 mask-gradient group-hover:grayscale object-cover min-w-full h-auto w-auto object-center";
+  "-right-20 -top-20 opacity-70 group-hover:opacity-30 dark:group-hover:opacity-30 transition-all duration-500 mask-gradient group-hover:grayscale-[50%] object-cover min-w-full h-auto w-auto object-center";
 
 const features = [
   {
@@ -39,7 +39,7 @@ const features = [
         alt="nails"
       />
     ),
-    class: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3",
+    class: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3 lg:mt-32",
   },
   {
     Icon: Icons.EsteticaIcon,
@@ -58,7 +58,7 @@ const features = [
         alt="estetica"
       />
     ),
-    class: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3",
+    class: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3 lg:-mt-10",
   },
   {
     Icon: GiFemaleLegs,
@@ -77,7 +77,7 @@ const features = [
         alt="estetica"
       />
     ),
-    class: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4",
+    class: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4 lg:-mt-10",
   },
   {
     Icon: TbMassage,
@@ -96,7 +96,7 @@ const features = [
         alt="Massaggi"
       />
     ),
-    class: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2",
+    class: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2 lg:mt-80",
   },
   {
     Icon: GiEyelashes,
@@ -115,28 +115,26 @@ const features = [
         alt="laminazione"
       />
     ),
-    class: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",
+    class: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4 lg:mt-80",
   },
 ];
 
 const BentoGridSection = () => {
   useGSAP(() => {
     features.map((_, i) => {
-      gsap.fromTo(
-        `.feature${i}`,
-        { y: 300, opacity: 0 },
-        {
-          opacity: 1,
-          y: 0,
-          ease: "power4.out",
-          scrollTrigger: {
-            trigger: `.feature${i}`,
-            start: "-30% bottom",
-            end: "bottom 70%",
-            scrub: true,
-          },
-        }
-      );
+      const tl = gsap.timeline();
+      gsap.set(".feature" + i, { y: 300, x: 0, opacity: 0 });
+      tl.to(`.feature${i}`, {
+        opacity: 1,
+        y: 0,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: `.feature${i}`,
+          start: "-30% bottom",
+          end: "bottom 70%",
+          scrub: true,
+        },
+      });
     });
   }, []);
 

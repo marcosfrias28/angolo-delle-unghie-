@@ -26,10 +26,10 @@ export default function Home() {
           <SideBySide />
         </section>
       </section>
-      <section className="w-full h-fit max-w-[1920px] min-h-screen lg:mt-40 max-md:px-5 px-10 overflow-hidden">
+      <section className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-5 px-10">
         <BentoGridSection />
       </section>
-      <section className="relative w-full max-w-[1920px] my-28 max-md:my-24 max-md:pl-3 max-md:px-5 px-10 overflow-hidden">
+      <section className="relative w-full max-w-[1920px] my-52 max-md:my-24 max-md:pl-3 max-md:px-5 px-10 overflow-hidden">
         <GalleryScroll />
       </section>
       <section className="relative w-full max-w-[1920px] overflow-hidden max-md:px-5">

@@ -21,7 +21,7 @@ const Petal = ({ index }: { index: number }) => {
   return (
     <motion.img
       key={key}
-      src={`/petali/p${index}.png`}
+      src={`/petali/p${index}.webp`}
       alt={`Pétalo ${index + 1}`}
       className="absolute"
       style={{
@@ -51,12 +51,10 @@ export default function FallingPetalsBackground({
 }: {
   className: ClassValue;
 }) {
-  const petalCount = 10;
+  const petalCount = 12;
 
   return (
-    <div
-      className={cn("inset-0 overflow-hidden pointer-events-none", className)}
-    >
+    <div className={cn("inset-0 pointer-events-none -mt-20", className)}>
       {[...Array(petalCount)].map((_, index) => (
         <Petal key={index} index={index + 1} />
       ))}

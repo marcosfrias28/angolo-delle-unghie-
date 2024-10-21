@@ -23,7 +23,7 @@ export default function NotFound() {
           href="/"
           className="max-w-48 mx-auto flex justify-center py-2 px-4 border border-gray-300 transition-all duration-300 rounded-full shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 hover:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-roseGold-light"
         >
-          Back to Home
+          Torna alla homepage
         </Link>
       </div>
     </div>

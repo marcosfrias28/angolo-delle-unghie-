@@ -140,12 +140,8 @@ export default function SideBySide() {
           "rgb(255, 228, 225)",
           "rgb(190, 120, 120)",
         ]}
-        className="mx-10 shadow-2xl relative"
+        className="mx-10 shadow-2xl relative overflow-hidden"
       >
-        <FallingPetalsBackground
-          className={cn("absolute flex flex-col z-0 overflow-hidden")}
-        />
-
         <div className="relative z-10 w-full max-w-6xl mx-auto p-3 rounded-2xl max-md:my-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
