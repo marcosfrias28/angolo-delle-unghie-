@@ -1,4 +1,4 @@
-import { AccordionComponent } from "@/components/homepage/accordion-component";
+import { FaqsSection } from "@/components/homepage/accordion-component";
 import HeroSection from "@/components/homepage/hero-section";
 import SideBySide from "@/components/homepage/side-by-side";
 import PageWrapper from "@/components/wrapper/page-wrapper";
@@ -22,20 +22,32 @@ export default function Home() {
         <Stars />
         <Meteors meteorQuantity={12} />
         <HeroSection />
-        <section className="relative max-md:px-5 px-10">
+        <section id="chi-sono" className="relative max-md:px-5 px-10">
           <SideBySide />
         </section>
       </section>
-      <section className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-5 px-10">
+      <section
+        id="servizi"
+        className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-5 px-10"
+      >
         <BentoGridSection />
       </section>
-      <section className="relative w-full max-w-[1920px] my-52 max-md:my-24 max-md:pl-3 max-md:px-5 px-10 overflow-hidden">
+      <section
+        id="galleria"
+        className="relative w-full max-w-[1920px] my-52 max-md:my-24 max-md:pl-3 max-md:px-5 px-10 overflow-hidden"
+      >
         <GalleryScroll />
       </section>
-      <section className="relative w-full max-w-[1920px] overflow-hidden max-md:px-5">
+      <section
+        id="stili-unghie"
+        className="relative w-full max-w-[1920px] overflow-hidden max-md:px-5"
+      >
         <NailsTypes />
       </section>
-      <section className="w-full bg-roseGold-light dark:bg-roseGold-dark mt-40">
+      <section
+        id="banner"
+        className="w-full bg-roseGold-light dark:bg-roseGold-dark mt-40"
+      >
         <CTASection />
       </section>
       <section
@@ -48,8 +60,11 @@ export default function Home() {
           <ReviewsMarquee />
         </section>
 
-        <section className="flex justify-center items-center w-full mb-32 pb-20">
-          <AccordionComponent />
+        <section
+          id="faqs"
+          className="flex justify-center items-center w-full mb-32 pb-20"
+        >
+          <FaqsSection />
         </section>
       </section>
     </PageWrapper>

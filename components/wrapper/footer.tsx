@@ -49,7 +49,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="dark:bg-black bg-roseGold w-full relative">
+      <footer id="footer" className="dark:bg-black bg-roseGold w-full relative">
         <Stars />
         <Meteors meteorQuantity={12} />
         <Marquee className="title-marquee -z-0 absolute -top-40 text-center px-20">

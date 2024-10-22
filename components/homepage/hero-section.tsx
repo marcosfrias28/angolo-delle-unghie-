@@ -20,6 +20,7 @@ const homepageText = {
 export default function HeroSection() {
   return (
     <section
+      id="hero-section"
       className={cn(
         "h-screen w-screen relative min-h-fit flex flex-col items-center justify-center"
       )}

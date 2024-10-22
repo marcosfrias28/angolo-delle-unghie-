@@ -49,7 +49,7 @@ const domandeERisposteEstetista = [
   },
 ];
 
-export function AccordionComponent() {
+export function FaqsSection() {
   return (
     <div className="flex flex-col w-full relative">
       <h2

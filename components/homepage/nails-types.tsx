@@ -171,18 +171,16 @@ const NailsTypes: React.FC = () => {
 
         {/* Services */}
         {services.map((service, index) => (
-          <>
-            <div
-              key={index}
-              ref={(el: HTMLDivElement | null) => {
-                if (el && sectionRef.current) {
-                  sectionRef.current[index] = el as HTMLDivElement;
-                }
-              }}
-            >
-              <Section service={service} index={index} />
-            </div>
-          </>
+          <div
+            key={index}
+            ref={(el: HTMLDivElement | null) => {
+              if (el && sectionRef.current) {
+                sectionRef.current[index] = el as HTMLDivElement;
+              }
+            }}
+          >
+            <Section service={service} index={index} />
+          </div>
         ))}
       </section>
     </>
@@ -227,7 +225,7 @@ const Section: React.FC<SectionProps> = ({ service, index }: SectionProps) => {
           </button>
         </div>
 
-        <motion.picture
+        <motion.figure
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5 }}
           animate={{ y: 300, opacity: 0 }}
@@ -244,10 +242,10 @@ const Section: React.FC<SectionProps> = ({ service, index }: SectionProps) => {
             fill
             className="aspect-auto"
           />
-          <caption className="absolute bottom-4 left-4 text-white text-xl font-semibold">
+          <figcaption className="absolute bottom-4 left-4 text-white text-xl font-semibold z-20">
             {service.note}
-          </caption>
-        </motion.picture>
+          </figcaption>
+        </motion.figure>
       </div>
     </motion.div>
   );
