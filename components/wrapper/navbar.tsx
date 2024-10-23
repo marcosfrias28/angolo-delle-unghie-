@@ -159,7 +159,7 @@ export default function NavBar() {
               Sezioni
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="flex flex-col w-[400px] gap-3 p-4 lg:w-[500px] bg-softWhite-50">
+              <ul className="flex flex-col w-[400px] gap-3 p-4 lg:w-[500px] bg-softWhite-50 text-black dark:bg-black/10 dark:text-white">
                 {components.map((component) => (
                   <ListItem
                     key={component.title}

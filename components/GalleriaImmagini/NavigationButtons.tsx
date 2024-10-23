@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, FC, useState, Dispatch, SetStateAction } from "react";
+import { useEffect, FC, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useGalleryStore } from "@/lib/store/gallery-store";
@@ -53,7 +53,7 @@ const NavigationButtons: FC<NavigationButtonsProps> = ({ length }) => {
     }
   };
   return (
-    <div className="flex gap-4 items-start self-stretch my-auto px-5">
+    <div className="flex gap-4 items-start self-stretch my-auto">
       <Button
         variant="ringHover"
         onClick={previousImage}
