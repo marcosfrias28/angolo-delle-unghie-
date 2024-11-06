@@ -19,7 +19,7 @@ const GalleryScroll: React.FC = () => {
         </p>
       </header>
       <ImageGrid images={galleryImagesSrc} />
-      <div className="flex flex-nowrap justify-between md:justify-center lg:gap-10 items-center mt-12 w-full mx-auto">
+      <div className="flex flex-nowrap justify-between md:justify-center gap-5 lg:gap-10 items-center mt-12 w-full mx-auto">
         <Pagination length={galleryImagesSrc.length} />
         <NavigationButtons length={galleryImagesSrc.length} />
       </div>

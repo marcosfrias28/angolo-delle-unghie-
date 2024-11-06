@@ -53,7 +53,7 @@ const NavigationButtons: FC<NavigationButtonsProps> = ({ length }) => {
     }
   };
   return (
-    <div className="flex gap-4 items-start self-stretch my-auto">
+    <div className="flex gap-1 items-start self-stretch mb-2">
       <Button
         variant="ringHover"
         onClick={previousImage}
@@ -76,7 +76,7 @@ const NavigationButtons: FC<NavigationButtonsProps> = ({ length }) => {
       <Button
         variant="ringHover"
         onClick={() => setIsPaused(!isPaused)}
-        className="flex gap-2 justify-center items-center px-3 w-12 h-12 bg-white border border-black border-solid rounded-[50px] text-black dark:hover:text-white"
+        className="flex gap-2 ml-4 justify-center items-center px-3 w-12 h-12 bg-white border border-black border-solid rounded-[50px] text-black dark:hover:text-white"
         aria-label="Next"
       >
         {isPaused ? (

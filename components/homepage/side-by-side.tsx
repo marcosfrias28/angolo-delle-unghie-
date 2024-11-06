@@ -129,7 +129,7 @@ export default function SideBySide() {
         alt="Hands with nails french style"
         width={800}
         height={800}
-        className="max-md:hidden absolute bottom-0 -right-36 mask-gradient w-auto h-auto opacity-45"
+        className="smax-md:hidden absolute bottom-0 -right-36 mask-gradient w-auto h-auto opacity-45"
       />
       <ShineBorder
         ref={divRef}
@@ -179,6 +179,9 @@ export default function SideBySide() {
                 }
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className={cn(
+                  //blur effect
+                  "[filter:url(#blur-and-scale-more)]",
+
                   //display
                   "relative flex items-center justify-center",
 
@@ -246,7 +249,12 @@ export default function SideBySide() {
                 key={feature.name}
                 className="max-md:p-2 p-3 text-center transform transition-all duration-300 hover:scale-105"
               >
-                <feature.icon className="w-12 h-12 text-rose mb-4 mx-auto" />
+                <feature.icon
+                  className={cn(
+                    "w-12 h-12 text-rose mb-4 mx-auto",
+                    "[filter:url(#blur-and-scale)]"
+                  )}
+                />
                 <h4 className="text-2xl font-semibold text-gray-800 dark:text-white mb-3">
                   {feature.name}
                 </h4>

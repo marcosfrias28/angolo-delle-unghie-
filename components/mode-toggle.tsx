@@ -1,26 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 export default function ModeToggle() {
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  // After mounting, we have access to the theme
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) {
-    // Render nothing on the server and until the theme is mounted
-    return null;
-  }
+  useEffect(() => {
+    if (window === undefined) return;
+    setIsClient(true);
+  }, []);
 
   return (
     <div>
-      {theme === "dark" ? (
+      {theme === "dark" && isClient ? (
         <Button
           variant="ghost"
           className="hover:bg-inherit border-zinc-900 bg-[#0c0c0d]"

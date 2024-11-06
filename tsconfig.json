@@ -28,7 +28,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "drizzle.config.js"
+    "drizzle.config.js",
+    "lib/utils/unsplash.js"
   ],
   "exclude": ["node_modules"]
 }

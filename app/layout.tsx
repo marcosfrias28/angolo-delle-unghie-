@@ -52,12 +52,53 @@ export default function RootLayout({
         >
           <UserProvider userPromise={userPromise}>
             <NavBar />
-
+            <BlurEffect />
             {children}
             <Toaster />
           </UserProvider>
         </ThemeProvider>
       </body>
     </html>
+  );
+}
+
+function BlurEffect() {
+  return (
+    <>
+      <svg height="0" width="0">
+        <filter
+          id="blur-and-scale"
+          x="-50%"
+          y="-50%"
+          width="200%"
+          height="200%"
+        >
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="5"
+            result="blurred"
+          />
+          <feColorMatrix type="saturate" values="4" in="blurred" />
+          <feComposite in="SourceGraphic" operator="over" />
+        </filter>
+      </svg>
+      <svg height="0" width="0">
+        <filter
+          id="blur-and-scale-more"
+          x="-50%"
+          y="-50%"
+          width="200%"
+          height="200%"
+        >
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="40"
+            result="blurred"
+          />
+          <feColorMatrix type="saturate" values="4" in="blurred" />
+          <feComposite in="SourceGraphic" operator="over" />
+        </filter>
+      </svg>
+    </>
   );
 }

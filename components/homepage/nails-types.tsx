@@ -117,7 +117,8 @@ const NailsTypes: React.FC = () => {
         ref={containerRef}
         className={cn(
           "w-full h-[600px] lg:h-[1000px] max-h-screen min-h-[600px] z-20 rounded-2xl mx-auto snap-y snap-mandatory scrollbar-hide",
-          isInView ? "overflow-y-scroll" : "overflow-hidden"
+          isInView ? "overflow-y-scroll" : "overflow-hidden",
+          "bg-gray-300 dark:bg-black/20 bg-opacity-70"
         )}
       >
         <Image
@@ -126,14 +127,16 @@ const NailsTypes: React.FC = () => {
           width={800}
           height={600}
           className={cn(
-            "absolute max-lg:-top-10 -top-36 mx-auto z-0 mask-gradient"
+            "absolute max-lg:-top-10 -top-36 mx-auto z-0 mask-gradient blur-lg"
           )}
         />
 
         <section
           className={cn(
             "absolute bottom-5 left-5 z-10",
-            "flex flex-col items-center justify-center gap-10"
+            "flex flex-col items-center justify-center gap-10",
+            // queries
+            "max-md:px-1 max-md:bottom-32"
           )}
         >
           {/* Pagination */}
@@ -145,8 +148,8 @@ const NailsTypes: React.FC = () => {
                 className={cn(
                   "flex shrink-0 rounded-sm overflow-hidden transition-all duration-200 cursor-pointer",
                   index === currentSection
-                    ? "w-8 h-8 bg-white dark:bg-softWhite-50"
-                    : "w-8 h-4 bg-white/30 dark:bg-gray-700/30"
+                    ? "w-8 h-8 max-md:w-3 max-md:h-3 bg-rose dark:bg-softWhite-50"
+                    : "w-8 h-4 max-md:w-3 max-md:h-3 bg-white dark:bg-gray-700/30"
                 )}
               ></div>
             ))}
@@ -158,13 +161,13 @@ const NailsTypes: React.FC = () => {
               y: isInView ? 0 : 20,
             }}
             className={cn(
-              "hero-link-to-base rounded-full flex items-start justify-center w-[30px] h-[60px]",
+              "hero-link-to-base rounded-full flex items-start justify-center max-md:w-4 w-8 h-16",
               "border-2 border-white bg-transparent",
               "transition-all duration-200 ease-linear"
             )}
           >
             <div className="bright">
-              <div className="size-3 rounded-full bg-white animate-bounce-more"></div>
+              <div className="size-4 max-md:size-2 rounded-full bg-white animate-bounce-more"></div>
             </div>
           </motion.div>
         </section>
@@ -200,17 +203,16 @@ const Section: React.FC<SectionProps> = ({ service, index }: SectionProps) => {
   return (
     <motion.div
       className={cn(
-        "h-[600px] lg:h-[1000px] w-full flex items-center justify-center snap-start overflow-hidden",
-        "bg-gray-300 dark:bg-black/20 backdrop-blur-lg bg-opacity-70"
+        "h-[600px] lg:h-[1000px] w-full flex items-center justify-center snap-start overflow-hidden"
       )}
       style={{
         backgroundColor: theme === "dark" ? "bg-gray-200" : "bg-gray-900",
       }}
     >
-      <div className="z-10 md:flex md:flex-row w-full h-full mx-auto">
+      <div className="z-10 md:flex md:flex-row w-full h-full mx-auto max-md:px-10">
         <div
           className={cn(
-            "w-1/2 h-full mb-8 md:mb-0 flex flex-col items-center justify-center "
+            "max-md:w-full w-1/2 h-full mb-8 md:mb-0 flex flex-col items-center justify-center "
             // index % 2 !== 0 && "order-1"
           )}
         >

@@ -3,6 +3,10 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import Image, { StaticImageData } from "next/image";
+
+const imageCustomClass =
+  "-right-20 -top-20 opacity-70 group-hover:opacity-30 dark:group-hover:opacity-30 transition-all duration-500 mask-gradient group-hover:grayscale-[50%] object-cover min-w-full h-auto w-auto object-center";
 
 const BentoGrid = ({
   children,
@@ -26,7 +30,7 @@ const BentoGrid = ({
 const BentoCard = ({
   name,
   className,
-  background,
+  src,
   Icon,
   description,
   href,
@@ -34,7 +38,7 @@ const BentoCard = ({
 }: {
   name: string;
   className: string;
-  background: ReactNode;
+  src: StaticImageData;
   Icon: any;
   description: string;
   href: string;
@@ -51,7 +55,14 @@ const BentoCard = ({
       className
     )}
   >
-    {background}
+    <Image
+      src={src}
+      placeholder="blur"
+      className={cn(imageCustomClass)}
+      fill
+      sizes="auto"
+      alt="laminazione"
+    />
     <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-10">
       <Icon className="size-16 origin-left transform-gpu text-neutral-700 dark:text-white transition-all duration-300 ease-in-out group-hover:scale-75 z-30" />
       <h3 className="text-xl font-bold text-neutral-700 dark:text-neutral-300 z-30">

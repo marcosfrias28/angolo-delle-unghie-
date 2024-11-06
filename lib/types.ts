@@ -45,3 +45,116 @@ const userUpdateSchema = z.object({
     .describe("user profile image URL"),
   user_id: z.string().describe("user ID"),
 });
+
+export type Article = {
+  id: string;
+  slug: string;
+  alternativeSlugs: AlternativeSlugs;
+  createdAt: Date;
+  updatedAt: Date;
+  promotedAt: Date | null;
+  width: number;
+  height: number;
+  color: string;
+  blurHash: string;
+  description: null | string;
+  altDescription: string;
+  breadcrumbs: any[];
+  urls: Urls;
+  links: ArticleLinks;
+  likes: number;
+  likedByUser: boolean;
+  currentUserCollections: any[];
+  sponsorship: null;
+  topicSubmissions: TopicSubmissions;
+  assetType: AssetType;
+  user: User;
+}
+
+export type AlternativeSlugs = {
+  en: string;
+  es: string;
+  ja: string;
+  fr: string;
+  it: string;
+  ko: string;
+  de: string;
+  pt: string;
+}
+
+export enum AssetType {
+  Photo = "photo",
+}
+
+export type ArticleLinks = {
+  self: string;
+  html: string;
+  download: string;
+  downloadLocation: string;
+}
+
+export type TopicSubmissions = {
+  health?: Health;
+}
+
+export type Health = {
+  status: string;
+  approvedOn: Date;
+}
+
+export type Urls = {
+  raw: string;
+  full: string;
+  regular: string;
+  small: string;
+  thumb: string;
+  smallS3: string;
+}
+
+export type User = {
+  id: string;
+  updatedAt: Date;
+  username: string;
+  name: string;
+  firstName: string;
+  lastName: string;
+  twitterUsername: null | string;
+  portfolioURL: null | string;
+  bio: null | string;
+  location: null | string;
+  links: UserLinks;
+  profileImage: ProfileImage;
+  instagramUsername: null | string;
+  totalCollections: number;
+  totalLikes: number;
+  totalPhotos: number;
+  totalPromotedPhotos: number;
+  totalIllustrations: number;
+  totalPromotedIllustrations: number;
+  acceptedTos: boolean;
+  forHire: boolean;
+  social: Social;
+}
+
+export type UserLinks = {
+  self: string;
+  html: string;
+  photos: string;
+  likes: string;
+  portfolio: string;
+  following: string;
+  followers: string;
+}
+
+export type ProfileImage = {
+  small: string;
+  medium: string;
+  large: string;
+}
+
+export type Social = {
+  instagramUsername: null | string;
+  portfolioURL: null | string;
+  twitterUsername: null | string;
+  paypalEmail: null;
+}

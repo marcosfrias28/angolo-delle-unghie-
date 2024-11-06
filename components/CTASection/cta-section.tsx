@@ -27,18 +27,21 @@ const CTASection: React.FC<CTASectionProps> = () => {
 
   return (
     <section className="flex overflow-hidden max-lg:flex-col flex-row justify-center w-screen h-[50vh] min-h-fit">
-      <Image
-        loading="lazy"
-        blurDataURL="/materials.jpg"
-        placeholder="blur"
-        src="/materials.jpg"
-        width={1000}
-        height={1000}
-        alt="Nail expert at work"
-        className="object-contain w-1/2 flex-1 h-auto"
-      />
+      <figure className="w-full lg:w-1/2 xl:w-1/4 ">
+        <Image
+          loading="lazy"
+          blurDataURL="/materials.jpg"
+          placeholder="blur"
+          src="/materials.jpg"
+          width={1000}
+          height={800}
+          alt="Nail expert at work"
+          className="object-cover w-full h-full"
+        />
+        <figcaption>Unghie Belle</figcaption>
+      </figure>
 
-      <section className="flex flex-col flex-1 self-stretch my-auto basis-0 w-1/2 px-16 max-lg:px-5 py-28 max-lg:py-24">
+      <section className="flex flex-col flex-1 self-stretch w-full lg:w-1/2 xl:w-3/4  my-auto basis-0 px-16 max-lg:px-5 py-28 max-lg:py-24">
         <Header />
         <div className="flex flex-col mt-8 w-full max-lg:max-w-full">
           <div className="flex flex-wrap gap-6 items-start py-2 w-full max-lg:max-w-full">
@@ -49,6 +52,19 @@ const CTASection: React.FC<CTASectionProps> = () => {
         </div>
         <ActionButtons />
       </section>
+      <figure className="w-full lg:w-1/2 xl:w-1/4 ">
+        <Image
+          loading="lazy"
+          blurDataURL="/materials.jpg"
+          placeholder="blur"
+          src="/materials.jpg"
+          width={1000}
+          height={800}
+          alt="Nail expert at work"
+          className="object-cover w-full h-full"
+        />
+        <figcaption>Unghie piu belle</figcaption>
+      </figure>
     </section>
   );
 };

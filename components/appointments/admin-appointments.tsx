@@ -43,7 +43,7 @@ import {
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import getReviews from "@/lib/actions/reviews";
-import { signOut } from "@/app/(login)/actions";
+import { signOut } from "@/app/(auth)/actions";
 
 interface Appointment {
   id: number;

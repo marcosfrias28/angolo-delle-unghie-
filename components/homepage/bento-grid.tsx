@@ -18,27 +18,15 @@ import { Icons } from "@/components/Icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const imageCustomClass =
-  "-right-20 -top-20 opacity-70 group-hover:opacity-30 dark:group-hover:opacity-30 transition-all duration-500 mask-gradient group-hover:grayscale-[50%] object-cover min-w-full h-auto w-auto object-center";
-
 const features = [
   {
     Icon: Icons.NailIcon,
     name: "Nails",
     description:
       "Esprimi la tua personalità con unghie eleganti e originali! Dai forma alla bellezza con i nostri trattamenti di onicotecnica avanzata, per mani che catturano ogni sguardo. Clicca e scopri come rendere uniche le tue unghie!",
-    href: "/",
+    href: "/servizi/nails",
     cta: "Scopri di più",
-    background: (
-      <Image
-        src={unghie}
-        placeholder="blur"
-        className={cn(imageCustomClass)}
-        fill
-        sizes="auto"
-        alt="nails"
-      />
-    ),
+    src: unghie,
     class: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3 lg:mt-32",
   },
   {
@@ -46,18 +34,9 @@ const features = [
     name: "Trattamenti viso e corpo",
     description:
       "Ritrova la tua bellezza naturale con i nostri esclusivi trattamenti viso e corpo. Dalla luminosità della pelle alla tonicità dei tuoi tessuti, regala alla tua pelle il lusso che merita. Clicca e scopri la tua nuova routine di bellezza!",
-    href: "/",
+    href: "/servizi/viso-e-corpo",
     cta: "Scopri di più",
-    background: (
-      <Image
-        src={visoecorpo}
-        placeholder="blur"
-        className={cn(imageCustomClass)}
-        fill
-        sizes="auto"
-        alt="estetica"
-      />
-    ),
+    src: visoecorpo,
     class: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3 lg:-mt-10",
   },
   {
@@ -65,18 +44,9 @@ const features = [
     name: "Estetica Base",
     description:
       "Scopri l’essenza della bellezza con il servizio di estetica base! Trattamenti semplici ma efficaci per valorizzare il tuo aspetto naturale, lasciandoti fresca e radiosa. Clicca e inizia il tuo viaggio verso un benessere autentico!",
-    href: "/",
+    href: "/servizi/estetica-base",
     cta: "Scopri di più",
-    background: (
-      <Image
-        src={esteticabase}
-        placeholder="blur"
-        className={cn(imageCustomClass)}
-        fill
-        sizes="auto"
-        alt="estetica"
-      />
-    ),
+    src: esteticabase,
     class: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4 lg:-mt-10",
   },
   {
@@ -84,18 +54,9 @@ const features = [
     name: "Massaggi",
     description:
       "Rilassa mente e corpo con massaggi professionali, pensati per sciogliere tensioni e stress. Scopri il piacere del benessere su misura e rigenerati con un’esperienza unica. Coccola la tua anima. Clicca qui per scoprire che tipo di massaggio fa per te.",
-    href: "/",
+    href: "/servizi/massaggi",
     cta: "Scopri di più",
-    background: (
-      <Image
-        src={massaggi}
-        placeholder="blur"
-        className={cn(imageCustomClass)}
-        fill
-        sizes="auto"
-        alt="Massaggi"
-      />
-    ),
+    src: massaggi,
     class: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2 lg:mt-80",
   },
   {
@@ -103,18 +64,9 @@ const features = [
     name: "Laminazione ciglia e sopracciglia",
     description:
       "La laminazione è un trattamento che migliora ciglia e sopracciglia naturali, rendendole più folte e definite. In particolare, nel caso delle ciglia, la laminazione le rende più scure e folte, dando loro una curvatura che in genere si ottiene con il mascara.",
-    href: "/",
+    href: "/servizi/laminazione",
     cta: "Scopri di più",
-    background: (
-      <Image
-        src={laminazione}
-        placeholder="blur"
-        className={cn(imageCustomClass)}
-        fill
-        sizes="auto"
-        alt="laminazione"
-      />
-    ),
+    src: laminazione,
     class: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4 lg:mt-80",
   },
 ];
