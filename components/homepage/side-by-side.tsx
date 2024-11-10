@@ -120,7 +120,7 @@ export default function SideBySide() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col justify-center items-center min-h-[1200px] my-20 max-lg:max-h-fit max-h-screen"
+      className="relative flex flex-col justify-center items-center min-h-[1200px] my-20 max-lg:max-h-fit"
     >
       <Image
         ref={imageRef}
@@ -142,7 +142,7 @@ export default function SideBySide() {
         ]}
         className="mx-10 shadow-2xl relative overflow-hidden"
       >
-        <div className="relative z-10 w-full max-w-6xl mx-auto p-3 rounded-2xl max-md:my-10">
+        <div className="relative z-10 w-full mx-auto p-3 rounded-2xl max-md:my-10">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={isInViewDiv ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
@@ -163,7 +163,7 @@ export default function SideBySide() {
             </p>
           </motion.div>
 
-          <div className="flex max-w-4xl mx-auto">
+          <div className="flex max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={
@@ -195,7 +195,7 @@ export default function SideBySide() {
                   "w-full h-auto max-h-80 max-w-80 max-md:max-w-60 max-md:max-h-60 dark:text-white",
 
                   //spacing
-                  "lg:ml-20 max-lg:mx-auto max-md:my-10",
+                  "lg:ml-20 max-lg:mx-auto max-md:my-10 mt-10",
 
                   //colors
                   "bg-gradient-to-b from-roseGold-light to-roseGold-light dark:from-rose dark:to-roseGold-dark ring-rose dark:ring-white ring-offset-[#f7f7f7] dark:ring-offset-black",
@@ -222,19 +222,47 @@ export default function SideBySide() {
                 </span>
                 !
               </h3>
-              <p className="text-xl [&>span]:font-bold text-gray-700 dark:text-gray-300 text-pretty font-medium pl-3 border-l-4 border-rose dark:border-roseGold-light mt-7">
-                Benvenuta nel mio spazio dedicato alla cura e alla bellezza
-                delle tue unghie. Qui, in un ambiente
-                <span> accogliente</span> e<span> personalizzato</span> , potrai
-                goderti trattamenti di alta qualità e momenti di puro relax.
-              </p>
-              <br />
-              <p className="text-xl [&>span]:font-bold text-gray-700 dark:text-gray-300 text-pretty font-medium pl-3 border-l-4 border-rose dark:border-roseGold-light">
-                La mia passione per l'arte delle unghie si unisce all'attenzione
-                per il benessere di ogni cliente. Ogni trattamento è
-                un'opportunità per <span>prendersi cura di sé</span> e sentirsi
-                speciali.
-              </p>
+              <CustomParragraph>
+                Ho 28 anni e dal
+                <span>
+                  2012 ho iniziato ad appassionarmi al mondo delle unghie
+                </span>
+                grazie a un regalo di Natale non richiesto:
+                <span>una lampada UV e un kit semipermanente</span>.
+              </CustomParragraph>
+
+              <CustomParragraph>
+                Da quel giorno iniziò una
+                <span>strada in salita piena di ostacoli</span>, ma anche di
+                <span>soddisfazioni e gratitudine</span>.
+                <span>
+                  Di pianti ne ho fatti tanti, troppi, e probabilmente altri ne
+                  farò
+                </span>
+                , ma oggi posso dire di essere un’
+                <span>
+                  onicotecnica specializzata con oltre 10 anni di esperienza
+                </span>
+                .
+              </CustomParragraph>
+
+              <CustomParragraph>
+                <span>Ogni giorno</span>,
+                <span>ogni sorriso delle mie clienti</span>,
+                <span>ogni piccola vittoria</span> mi ricordano perché ho
+                iniziato questo cammino e perché,
+                <span>
+                  nonostante le difficoltà, non ho mai smesso di crederci
+                </span>
+                . Il mio lavoro non è solo una professione: è una
+                <span>passione</span> che mi permette di
+                <span>esprimere la mia creatività</span> e di
+                <span>rendere felici le persone</span>. Questo è solo
+                <span>l’inizio di un percorso</span> che voglio continuare a
+                percorrere, con
+                <span>lo stesso entusiasmo del primo giorno</span> e con il
+                cuore sempre <span>pieno di gratitudine</span>.
+              </CustomParragraph>
             </motion.div>
           </div>
 
@@ -242,16 +270,16 @@ export default function SideBySide() {
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid max-md:grid-cols-2 grid-cols-3 gap-8 mt-10"
+            className="grid max-md:grid-cols-2 grid-cols-3 gap-8 mt-10 max-w-7xl mx-auto text-center"
           >
             {features.map((feature, index) => (
               <div
                 key={feature.name}
-                className="max-md:p-2 p-3 text-center transform transition-all duration-300 hover:scale-105"
+                className="max-md:p-2 p-3text-center transform transition-all duration-300 hover:scale-105"
               >
                 <feature.icon
                   className={cn(
-                    "w-12 h-12 text-rose mb-4 mx-auto",
+                    "w-12 h-12 text-rose/40 mb-4 mx-auto animate-pulse",
                     "[filter:url(#blur-and-scale)]"
                   )}
                 />
@@ -269,3 +297,11 @@ export default function SideBySide() {
     </section>
   );
 }
+
+const CustomParragraph: React.FC<any> = ({ children }: any) => {
+  return (
+    <p className="text-xl [&>span]:font-bold [&>span]:mx-1 text-gray-700 dark:text-gray-300 text-pretty font-medium pl-3 border-l-4 border-rose dark:border-roseGold-light mt-7">
+      {children}
+    </p>
+  );
+};

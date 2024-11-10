@@ -96,13 +96,13 @@ const ReviewsSection: React.FC = () => {
       </div>
       <div>
         <Marquee pauseOnHover className="[--duration:20s] h-fit">
-          {firstRow.map((review) => (
-            <ReviewCard key={crypto.randomUUID()} {...review} />
+          {firstRow.map((review, i) => (
+            <ReviewCard key={-i} {...review} />
           ))}
         </Marquee>
         <Marquee reverse pauseOnHover className="[--duration:20s] h-fit">
-          {secondRow.map((review) => (
-            <ReviewCard key={crypto.randomUUID()} {...review} />
+          {secondRow.map((review, i) => (
+            <ReviewCard key={i} {...review} />
           ))}
         </Marquee>
       </div>
