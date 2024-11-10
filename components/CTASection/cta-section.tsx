@@ -27,20 +27,6 @@ const CTASection: React.FC<CTASectionProps> = () => {
 
   return (
     <section className="flex overflow-hidden max-lg:flex-col flex-row justify-center w-screen h-[50vh] min-h-fit">
-      <figure className="w-full lg:w-1/2 xl:w-1/4 ">
-        <Image
-          loading="lazy"
-          blurDataURL="/materials.jpg"
-          placeholder="blur"
-          src="/materials.jpg"
-          width={1000}
-          height={800}
-          alt="Nail expert at work"
-          className="object-cover w-full h-full"
-        />
-        <figcaption>Unghie Belle</figcaption>
-      </figure>
-
       <section className="flex flex-col flex-1 self-stretch w-full lg:w-1/2 xl:w-3/4  my-auto basis-0 px-16 max-lg:px-5 py-28 max-lg:py-24">
         <Header />
         <div className="flex flex-col mt-8 w-full max-lg:max-w-full">
@@ -52,19 +38,17 @@ const CTASection: React.FC<CTASectionProps> = () => {
         </div>
         <ActionButtons />
       </section>
-      <figure className="w-full lg:w-1/2 xl:w-1/4 ">
+      <picture>
+        <source srcSet="/materials.jpg" type="image/jpeg" />
         <Image
           loading="lazy"
-          blurDataURL="/materials.jpg"
-          placeholder="blur"
           src="/materials.jpg"
           width={1000}
           height={800}
           alt="Nail expert at work"
-          className="object-cover w-full h-full"
+          className="object-cover w-full lg:w-1/2 xl:w-1/4 "
         />
-        <figcaption>Unghie piu belle</figcaption>
-      </figure>
+      </picture>
     </section>
   );
 };
