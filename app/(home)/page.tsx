@@ -1,6 +1,6 @@
 import { FaqsSection } from "@/components/homepage/accordion-component";
 import HeroSection from "@/components/homepage/hero-section";
-import SideBySide from "@/components/homepage/side-by-side";
+import AboutMe from "@/components/homepage/about-me";
 import PageWrapper from "@/components/wrapper/page-wrapper";
 import BentoGridSection from "@/components/homepage/bento-grid";
 import CTASection from "@/components/CTASection/cta-section";
@@ -24,7 +24,7 @@ export default function Home() {
         <Meteors meteorQuantity={12} />
         <HeroSection />
         <section id="chi-sono" className="relative max-md:px-2 px-10">
-          <SideBySide />
+          <AboutMe />
         </section>
       </section>
       <section

@@ -2,25 +2,16 @@
 
 import { useRef } from "react";
 import { Sparkles, Heart, Smile, Star, Clock, Palette } from "lucide-react";
-import { BorderBeam } from "../magicui/border-beam";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, useInView } from "framer-motion";
 import { useMediaQuery } from "usehooks-ts";
-import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import ShineBorder from "../ui/shine-border";
-import FallingPetalsBackground from "../NailsSection/petals-falling";
 
 gsap.registerPlugin(ScrollTrigger);
-
-const petalos = [
-  {
-    src: "/petalo-1.webp",
-  },
-];
 
 const features = [
   {
@@ -55,7 +46,7 @@ const features = [
   },
 ];
 
-export default function SideBySide() {
+export default function AboutMe() {
   const sectionRef = useRef(null);
   const divRef = useRef(null);
   const imageRef = useRef(null);
@@ -222,30 +213,6 @@ export default function SideBySide() {
                 </span>
                 !
               </h3>
-              <CustomParragraph>
-                Ho 28 anni e dal
-                <span>
-                  2012 ho iniziato ad appassionarmi al mondo delle unghie
-                </span>
-                grazie a un regalo di Natale non richiesto:
-                <span>una lampada UV e un kit semipermanente</span>.
-              </CustomParragraph>
-
-              <CustomParragraph>
-                Da quel giorno iniziò una
-                <span>strada in salita piena di ostacoli</span>, ma anche di
-                <span>soddisfazioni e gratitudine</span>.
-                <span>
-                  Di pianti ne ho fatti tanti, troppi, e probabilmente altri ne
-                  farò
-                </span>
-                , ma oggi posso dire di essere un’
-                <span>
-                  onicotecnica specializzata con oltre 10 anni di esperienza
-                </span>
-                .
-              </CustomParragraph>
-
               <CustomParragraph>
                 <span>Ogni giorno</span>,
                 <span>ogni sorriso delle mie clienti</span>,
