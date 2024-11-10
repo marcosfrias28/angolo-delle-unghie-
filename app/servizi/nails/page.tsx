@@ -8,24 +8,27 @@ import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function NailsPage({
-  title = "Trattamenti e Ricostruzione Unghie",
-  description = "I trattamenti per le unghie includono manicure, ricostruzione, nail art e molto altro. Ogni servizio è pensato per valorizzare la bellezza delle mani e delle unghie, garantendo risultati duraturi e personalizzati in base ai gusti e alle esigenze di ogni cliente.",
-  features = [
+const { title, description, features, images, ctaText, ctaLink } = {
+  title: "Trattamenti e Ricostruzione Unghie",
+  description:
+    "I trattamenti per le unghie includono manicure, ricostruzione, nail art e molto altro. Ogni servizio è pensato per valorizzare la bellezza delle mani e delle unghie, garantendo risultati duraturi e personalizzati in base ai gusti e alle esigenze di ogni cliente.",
+  features: [
     "Manicure e pedicure personalizzate",
     "Ricostruzione unghie in gel o acrilico",
     "Nail art creativa e decorazioni",
     "Trattamenti per unghie forti e sane",
     "Smalto semipermanente e lunga durata",
   ],
-  images = [
+  images: [
     "https://images.unsplash.com/photo-1593757141993-0b1d62e6ed0d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWFuaWN1cmUlMjBlJTIwcmljb3N0cnV6aW9uZSUyMHVuZ2hpZXxlbnwwfHwwfHx8fDA%3D",
     "https://images.unsplash.com/photo-1591474207287-9f9a181d1d65?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZGVjb3JhemlvbmUlMjB1bmdoaWV8ZW58MHx8MHx8fDA%3D",
     "https://images.unsplash.com/photo-1522336572468-97b6a1a4b3ba?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG5haWwlMjBhcnR8ZW58MHx8MHx8fDA%3D",
   ],
-  ctaText = "Prenota ora un appuntamento",
-  ctaLink = "#",
-} = {}) {
+  ctaText: "Prenota ora un appuntamento",
+  ctaLink: "#",
+};
+
+export default function NailsPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {

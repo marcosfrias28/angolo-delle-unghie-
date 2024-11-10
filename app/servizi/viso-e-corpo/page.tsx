@@ -8,24 +8,25 @@ import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function NailTypePage({
-  title = "Cura del Viso e del Corpo",
-  description = "I trattamenti di cura del viso e del corpo sono pensati per migliorare la salute e la bellezza della pelle, offrendo un'esperienza di benessere completa. Dalla pulizia profonda del viso ai massaggi rilassanti, ogni servizio è mirato a far risplendere la pelle e a favorire il rilassamento e il ringiovanimento.",
-  features = [
+const { title, description, features, images, ctaText, ctaLink } = {
+  title: "Cura del Viso e del Corpo",
+  description:
+    "I trattamenti di cura del viso e del corpo sono pensati per migliorare la salute e la bellezza della pelle, offrendo un'esperienza di benessere completa. Dalla pulizia profonda del viso ai massaggi rilassanti, ogni servizio è mirato a far risplendere la pelle e a favorire il rilassamento e il ringiovanimento.",
+  features: [
     "Pulizia profonda e trattamenti viso personalizzati",
     "Massaggi rilassanti e terapeutici",
     "Scrub corpo e trattamenti esfolianti",
     "Idratazione intensiva e maschere nutrienti",
     "Rituali di benessere per il corpo e la mente",
   ],
-  images = [
-    "https://images.unsplash.com/photo-1589820296154-59da1ae066d3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y3VyYSUyMGRlbCUyMHZpc29lJTIwZSUyMGRlbCUyMGNvcnBvfGVufDB8fDB8fHx8MA%3D%3D",
-    "https://images.unsplash.com/photo-1556228720-3c1d550f233b?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fG1hc3NhZ2dpJTIwcGVyJTIwaWwlMjBjb3Jwb3xlbnwwfHwwfHx8fDA%3D",
-    "https://images.unsplash.com/photo-1570749077104-2b28d2dfcfbe?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8dHJhdHRhbWVudGklMjBkaSUyMHZpc298ZW58MHx8MHx8fDA%3D",
+  images: [
+    "https://images.unsplash.com/photo-1580714559550-4cb5d62e42c1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFtaW5hemlvbmUlMjBjaWdsaWUlMjBlJTIwc29wcmFjY2lnaWxpYXxlbnwwfHwwfHx8fDA%3D",
+    "https://images.unsplash.com/photo-1551232868-83160edcd444?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c29wcmFjY2lnaWxpYXxlbnwwfHwwfHx8fDA%3D",
   ],
-  ctaText = "Prenota il tuo trattamento",
-  ctaLink = "#",
-} = {}) {
+  ctaText: "Prenota il tuo trattamento",
+  ctaLink: "#",
+};
+export default function NailTypePage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {

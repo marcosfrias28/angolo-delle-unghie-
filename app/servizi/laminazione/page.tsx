@@ -8,23 +8,25 @@ import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function LaminazionePage({
-  title = "Laminazione Ciglia e Sopracciglia",
-  description = "La laminazione di ciglia e sopracciglia è un trattamento che rinforza, curva e definisce le ciglia e le sopracciglia naturali, donando uno sguardo intenso e ben definito. Perfetto per chi desidera un look naturale ma curato, senza l'uso quotidiano di make-up.",
-  features = [
+const { title, description, features, images, ctaText, ctaLink } = {
+  title: "Laminazione Ciglia e Sopracciglia",
+  description:
+    "La laminazione di ciglia e sopracciglia è un trattamento che rinforza, curva e definisce le ciglia e le sopracciglia naturali, donando uno sguardo intenso e ben definito. Perfetto per chi desidera un look naturale ma curato, senza l'uso quotidiano di make-up.",
+  features: [
     "Rinforzo e curvatura delle ciglia naturali",
     "Definizione delle sopracciglia per un look naturale",
     "Trattamenti nutrienti per ciglia e sopracciglia",
     "Aspetto intenso e curato a lunga durata",
   ],
-  images = [
+  images: [
     "https://images.unsplash.com/photo-1511974035430-5de47d3b95da?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bGFtaW5hemlvbmUlMjBjaWdsaWUlMjBlJTIwc29wcmFjY2lnaWxpYXxlbnwwfHwwfHx8fDA%3D",
     "https://images.unsplash.com/photo-1580714559550-4cb5d62e42c1?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFtaW5hemlvbmUlMjBjaWdsaWUlMjBlJTIwc29wcmFjY2lnaWxpYXxlbnwwfHwwfHx8fDA%3D",
     "https://images.unsplash.com/photo-1551232868-83160edcd444?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c29wcmFjY2lnaWxpYXxlbnwwfHwwfHx8fDA%3D",
   ],
-  ctaText = "Prenota il tuo trattamento",
-  ctaLink = "#",
-} = {}) {
+  ctaText: "Prenota il tuo trattamento",
+  ctaLink: "#",
+};
+export default function LaminazionePage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {

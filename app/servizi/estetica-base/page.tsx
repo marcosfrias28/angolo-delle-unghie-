@@ -8,23 +8,22 @@ import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-export default function NailTypePage({
-  title = "Estetica Base",
-  description = "I trattamenti di estetica base includono manicure, pedicure, depilazione e trattamenti per la pelle. Questi servizi offrono una cura essenziale per mantenere mani, piedi e pelle in condizioni ottimali, garantendo un aspetto curato e fresco.",
-  features = [
+const { title, description, features, images, ctaText, ctaLink } = {
+  title: "Estetica Base",
+  description:
+    "I trattamenti di estetica base includono manicure, pedicure, depilazione e trattamenti per la pelle. Questi servizi offrono una cura essenziale per mantenere mani, piedi e pelle in condizioni ottimali, garantendo un aspetto curato e fresco.",
+  features: [
     "Manicure e pedicure professionali",
     "Depilazione con cera delicata",
     "Trattamenti per la cura della pelle",
     "Rilassamento e cura personale",
   ],
-  images = [
-    "https://images.unsplash.com/photo-1535732598564-30eec2ef8e56?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8bWFuaWN1cmV8ZW58MHx8MHx8fDA%3D",
-    "https://images.unsplash.com/photo-1572396760508-577d6dc7e645?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGRlcGlsYXppb25lJTIwY2VyYVxlbnwwfHwwfHx8fDA%3D",
-    "https://images.unsplash.com/photo-1522336572468-97b6a1a4b3ba?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8ZmFjaWFsc2x8ZW58MHx8MHx8fDA%3D",
-  ],
-  ctaText = "Prenota ora",
-  ctaLink = "#",
-} = {}) {
+  images: [],
+  ctaText: "Prenota ora",
+  ctaLink: "#",
+};
+
+export default function NailTypePage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const nextImage = () => {

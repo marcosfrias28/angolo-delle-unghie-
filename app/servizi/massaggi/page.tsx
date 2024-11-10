@@ -10,19 +10,23 @@ import { unsplash } from "@/lib/utils/unsplash";
 import { Article } from "@/lib/types";
 import { set } from "zod";
 
-export default function MassaggiPage({
-  title = "Massaggi",
-  description = "I massaggi offrono un’esperienza di rilassamento e benessere, ideale per alleviare lo stress e migliorare la circolazione. Dalla tecnica rilassante al massaggio terapeutico, ogni trattamento è personalizzato per rispondere alle esigenze specifiche del cliente, favorendo il rilassamento del corpo e della mente.",
-  features = [
+const { title, description, features, images, ctaText, ctaLink } = {
+  title: "Massaggi",
+  description:
+    "I massaggi offrono un’esperienza di rilassamento e benessere, ideale per alleviare lo stress e migliorare la circolazione. Dalla tecnica rilassante al massaggio terapeutico, ogni trattamento è personalizzato per rispondere alle esigenze specifiche del cliente, favorendo il rilassamento del corpo e della mente.",
+  images: ["", ""],
+  features: [
     "Massaggi rilassanti per ridurre lo stress",
     "Massaggi terapeutici per dolori muscolari",
     "Massaggi linfodrenanti per migliorare la circolazione",
     "Massaggi con oli essenziali per il benessere totale",
     "Trattamenti personalizzati per ogni necessità",
   ],
-  ctaText = "Prenota il tuo massaggio",
-  ctaLink = "#",
-} = {}) {
+  ctaText: "Prenota il tuo massaggio",
+  ctaLink: "#",
+};
+
+export default function MassaggiPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState<Article[] | []>([]);
 
