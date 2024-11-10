@@ -49,7 +49,7 @@ const Petal = ({ index }: { index: number }) => {
 export default function FallingPetalsBackground({
   className,
 }: {
-  className: ClassValue;
+  className?: ClassValue;
 }) {
   const petalCount = 12;
 
