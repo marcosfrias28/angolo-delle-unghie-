@@ -28,7 +28,7 @@ export default function HeroSection() {
     >
       <div
         className={cn(
-          "flex items-center justify-center flex-col mt-20 lg:flex-row-reverse max-sm:mt-20 gap-10 mx-auto",
+          "flex items-center justify-center flex-col mt-10 lg:flex-row-reverse max-sm:mt-20 gap-10 mx-auto",
           "container"
         )}
       >
@@ -36,7 +36,7 @@ export default function HeroSection() {
 
         {[...Array(2)].map((_, i) => (
           <HeroLogo
-            key={crypto.randomUUID()}
+            key={i}
             className={cn(i === 0 ? "hidden dark:block" : "block dark:hidden")}
             imageSrc={
               i === 0 ? "/hero-logo-new-rose.svg" : "/hero-logo-new.svg"
