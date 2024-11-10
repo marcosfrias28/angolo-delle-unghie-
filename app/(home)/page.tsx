@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import Meteors from "@/components/magicui/meteors";
 import Stars from "@/components/homepage/stars";
 import NailsTypes from "@/components/homepage/nails-types";
+import { StandardHeader } from "@/components/generic/standard-header";
 export default function Home() {
   return (
     <PageWrapper>
@@ -22,26 +23,34 @@ export default function Home() {
         <Stars />
         <Meteors meteorQuantity={12} />
         <HeroSection />
-        <section id="chi-sono" className="relative max-md:px-5 px-10">
+        <section id="chi-sono" className="relative max-md:px-2 px-10">
           <SideBySide />
         </section>
       </section>
       <section
         id="servizi"
-        className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-5 px-10"
+        className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-2 px-10"
       >
         <BentoGridSection />
       </section>
       <section
         id="galleria"
-        className="relative w-full max-w-[1920px] my-52 max-md:my-24 max-md:pl-3 max-md:px-5 px-10 overflow-hidden"
+        className="relative w-full max-w-[1920px] my-40 max-md:my-24 max-md:pl-3 max-md:px-2 px-10 overflow-hidden"
       >
+        <StandardHeader
+          title="Lavori Realizzati Recentemente"
+          description="Scopri le mie creazioni uniche di nail art."
+        />
         <GalleryScroll />
       </section>
       <section
         id="stili-unghie"
-        className="relative w-full max-w-[1920px] overflow-hidden max-md:px-5"
+        className="relative w-full max-w-[1920px] overflow-hidden p-2"
       >
+        <StandardHeader
+          title="I Miei Stili Preferiti"
+          description="Le mie preferite! Unghie per tutti i gusti."
+        />
         <NailsTypes />
       </section>
       <section
