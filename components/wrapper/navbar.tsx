@@ -86,7 +86,7 @@ const components: { title: string; href: `#${string}`; description: string }[] =
 export default function NavBar() {
   const path = usePathname();
 
-  if (path.includes("/dashboard")) {
+  if (path.includes("/dashboard") || path === "/work-in-progress") {
     return null;
   }
 
