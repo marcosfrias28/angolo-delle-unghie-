@@ -10,6 +10,7 @@ import { motion, useInView } from "framer-motion";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 import ShineBorder from "../ui/shine-border";
+import ProfileImage from "@/public/miry-image.webp";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -196,9 +197,9 @@ export default function AboutMe() {
                 )}
               >
                 <Image
-                  src="/miry-image.webp"
+                  src={ProfileImage}
                   placeholder="blur"
-                  blurDataURL="/miry-image.webp"
+                  blurDataURL={ProfileImage.blurDataURL}
                   alt="Foto di Miryam"
                   loading="lazy"
                   width={300}
