@@ -27,7 +27,7 @@ const CTASection: React.FC<CTASectionProps> = () => {
 
   return (
     <section className="flex overflow-hidden max-lg:flex-col flex-row justify-center w-screen h-[50vh] min-h-fit">
-      <section className="flex flex-col flex-1 self-stretch w-full lg:w-1/2 xl:w-3/4  my-auto basis-0 px-16 max-lg:px-5 py-28 max-lg:py-24">
+      <section className="flex flex-col flex-1 self-stretch w-full my-auto basis-0 px-16 max-lg:px-5 py-28 max-lg:py-24">
         <Header />
         <div className="flex flex-col mt-8 w-full max-lg:max-w-full">
           <div className="flex flex-wrap gap-6 items-start py-2 w-full max-lg:max-w-full">

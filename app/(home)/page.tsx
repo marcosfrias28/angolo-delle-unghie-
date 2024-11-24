@@ -35,7 +35,7 @@ export default function Home() {
       </section>
       <section
         id="galleria"
-        className="relative w-full max-w-[1920px] my-40 max-md:my-24 max-md:pl-3 max-md:px-2 px-10 overflow-hidden"
+        className="relative w-full max-w-[1920px] my-40 max-md:my-24"
       >
         <StandardHeader
           title="Lavori Realizzati Recentemente"

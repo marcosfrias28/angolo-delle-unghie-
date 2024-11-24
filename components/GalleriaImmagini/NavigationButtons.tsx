@@ -53,7 +53,7 @@ const NavigationButtons: FC<NavigationButtonsProps> = ({ length }) => {
     }
   };
   return (
-    <div className="flex gap-1 items-start self-stretch mb-2">
+    <div className="flex gap-2 items-start self-stretch mb-2">
       <Button
         variant="ringHover"
         onClick={previousImage}

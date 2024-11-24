@@ -13,6 +13,7 @@ import MurettoImage from "@/public/unghie/muretto.webp";
 import FrenchBabyBoomer from "@/public/unghie/french-baby-boomer.webp";
 import TrendNails from "@/public/unghie/trend-nails.webp";
 import UnghieNaturali from "@/public/unghie/unghie-naturali.webp";
+import { useMediaQuery } from "usehooks-ts";
 
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
@@ -108,8 +109,7 @@ const NailsTypes: React.FC = () => {
       className={cn(
         "w-full h-[600px] lg:h-[1000px] max-h-screen min-h-[600px] z-20 rounded-2xl mx-auto snap-y snap-mandatory scrollbar-hide",
         isInView ? "overflow-y-scroll" : "overflow-hidden",
-        "bg-gray-300 dark:bg-black/20 bg-opacity-70",
-        "bg-cover bg-center bg-no-repeat"
+        "bg-gray-300 dark:bg-black/40"
       )}
       style={{
         backgroundImage: `url(${nailType.image})`,
@@ -155,44 +155,43 @@ const NailsTypes: React.FC = () => {
           </div>
         </motion.div>
       </section>
-
       {/* Services */}
-      {nailsTypes.map((nailType, index) => (
-        <NailType
-          key={index}
-          style={{
-            backgroundColor: theme === "dark" ? "bg-gray-200" : "bg-gray-900",
-          }}
-          ref={(el: HTMLDivElement | null) => {
-            if (el && sectionRef.current) {
-              sectionRef.current[index] = el as HTMLDivElement;
-            }
-          }}
-          nailType={nailType}
-          index={index}
-          currentSection={currentSection}
-        />
-      ))}
+      <section>
+        {nailsTypes.map((nailType, index) => (
+          <NailType
+            key={index}
+            style={{
+              backgroundColor: theme === "dark" ? "bg-gray-200" : "bg-gray-900",
+            }}
+            ref={(el: HTMLDivElement | null) => {
+              if (el && sectionRef.current) {
+                sectionRef.current[index] = el as HTMLDivElement;
+              }
+            }}
+            nailType={nailType}
+            index={index}
+            currentSection={currentSection}
+          />
+        ))}
+      </section>
     </section>
   );
 };
 
 const NailType: React.FC<any> = ({ nailType, currentSection, index }: any) => {
   const [viewImage, setViewImage] = useState<boolean>(false);
+  const isDesktop = useMediaQuery("min-width: 1024px");
 
   useEffect(() => {
     if (currentSection !== index) {
       setViewImage(false);
     }
-  }, [currentSection]);
+  }, [currentSection, index]);
 
   return (
     <div
       className={cn(
-        "relative",
-        "z-10 mx-auto max-md:px-20",
-        `bg-cover bg-center bg-no-repeat`,
-        "flex items-center justify-center gap-20",
+        "relative z-10 mx-auto max-md:px-20 grid grid-cols-1 lg:grid-cols-2 gap-20",
         "h-[600px] lg:h-[1000px] w-full snap-start overflow-hidden"
       )}
     >
@@ -201,20 +200,21 @@ const NailType: React.FC<any> = ({ nailType, currentSection, index }: any) => {
         placeholder="blur"
         blurDataURL={nailType.image.blurDataURL}
         alt={nailType.name}
-        objectFit="cover"
-        width={1280}
-        height={720}
+        loading={isDesktop ? "lazy" : "eager"}
+        width={isDesktop ? 500 : 1280}
+        height={isDesktop ? 500 : 720}
         className={cn(
-          "absolute lg:hidden h-[600px] lg:h-[1000px] w-full overflow-hidden -z-10",
           "transition-all transform-gpu duration-300 ease-in-out",
-          viewImage ? "" : "blur-2xl "
+          viewImage ? "" : "blur-2xl",
+          isDesktop
+            ? "w-1/2 min-w-[50%] h-screen hidden lg:block" // Desktop styles
+            : "absolute h-[600px] w-full overflow-hidden -z-10 lg:hidden" // Mobile styles
         )}
       />
+
       <section
         className={cn(
-          "w-full lg:w-1/2 h-full",
-          "place-content-center grid",
-          "space-y-2 lg:space-y-8",
+          "w-full lg:w-1/2 h-full place-content-center grid space-y-2 lg:space-y-8",
           viewImage ? "hidden" : ""
         )}
       >
@@ -225,21 +225,13 @@ const NailType: React.FC<any> = ({ nailType, currentSection, index }: any) => {
           {nailType.description}
         </p>
       </section>
+
       <button
         onClick={() => setViewImage(!viewImage)}
-        className="lg:hidden flex flex-row flex-nowrap group gap-2 items-center justify-center w-fit bg-black/20 backdrop-blur-lg text-[rgb(255,228,225)] p-3 rounded-full text-lg font-semibold hover:bg-opacity-90 dark:hover:bg-opacity-80 transition-colors shadow-lg absolute bottom-8 z-10 left-1/2 -translate-x-1/2"
+        className="lg:hidden flex flex-row gap-2 items-center justify-center w-fit bg-black/20 backdrop-blur-lg text-[rgb(255,228,225)] p-3 rounded-full text-lg font-semibold hover:bg-opacity-90 dark:hover:bg-opacity-80 transition-colors shadow-lg absolute bottom-8 z-10 left-1/2 -translate-x-1/2"
       >
         {viewImage ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
       </button>
-      <Image
-        src={nailType.image}
-        alt={nailType.name}
-        loading="lazy"
-        placeholder="blur"
-        width={500}
-        height={500}
-        className="max-lg:hidden w-1/2 h-screen"
-      />
     </div>
   );
 };
