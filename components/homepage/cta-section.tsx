@@ -63,7 +63,7 @@ const CTASection = () => {
           // Borders and rounded corners
           "rounded-full",
           // Typography
-          "font-bold text-lg text-center",
+          "font-extrabold text-lg text-center",
           // Effects
           "hover:shadow-xl shadow-lg",
           // Animations
