@@ -20,17 +20,55 @@ const CTASection = () => {
       initial={{ opacity: 0, scale: 0.1 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
-      className={cn("flex flex-col items-center justify-center", "opacity-0")}
+      className={cn(
+        // Layout
+        "flex flex-col items-center justify-center",
+        // Initial state
+        "opacity-0"
+      )}
     >
-      <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-white dark:text-white mb-6 text-center">
+      <h2
+        className={cn(
+          // Typography
+          "text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold",
+          // Text colors
+          "text-white dark:text-white",
+          // Spacing
+          "mb-6 text-center"
+        )}
+      >
         {CTAtext.cta.title}
       </h2>
-      <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 text-center">
+      <p
+        className={cn(
+          // Typography
+          "text-lg",
+          // Text colors
+          "text-gray-600 dark:text-gray-300",
+          // Spacing
+          "mb-8 text-center"
+        )}
+      >
         {CTAtext.cta.subtitle}
       </p>
       <Link
         href="/prenota"
-        className="px-8 py-4 bg-[rgb(244,183,180)] dark:bg-roseGold text-black dark:text-white rounded-full font-bold text-lg hover:bg-[rgb(234,173,170)] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
+        className={cn(
+          // Padding
+          "px-8 py-4",
+          // Background colors
+          "bg-rose dark:bg-roseGold hover:bg-[rgb(234,173,170)]",
+          // Text colors
+          "text-softWhite-50 hover:text-black dark:text-white",
+          // Borders and rounded corners
+          "rounded-full",
+          // Typography
+          "font-bold text-lg text-center",
+          // Effects
+          "hover:shadow-xl shadow-lg",
+          // Animations
+          "hover:-translate-y-1 transform transition-all duration-300"
+        )}
       >
         {CTAtext.cta.button}
         <BorderBeam
