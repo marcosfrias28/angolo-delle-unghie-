@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Playfair_Display, Lato } from "next/font/google";
+import { Lato } from "next/font/google";
 import { AlertTriangle } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const playfair = Playfair_Display({ subsets: ["latin"] });
 const lato = Lato({ weight: ["400", "700"], subsets: ["latin"] });
 
 export default function WorkInProgressPage() {
@@ -31,8 +30,10 @@ export default function WorkInProgressPage() {
   if (!isFirstVisit) return null;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#f9e0e0] to-[#e0c5c5] p-4">
-      <div className={`text-center ${playfair.className} mb-8`}>
+    <div
+      className={`min-h-screen ${lato.className} flex flex-col items-center justify-center bg-gradient-to-br from-[#f9e0e0] to-[#e0c5c5] p-4`}
+    >
+      <div className={`text-center mb-8`}>
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#b76e79] tracking-wider">
           "Work in Progress"
         </h1>
@@ -41,7 +42,7 @@ export default function WorkInProgressPage() {
         </p>
       </div>
 
-      <div className={`${lato.className} max-w-md text-center mb-8`}>
+      <div className={`max-w-md text-center mb-8`}>
         <div className="bg-[#fdf1f1] border-2 border-[#d4a5a5] rounded-lg p-4 shadow-md">
           <div className="flex items-center justify-center mb-2">
             <AlertTriangle className="text-[#b76e79] mr-2" aria-hidden="true" />
