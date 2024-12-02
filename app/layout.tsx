@@ -75,7 +75,7 @@ function BlurEffect() {
         >
           <feGaussianBlur
             in="SourceGraphic"
-            stdDeviation="5"
+            stdDeviation="15"
             result="blurred"
           />
           <feColorMatrix type="saturate" values="4" in="blurred" />

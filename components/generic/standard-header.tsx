@@ -13,7 +13,14 @@ export function StandardHeader({
     <header
       aria-labelledby={title}
       className={cn(
-        "flex flex-col max-w-full text-black dark:text-white mb-10",
+        "[filter:url(#blur-and-scale)]",
+        // Layout
+        "flex flex-col max-w-full",
+        // Text colors
+        "text-black dark:text-white",
+        // Spacing
+        "mb-10",
+        // Positioning
         position === "left" && "items-start",
         position === "right" && "items-end",
         position === "center" && "items-center"
