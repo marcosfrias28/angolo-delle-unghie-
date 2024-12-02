@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Image, { StaticImageData } from "next/image";
@@ -58,6 +57,7 @@ const BentoCard = ({
     <Image
       src={src}
       placeholder="blur"
+      blurDataURL={src.blurDataURL}
       className={cn(imageCustomClass)}
       fill
       sizes="auto"

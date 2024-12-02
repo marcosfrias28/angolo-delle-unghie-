@@ -204,7 +204,7 @@ export default function AboutMe() {
                   loading="lazy"
                   width={300}
                   height={300}
-                  className="object-cover object-center scale-150 mt-36 lg:mr-10 max-lg:mb-20 w-auto h-auto"
+                  className="object-cover aspect-square object-center scale-150 mt-36 lg:mr-10 max-lg:mb-20 w-auto h-auto"
                 />
               </motion.div>
               <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-300 max-md:text-center text-pretty mt-10">
