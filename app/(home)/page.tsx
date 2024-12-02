@@ -11,13 +11,14 @@ import Meteors from "@/components/magicui/meteors";
 import Stars from "@/components/homepage/stars";
 import NailsTypes from "@/components/homepage/nails-types";
 import { StandardHeader } from "@/components/generic/standard-header";
+
 export default function Home() {
   return (
     <PageWrapper>
       <section
         className={cn(
           "w-full h-auto min-h-screen relative",
-          "bg-gradient-to-b from-roseGold-metallic dark:from-roseGold-metallic/20 from-70% to-transparent"
+          "bg-gradient-to-b from-roseGold-light dark:from-roseGold-metallic/20 from-70% to-transparent"
         )}
       >
         <Stars />
@@ -48,8 +49,8 @@ export default function Home() {
         className="relative w-full max-w-[1920px] overflow-hidden p-2"
       >
         <StandardHeader
-          title="I Miei Stili Preferiti"
-          description="Le mie preferite! Unghie per tutti i gusti."
+          title="Stili che potrebbero piacerti"
+          position="center"
         />
         <NailsTypes />
       </section>
