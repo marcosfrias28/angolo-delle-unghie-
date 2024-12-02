@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, SetStateAction } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image, { StaticImageData } from "next/image";
 import { motion, useInView } from "framer-motion";
 import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
@@ -14,6 +14,7 @@ import FrenchBabyBoomer from "@/public/unghie/french-baby-boomer.webp";
 import TrendNails from "@/public/unghie/trend-nails.webp";
 import UnghieNaturali from "@/public/unghie/unghie-naturali.webp";
 import { useMediaQuery } from "usehooks-ts";
+import Logo from "./logo";
 
 gsap.registerPlugin(ScrollToPlugin);
 gsap.registerPlugin(ScrollTrigger);
@@ -26,13 +27,13 @@ interface nailType {
 const nailsTypes: nailType[] = [
   {
     name: "Unghie a muretto",
-    image: MurettoImage,
+    image: TrendNails,
     description:
       "Un French che è parte della ricostruzione, e non un disegno, è una tecnica di ricostruzione delle unghie con cui la nail artist non si limita a disegnare la smile line delle unghie con il gel bianco, o di altro colore, sopra l'unghia già ricostruita ma crea la smile line direttamente in struttura.",
   },
   {
     name: "French & Babyboomer",
-    image: FrenchBabyBoomer,
+    image: TrendNails,
     description:
       "Il french manicure rientra tra le prime tecniche di manicure che negli ultimi tempi ha riavuto una piccola rivincita su altri più vivaci e sfiziosi mentre, il baby boomer è l’ultima tendenza del manicure, molto sobrio e naturale come il precedente, ma con una sfumatura delicata",
   },
@@ -44,19 +45,19 @@ const nailsTypes: nailType[] = [
   },
   {
     name: "Unghie naturali",
-    image: UnghieNaturali,
+    image: TrendNails,
     description:
       "Svela la tua bellezza con unghie naturali, nude, semplici ed eleganti per ogni occasione. Esalta la tua femminilità con i miei servizi.",
   },
   {
     name: "Sprint Nails",
-    image: UnghieNaturali,
+    image: TrendNails,
     description:
       "Fantasie, disegni, personalità, brillantini, animals… sono solo alcune delle parole chiave delle Sprint Nails.. sbizzarriamoci per avere le unghie dei tuoi sogni.",
   },
   {
     name: "Card Nails",
-    image: UnghieNaturali,
+    image: TrendNails,
     description:
       "Ultimo arrivato ma ha subito rapito i cuori di tanti: tu scegli il prezzo e la fortuna sceglierà le unghie al posto tuo!",
   },
@@ -65,9 +66,11 @@ const nailsTypes: nailType[] = [
 const NailsTypes: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [currentSection, setCurrentSection] = useState(0);
+  const [viewImage, setViewImage] = useState<boolean>(false);
+  const [_, setService] = useState(nailsTypes[currentSection]);
+
   const sectionRef = useRef<HTMLDivElement[] | null>(null);
   const isInView = useInView(containerRef, { amount: 0.95 });
-  const [nailType, setService] = useState(nailsTypes[currentSection]);
   const { theme } = useTheme();
 
   useEffect(() => {
@@ -78,6 +81,7 @@ const NailsTypes: React.FC = () => {
     const container = containerRef.current;
     if (!container) return;
     const handleScroll = () => {
+      setViewImage(false);
       const scrollPosition = container.scrollTop;
       const sectionHeight = container.clientHeight;
       const newSection = Math.round(scrollPosition / sectionHeight);
@@ -109,15 +113,23 @@ const NailsTypes: React.FC = () => {
       className={cn(
         "w-full h-[600px] lg:h-[1000px] max-h-screen min-h-[600px] z-20 rounded-2xl mx-auto snap-y snap-mandatory scrollbar-hide",
         isInView ? "overflow-y-scroll" : "overflow-hidden",
-        "bg-gray-300 dark:bg-black/40"
+        "bg-roseGold-light dark:bg-black/40"
       )}
-      style={{
-        backgroundImage: `url(${nailType.image})`,
-      }}
     >
+      {/* Logo */}
       <section
         className={cn(
-          "absolute bottom-8 left-8 z-20",
+          "absolute bottom-0 right-0 z-20",
+          "flex flex-col items-center justify-center gap-10"
+        )}
+      >
+        <Logo width={100} height={100} />
+      </section>
+
+      {/* Pagination and Scroll */}
+      <section
+        className={cn(
+          "absolute bottom-8 left-8 max-md:left-3 z-20",
           "flex flex-col items-center justify-center gap-10",
           // queries
           "max-md:px-1 max-md:bottom-32"
@@ -155,6 +167,7 @@ const NailsTypes: React.FC = () => {
           </div>
         </motion.div>
       </section>
+
       {/* Services */}
       <section>
         {nailsTypes.map((nailType, index) => (
@@ -168,70 +181,90 @@ const NailsTypes: React.FC = () => {
                 sectionRef.current[index] = el as HTMLDivElement;
               }
             }}
+            viewImage={viewImage}
+            setViewImage={setViewImage}
             nailType={nailType}
             index={index}
             currentSection={currentSection}
           />
         ))}
       </section>
+
+      {/* View Image eye button */}
+      <button
+        onClick={() => setViewImage(!viewImage)}
+        className="hidden max-lg:flex flex-row gap-2 items-center justify-center w-fit bg-black/20 backdrop-blur-lg text-[rgb(255,228,225)] p-3 rounded-full text-lg font-semibold hover:bg-opacity-90 dark:hover:bg-opacity-80 transition-colors shadow-lg absolute bottom-8 z-10 left-1/2 -translate-x-1/2"
+      >
+        {viewImage ? (
+          <EyeOff className="size-5 md:size-7 lg:size-10" />
+        ) : (
+          <Eye className="size-5 md:size-7 lg:size-10" />
+        )}
+      </button>
     </section>
   );
 };
 
-const NailType: React.FC<any> = ({ nailType, currentSection, index }: any) => {
-  const [viewImage, setViewImage] = useState<boolean>(false);
+const NailType: React.FC<any> = ({ nailType, viewImage }: any) => {
   const isDesktop = useMediaQuery("min-width: 1024px");
-
-  useEffect(() => {
-    if (currentSection !== index) {
-      setViewImage(false);
-    }
-  }, [currentSection, index]);
 
   return (
     <div
       className={cn(
-        "relative z-10 mx-auto max-md:px-20 grid grid-cols-1 lg:grid-cols-2 gap-20",
-        "h-[600px] lg:h-[1000px] w-full snap-start overflow-hidden"
+        "relative z-10 mx-auto place-content-center",
+        "lg:grid lg:grid-cols-2 lg:grid-rows-1", // Desktop styles
+        "w-full snap-start overflow-hidden h-[600px] lg:h-[1000px]"
       )}
     >
+      <section
+        className={cn(
+          "w-full h-full place-content-center grid space-y-2 lg:space-y-8 px-20 mx-auto",
+          viewImage ? "max-md:hidden" : "",
+          isDesktop ? "col-span-1" : ""
+        )}
+      >
+        <h2
+          className={cn(
+            "text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold",
+            "w-full mb-4",
+            "text-white dark:text-roseGold-light",
+            "lg:[filter:url(#blur-and-scale-more)]"
+          )}
+        >
+          {nailType.name}
+        </h2>
+        <p className="w-full text-xl lg:text-3xl text-black dark:text-roseGold-accent text-pretty">
+          {nailType.description}
+        </p>
+      </section>
+      <picture className="w-full h-full hidden lg:block">
+        <Image
+          src={nailType.image}
+          placeholder="blur"
+          blurDataURL={nailType.image.blurDataURL}
+          alt={nailType.name}
+          loading="lazy"
+          className={cn(
+            "transition-all transform-gpu duration-300 ease-in-out",
+            "w-full h-full"
+          )}
+        />
+      </picture>
       <Image
         src={nailType.image}
         placeholder="blur"
         blurDataURL={nailType.image.blurDataURL}
         alt={nailType.name}
-        loading={isDesktop ? "lazy" : "eager"}
-        width={isDesktop ? 500 : 1280}
-        height={isDesktop ? 500 : 720}
+        fill
+        loading="eager"
         className={cn(
+          "hidden max-lg:block",
           "transition-all transform-gpu duration-300 ease-in-out",
-          viewImage ? "" : "blur-2xl",
-          isDesktop
-            ? "w-1/2 min-w-[50%] h-screen hidden lg:block" // Desktop styles
-            : "absolute h-[600px] w-full overflow-hidden -z-10 lg:hidden" // Mobile styles
+          "w-full h-full",
+          !viewImage ? "blur-3xl" : "",
+          "absolute overflow-hidden -z-10"
         )}
       />
-
-      <section
-        className={cn(
-          "w-full lg:w-1/2 h-full place-content-center grid space-y-2 lg:space-y-8",
-          viewImage ? "hidden" : ""
-        )}
-      >
-        <h2 className="text-3xl md:text-5xl font-extrabold mb-4 text-roseGold-light dark:text-roseGold-accent">
-          {nailType.name}
-        </h2>
-        <p className="text-md lg:text-xl text-softWhite-50 mb-6 text-pretty">
-          {nailType.description}
-        </p>
-      </section>
-
-      <button
-        onClick={() => setViewImage(!viewImage)}
-        className="lg:hidden flex flex-row gap-2 items-center justify-center w-fit bg-black/20 backdrop-blur-lg text-[rgb(255,228,225)] p-3 rounded-full text-lg font-semibold hover:bg-opacity-90 dark:hover:bg-opacity-80 transition-colors shadow-lg absolute bottom-8 z-10 left-1/2 -translate-x-1/2"
-      >
-        {viewImage ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
-      </button>
     </div>
   );
 };
