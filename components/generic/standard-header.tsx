@@ -7,7 +7,7 @@ export function StandardHeader({
 }: {
   title: string;
   position?: "left" | "right" | "center";
-  description: string;
+  description?: string;
 }) {
   return (
     <header
