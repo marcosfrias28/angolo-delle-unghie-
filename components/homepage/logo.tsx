@@ -36,15 +36,15 @@ const Logo: React.FC<HeroLogoProps> = ({
         ease: "easeInOut",
       }}
       className={cn(
-        "w-full h-full items-center justify-center",
+        "w-full h-full items-center justify-center pointer-events-none z-0",
         i === 0 ? "hidden dark:flex" : "flex dark:hidden",
         className
       )}
     >
       <Image
         src={i === 0 ? AngoloDelleUnghieDark : AngoloDelleUnghieLight}
-        width={isMobile ? width : width + 200}
-        height={isMobile ? height : height + 200}
+        width={!isMobile ? width : width + 100}
+        height={!isMobile ? height : height + 100}
         alt={`${config.websiteName} Logo`}
       />
     </motion.div>
