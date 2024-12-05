@@ -19,7 +19,7 @@ export function StandardHeader({
         // Text colors
         "text-rose dark:text-white",
         // Spacing
-        "mb-10 py-6 px-3",
+        " py-6 px-3",
         // Positioning
         position === "left" && "items-start",
         position === "right" && "items-end",

@@ -52,7 +52,7 @@ export default function Footer() {
       <footer id="footer" className="dark:bg-black bg-roseGold w-full relative">
         <Stars />
         <Meteors meteorQuantity={12} />
-        <Marquee className="title-marquee -z-0 absolute -top-40 text-center px-20">
+        <Marquee className="title-marquee -z-0 absolute -top-40 text-center">
           <h1 className="text-[150px] font-black text-roseGold dark:text-black">
             L'Angolo Delle Unghie
           </h1>

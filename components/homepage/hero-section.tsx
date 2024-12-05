@@ -20,7 +20,7 @@ export default function HeroSection() {
         )}
       >
         <h1 className="sr-only">{config.websiteName}</h1>
-        <Logo />
+        <Logo width={600} height={600} />
         <CTASection />
       </div>
       <ScrollIcon />

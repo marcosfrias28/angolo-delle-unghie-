@@ -67,7 +67,7 @@ export default function AboutMe() {
     gsap.set(divRef.current, {
       y: isMobile ? 200 : 0,
       x: !isMobile ? 500 : 0,
-      opacity: 0,
+      opacity: 0.7,
     });
 
     tl.to(image, {
@@ -89,7 +89,7 @@ export default function AboutMe() {
       scrollTrigger: {
         trigger: section,
         start: "top 70%",
-        end: "bottom 50%",
+        end: "bottom 30%",
         scrub: true,
       },
     });
@@ -118,7 +118,7 @@ export default function AboutMe() {
           "rgb(255, 228, 225)",
           "rgb(190, 120, 120)",
         ]}
-        className="mx-10 shadow-2xl relative overflow-hidden"
+        className="shadow-2xl relative overflow-hidden"
       >
         <div className="relative z-10 w-full mx-auto p-3 rounded-2xl max-md:my-10">
           <motion.div
