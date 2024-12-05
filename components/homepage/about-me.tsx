@@ -11,6 +11,7 @@ import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 import ShineBorder from "../ui/shine-border";
 import ProfileImage from "@/public/miry-image.webp";
+import CustomParragraph from "../ui/custom-paragraph";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,42 +72,27 @@ export default function AboutMe() {
 
     tl.to(image, {
       y: 0,
-      ease: "power1.inOut",
+      ease: "power2.out",
+      duration: 1.2,
       scrollTrigger: {
         trigger: section,
-        start: "-=700px center",
-        end: "center bottom",
+        start: "top 80%",
+        end: "center 50%",
         scrub: true,
       },
-    })
-      .to(divRef.current, {
-        opacity: 1,
-        x: 0,
-        y: 0,
-        ease: "power1.inOut",
-        scrollTrigger: {
-          trigger: section,
-          start: "-=500px center",
-          end: "center bottom",
-          scrub: true,
-        },
-      })
-      .fromTo(
-        divRef.current,
-        { opacity: 1, x: 0 },
-        {
-          opacity: 0,
-          x: -600,
-          duration: 3,
-          ease: "power1.inOut",
-          scrollTrigger: {
-            trigger: divRef.current,
-            start: `center ${isMobile ? "-=500px" : "top"}`,
-            end: "bottom top",
-            scrub: true,
-          },
-        }
-      );
+    }).to(divRef.current, {
+      opacity: 1,
+      x: 0,
+      y: 0,
+      duration: 1,
+      ease: "power1.out",
+      scrollTrigger: {
+        trigger: section,
+        start: "top 70%",
+        end: "bottom 50%",
+        scrub: true,
+      },
+    });
   }, [isMobile]);
 
   return (
@@ -265,11 +251,3 @@ export default function AboutMe() {
     </section>
   );
 }
-
-const CustomParragraph: React.FC<any> = ({ children }: any) => {
-  return (
-    <p className="text-xl [&>span]:font-bold [&>span]:mx-1 text-gray-700 dark:text-gray-300 text-pretty font-medium pl-3 border-l-4 border-rose dark:border-roseGold-light mt-7">
-      {children}
-    </p>
-  );
-};
