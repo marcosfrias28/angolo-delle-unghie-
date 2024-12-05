@@ -2,13 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image, { StaticImageData } from "next/image";
-import { motion, useInView } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
 import { useTheme } from "next-themes";
 import { useGSAP } from "@gsap/react";
-import { Eye, EyeOff } from "lucide-react";
+import { ChevronsDown, Eye, EyeOff } from "lucide-react";
 import MurettoImage from "@/public/unghie/muretto.webp";
 import FrenchBabyBoomer from "@/public/unghie/french-baby-boomer.webp";
 import TrendNails from "@/public/unghie/trend-nails.webp";
@@ -97,75 +97,78 @@ const NailsTypes: React.FC = () => {
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useGSAP(() => {
-    if (!sectionRef.current) return;
-
-    gsap.to(containerRef, {
-      duration: 2,
-      ease: "power2",
-      scrollTo: sectionRef.current[currentSection],
-    });
-  }, [currentSection]);
-
   return (
     <section
       ref={containerRef}
       className={cn(
-        "w-full h-[600px] lg:h-[1000px] max-h-screen min-h-[600px] z-20 rounded-2xl mx-auto snap-y snap-mandatory scrollbar-hide",
+        "w-full h-[600px] lg:h-[900px] max-h-screen min-h-[600px] z-20 rounded-2xl mx-auto snap-y snap-mandatory scrollbar-hide",
         isInView ? "overflow-y-scroll" : "overflow-hidden",
         "bg-roseGold-light dark:bg-black/40"
       )}
     >
-      {/* Logo */}
-      <section
-        className={cn(
-          "absolute bottom-0 right-0 z-20",
-          "flex flex-col items-center justify-center gap-10"
-        )}
-      >
-        <Logo width={100} height={100} />
-      </section>
-
       {/* Pagination and Scroll */}
       <section
         className={cn(
-          "absolute bottom-8 left-8 max-md:left-3 z-20",
-          "flex flex-col items-center justify-center gap-10",
-          // queries
-          "max-md:px-1 max-md:bottom-32"
+          "absolute bottom-0 left-5 h-full mb-14 lg:mb-82 lg:pt-10 max-md:left-3 z-20",
+          "flex flex-col items-center justify-between",
+          "h-[500px] lg:h-[850px]"
         )}
       >
+        <AnimatePresence>
+          <motion.section
+            className={cn(
+              "animate-bounce duration-500 transform-gpu transition-opacity",
+              currentSection !== 0 ? "opacity-100" : "opacity-0",
+              "flex flex-col items-center justify-center gap-10"
+            )}
+          >
+            <ChevronsDown className="absolute text-rose rounded-full size-10 lg:size-20 max-md:ml-2 z-10 pointer-events-none rotate-180" />
+          </motion.section>
+        </AnimatePresence>
         {/* Pagination */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 items-center justify-center">
           {[...Array(nailsTypes.length)].map((_, index) => (
             <div
               key={index}
-              onClick={() => setCurrentSection(index)}
               className={cn(
-                "flex shrink-0 rounded-sm overflow-hidden transition-all duration-200 cursor-pointer",
+                "flex ml-1 shrink-0 rounded-sm overflow-hidden transition-all duration-200 pointer-events-none",
                 index === currentSection
                   ? "w-8 h-8 max-md:w-3 max-md:h-3 bg-rose dark:bg-softWhite-50"
-                  : "w-8 h-4 max-md:w-3 max-md:h-3 bg-softWhite-50 dark:bg-rose"
+                  : "w-8 h-5 max-md:w-3 max-md:h-3 bg-softWhite-50 dark:bg-rose"
               )}
             ></div>
           ))}
+          {/*scollabile */}
+          <motion.div
+            style={{
+              opacity: isInView ? 1 : 0,
+              y: isInView ? 0 : 20,
+            }}
+            className={cn(
+              "hero-link-to-base rounded-full flex items-start justify-center max-md:w-4 w-8 h-16 ml-1",
+              "border-2 border-white bg-transparent",
+              "transition-all duration-200 ease-linear"
+            )}
+          >
+            <div className="bright">
+              <div className="size-4 max-md:size-2 rounded-full bg-white animate-bounce-more"></div>
+            </div>
+          </motion.div>
         </div>
-        {/*scollabile */}
-        <motion.div
-          style={{
-            opacity: isInView ? 1 : 0,
-            y: isInView ? 0 : 20,
-          }}
-          className={cn(
-            "hero-link-to-base rounded-full flex items-start justify-center max-md:w-4 w-8 h-16",
-            "border-2 border-white bg-transparent",
-            "transition-all duration-200 ease-linear"
-          )}
-        >
-          <div className="bright">
-            <div className="size-4 max-md:size-2 rounded-full bg-white animate-bounce-more"></div>
-          </div>
-        </motion.div>
+
+        <AnimatePresence>
+          <motion.section
+            className={cn(
+              "animate-bounce duration-500 transform-gpu transition-opacity",
+              currentSection !== nailsTypes.length - 1
+                ? "opacity-100"
+                : "opacity-0",
+              "flex flex-col items-center justify-center gap-10"
+            )}
+          >
+            <ChevronsDown className="absolute text-rose rounded-full size-10 lg:size-20 max-md:ml-2 z-10 pointer-events-none" />
+          </motion.section>
+        </AnimatePresence>
       </section>
 
       {/* Services */}
@@ -201,11 +204,21 @@ const NailsTypes: React.FC = () => {
           <Eye className="size-5 md:size-7 lg:size-10" />
         )}
       </button>
+
+      {/* Logo */}
+      <section
+        className={cn(
+          "absolute bottom-5 right-5 z-20 pointer-events-none",
+          "flex flex-col items-center justify-center gap-10"
+        )}
+      >
+        <Logo width={100} height={100} />
+      </section>
     </section>
   );
 };
 
-const NailType: React.FC<any> = ({ nailType, viewImage }: any) => {
+const NailType: React.FC<any> = ({ nailType, viewImage, index }: any) => {
   const isDesktop = useMediaQuery("min-width: 1024px");
 
   return (
@@ -213,12 +226,13 @@ const NailType: React.FC<any> = ({ nailType, viewImage }: any) => {
       className={cn(
         "relative z-10 mx-auto place-content-center",
         "lg:grid lg:grid-cols-2 lg:grid-rows-1", // Desktop styles
-        "w-full snap-start overflow-hidden h-[600px] lg:h-[1000px]"
+        "w-full snap-start overflow-hidden h-[600px] lg:h-[900px]"
       )}
     >
       <section
         className={cn(
           "w-full h-full place-content-center grid space-y-2 lg:space-y-8 px-20 mx-auto",
+          index % 2 === 0 ? "order-first" : "order-last",
           viewImage ? "max-md:hidden" : "",
           isDesktop ? "col-span-1" : ""
         )}
