@@ -19,7 +19,7 @@ export function StandardHeader({
         // Text colors
         "text-rose dark:text-white",
         // Spacing
-        "mb-10",
+        "mb-10 py-6 px-3",
         // Positioning
         position === "left" && "items-start",
         position === "right" && "items-end",
@@ -29,7 +29,7 @@ export function StandardHeader({
       <h2 className="text-5xl font-bold leading-tight max-md:max-w-full max-md:text-4xl">
         {title}
       </h2>
-      <p className="mt-6 text-lg max-md:max-w-full text-black">{description}</p>
+      <p className="mt-6 text-lg max-md:max-w-full">{description}</p>
     </header>
   );
 }
