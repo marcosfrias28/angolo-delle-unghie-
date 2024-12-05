@@ -24,19 +24,19 @@ export default function Home() {
         <Stars />
         <Meteors meteorQuantity={12} />
         <HeroSection />
-        <section id="chi-sono" className="relative max-md:px-2 px-10">
+        <section id="chi-sono" className="relative px-10 w-full max-md:px-4">
           <AboutMe />
         </section>
       </section>
       <section
         id="servizi"
-        className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-2 px-10"
+        className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-4 px-10"
       >
         <BentoGridSection />
       </section>
       <section
         id="galleria"
-        className="relative w-full max-w-[1920px] my-40 max-md:my-24"
+        className="relative w-full max-w-[1920px] my-40 max-md:my-24 max-md:px-4"
       >
         <StandardHeader
           title="Lavori Realizzati Recentemente"
@@ -46,7 +46,7 @@ export default function Home() {
       </section>
       <section
         id="stili-unghie"
-        className="relative w-full max-w-[1920px] overflow-hidden p-2"
+        className="relative w-full max-w-[1920px] overflow-hidden p-2 max-md:px-4"
       >
         <StandardHeader
           title="Stili che potrebbero piacerti"
