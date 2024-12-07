@@ -52,7 +52,7 @@ export default function AboutMe() {
   const sectionRef = useRef(null);
   const divRef = useRef(null);
   const imageRef = useRef(null);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery("(max-width: 991px)");
   const isInView = useInView(sectionRef, { once: true });
   const isInViewDiv = useInView(divRef, { once: true });
 
@@ -66,7 +66,7 @@ export default function AboutMe() {
 
     gsap.set(divRef.current, {
       y: isMobile ? 200 : 0,
-      x: !isMobile ? 500 : 0,
+      x: isMobile ? 0 : 2000,
       opacity: 0.7,
     });
 
@@ -88,9 +88,10 @@ export default function AboutMe() {
       ease: "power1.out",
       scrollTrigger: {
         trigger: section,
-        start: "top 70%",
-        end: "bottom 30%",
+        start: "top bottom",
+        end: "center 60%",
         scrub: true,
+        markers: true,
       },
     });
   }, [isMobile]);
@@ -122,7 +123,6 @@ export default function AboutMe() {
       >
         <div className="relative z-10 w-full mx-auto p-3 rounded-2xl max-md:my-10">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
             animate={isInViewDiv ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-center mb-12 space-y-4"
@@ -143,7 +143,6 @@ export default function AboutMe() {
 
           <div className="flex max-w-6xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
               animate={
                 isInViewDiv ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
               }
@@ -151,7 +150,6 @@ export default function AboutMe() {
               className="divide-x-8"
             >
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
                 animate={
                   isInViewDiv ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
                 }
@@ -185,12 +183,12 @@ export default function AboutMe() {
                 <Image
                   src={ProfileImage}
                   placeholder="blur"
-                  blurDataURL={ProfileImage.blurDataURL}
+                  blurDataURL={ProfileImage.blurDataURL || ""}
                   alt="Foto di Miryam"
-                  loading="lazy"
+                  loading="eager"
                   width={300}
                   height={300}
-                  className="object-cover aspect-square object-center scale-150 mt-36 lg:mr-10 max-lg:mb-20 w-auto h-auto"
+                  className="object-cover aspect-square object-center scale-150 mt-36 lg:mr-10 max-lg:mb-20 w-[300px] h-auto"
                 />
               </motion.div>
               <h3 className="text-2xl font-bold text-gray-700 dark:text-gray-300 max-md:text-center text-pretty mt-10">
@@ -221,7 +219,6 @@ export default function AboutMe() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="grid max-md:grid-cols-2 grid-cols-3 gap-8 mt-10 max-w-7xl mx-auto text-center"
