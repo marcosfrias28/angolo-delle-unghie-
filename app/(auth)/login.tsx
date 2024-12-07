@@ -10,6 +10,7 @@ import { Loader2, TriangleIcon } from "lucide-react";
 import { signIn, signUp } from "./actions";
 import { ActionState } from "@/lib/auth/middleware";
 import Image from "next/image";
+import config from "@/config";
 
 export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
   const searchParams = useSearchParams();
@@ -121,7 +122,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-gray-50 text-gray-500">
                 {mode === "signin"
-                  ? "Nuov@ su Angolo Delle Unghie?"
+                  ? `Nuov@ su ${config.websiteName}`
                   : "Hai già un account?"}
               </span>
             </div>

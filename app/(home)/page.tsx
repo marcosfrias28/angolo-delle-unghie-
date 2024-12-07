@@ -1,16 +1,16 @@
-import { FaqsSection } from "@/components/homepage/accordion-component";
-import HeroSection from "@/components/homepage/hero-section";
-import AboutMe from "@/components/homepage/about-me";
-import PageWrapper from "@/components/wrapper/page-wrapper";
-import BentoGridSection from "@/components/homepage/bento-grid";
-import CTASection from "@/components/CTASection/cta-section";
 import GalleryScroll from "@/components/GalleriaImmagini/gallery-scroll";
+import { FaqsSection } from "@/components/homepage/accordion-component";
+import { StandardHeader } from "@/components/generic/standard-header";
+import BentoGridSection from "@/components/homepage/bento-grid";
+import HeroSection from "@/components/homepage/hero-section";
+import CTASection from "@/components/CTASection/cta-section";
+import PageWrapper from "@/components/wrapper/page-wrapper";
 import ReviewsMarquee from "@/components/homepage/reviews";
-import { cn } from "@/lib/utils";
+import NailsTypes from "@/components/homepage/nails-types";
+import AboutMe from "@/components/homepage/about-me";
 import Meteors from "@/components/magicui/meteors";
 import Stars from "@/components/homepage/stars";
-import NailsTypes from "@/components/homepage/nails-types";
-import { StandardHeader } from "@/components/generic/standard-header";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
@@ -24,14 +24,28 @@ export default function Home() {
         <Stars />
         <Meteors meteorQuantity={12} />
         <HeroSection />
-        <section id="chi-sono" className="relative px-10 w-full max-md:px-4">
-          <AboutMe />
-        </section>
+      </section>
+      <section
+        id="chi-sono"
+        className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-4 px-10"
+      >
+        <StandardHeader
+          title="Conosciamoci meglio!"
+          description="Prima di tutto, ti racconto di me. E poi scopriamo come ti posso aiutare."
+          position="center"
+        />
+        <AboutMe />
       </section>
       <section
         id="servizi"
         className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-4 px-10"
       >
+        <StandardHeader
+          className="-mb-36"
+          title="Servizi"
+          description="Scopri cosa offro per la tua cura e bellezza."
+          position="center"
+        />
         <BentoGridSection />
       </section>
       <section
@@ -49,7 +63,9 @@ export default function Home() {
         className="relative w-full max-w-[1920px] overflow-hidden p-2 max-md:px-4"
       >
         <StandardHeader
+          className="mt-20 mb-10"
           title="Stili che potrebbero piacerti"
+          description="Scopri i miei stili preferiti e trova nuovi stili per le tue unghie."
           position="center"
         />
         <NailsTypes />
