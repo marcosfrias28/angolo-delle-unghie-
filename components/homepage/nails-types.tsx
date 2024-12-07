@@ -7,7 +7,6 @@ import { ScrollToPlugin, ScrollTrigger } from "gsap/all";
 import { cn } from "@/lib/utils";
 import gsap from "gsap";
 import { useTheme } from "next-themes";
-import { useGSAP } from "@gsap/react";
 import { ChevronsDown, Eye, EyeOff } from "lucide-react";
 import MurettoImage from "@/public/unghie/muretto.webp";
 import FrenchBabyBoomer from "@/public/unghie/french-baby-boomer.webp";
@@ -109,7 +108,7 @@ const NailsTypes: React.FC = () => {
       {/* Pagination and Scroll */}
       <section
         className={cn(
-          "absolute bottom-0 left-5 h-full mb-14 lg:mb-82 lg:pt-10 max-md:left-3 z-20",
+          "absolute bottom-0 max-md:pl-2 left-5 h-full mb-14 lg:mb-82 lg:pt-10 max-md:left-3 z-20",
           "flex flex-col items-center justify-between",
           "h-[500px] lg:h-[850px]"
         )}
@@ -231,10 +230,27 @@ const NailType: React.FC<any> = ({ nailType, viewImage, index }: any) => {
     >
       <section
         className={cn(
-          "w-full h-full place-content-center grid space-y-2 lg:space-y-8 px-20 mx-auto",
-          index % 2 === 0 ? "order-first" : "order-last",
-          viewImage ? "max-md:hidden" : "",
-          isDesktop ? "col-span-1" : ""
+          // Layout & Structure
+          "w-full h-full grid mx-auto",
+
+          // Spacing & Alignment
+          "place-content-center space-y-2 lg:space-y-8 md:px-20 max-md:pl-9",
+
+          // Conditional order based on index
+          {
+            "order-first": index % 2 === 0,
+            "order-last": index % 2 !== 0,
+          },
+
+          // Visibility for specific views
+          {
+            "max-lg:hidden": viewImage,
+          },
+
+          // Desktop layout specific
+          {
+            "col-span-1": isDesktop,
+          }
         )}
       >
         <h2
