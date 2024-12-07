@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import config from "@/config";
 import { cn } from "@/lib/utils";
-import React from "react";
 import AngoloDelleUnghieDark from "@/public/angolodelleunghie-rose.svg";
 import AngoloDelleUnghieLight from "@/public/angolodelleunghie.svg";
 
@@ -21,33 +20,37 @@ const Logo: React.FC<HeroLogoProps> = ({
 }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
-  return [...Array(2)].map((_, i) => (
-    <motion.div
-      initial={{
-        opacity: 0,
-        scale: 0.1,
-      }}
-      animate={{
-        opacity: 1,
-        scale: 1,
-      }}
-      transition={{
-        duration: 0.5,
-        ease: "easeInOut",
-      }}
+  // Definiamo un oggetto con le due possibili immagini e le condizioni per la loro visibilità
+  const images = [
+    {
+      src: AngoloDelleUnghieDark,
+      alt: `${config.websiteName} Logo (Dark)`,
+      className: "hidden dark:flex",
+    },
+    {
+      src: AngoloDelleUnghieLight,
+      alt: `${config.websiteName} Logo (Light)`,
+      className: "flex dark:hidden",
+    },
+  ];
+
+  return images.map(({ src, alt, className: imageClass }, i) => (
+    <div
+      key={i}
       className={cn(
         "w-full h-full items-center justify-center pointer-events-none z-0",
-        i === 0 ? "hidden dark:flex" : "flex dark:hidden",
+        imageClass,
         className
       )}
     >
       <Image
-        src={i === 0 ? AngoloDelleUnghieDark : AngoloDelleUnghieLight}
-        width={!isMobile ? width : width + 100}
-        height={!isMobile ? height : height + 100}
-        alt={`${config.websiteName} Logo`}
+        src={src}
+        loading="eager"
+        width={width + (isMobile ? 100 : 0)}
+        height={height + (isMobile ? 100 : 0)}
+        alt={alt}
       />
-    </motion.div>
+    </div>
   ));
 };
 
