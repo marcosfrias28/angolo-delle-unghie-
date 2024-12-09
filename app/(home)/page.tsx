@@ -11,6 +11,7 @@ import AboutMe from "@/components/homepage/about-me";
 import Meteors from "@/components/magicui/meteors";
 import Stars from "@/components/homepage/stars";
 import { cn } from "@/lib/utils";
+import { SectionWrapper } from "@/components/wrapper/section-wrapper";
 
 export default function Home() {
   return (
@@ -25,42 +26,33 @@ export default function Home() {
         <Meteors meteorQuantity={12} />
         <HeroSection />
       </section>
-      <section
-        id="chi-sono"
-        className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-4 px-10"
-      >
+      <SectionWrapper id="chi-sono">
         <StandardHeader
           title="Conosciamoci meglio!"
           description="Prima di tutto, ti racconto di me. E poi scopriamo come ti posso aiutare."
           position="center"
         />
         <AboutMe />
-      </section>
-      <section
-        id="servizi"
-        className="w-full h-fit max-w-[1920px] min-h-screen lg:my-40 max-md:px-4 px-10"
-      >
+      </SectionWrapper>
+      <SectionWrapper id="servizi">
         <StandardHeader
-          className="-mb-36"
+          className="lg:-mb-36"
           title="Servizi"
           description="Scopri cosa offro per la tua cura e bellezza."
           position="center"
         />
         <BentoGridSection />
-      </section>
-      <section
-        id="galleria"
-        className="relative w-full max-w-[1920px] my-40 max-md:my-24 max-md:px-4"
-      >
+      </SectionWrapper>
+      <SectionWrapper id="galleria" className="my-40 max-md:my-24">
         <StandardHeader
           title="Lavori Realizzati Recentemente"
           description="Scopri le mie creazioni uniche di nail art."
         />
         <GalleryScroll />
-      </section>
-      <section
+      </SectionWrapper>
+      <SectionWrapper
         id="stili-unghie"
-        className="relative w-full max-w-[1920px] overflow-hidden p-2 max-md:px-4"
+        className="relative overflow-hidden p-2"
       >
         <StandardHeader
           className="mt-20 mb-10"
@@ -69,7 +61,7 @@ export default function Home() {
           position="center"
         />
         <NailsTypes />
-      </section>
+      </SectionWrapper>
       <section
         id="banner"
         className="w-full bg-roseGold-light dark:bg-roseGold-dark mt-40"
@@ -85,13 +77,12 @@ export default function Home() {
         <section className="flex justify-center items-center w-full mt-10">
           <ReviewsMarquee />
         </section>
-
-        <section
+        <SectionWrapper
           id="faqs"
           className="flex justify-center items-center w-full mb-32 pb-20"
         >
           <FaqsSection />
-        </section>
+        </SectionWrapper>
       </section>
     </PageWrapper>
   );
