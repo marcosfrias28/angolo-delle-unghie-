@@ -55,6 +55,7 @@ export function FaqsSection() {
     <div className="flex flex-col w-full relative">
       <StandardHeader
         position="center"
+        description="Se hai dei dubbi che non trovi in questa lista, Contattami nella sezione in fondo."
         className={cn(
           `my-2 font-semibold text-center tracking-tight`,
           `title-tailwind-class mx-5`

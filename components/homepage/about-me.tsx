@@ -99,7 +99,7 @@ export default function AboutMe() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col justify-center items-center min-h-[1200px] my-20 max-lg:max-h-fit"
+      className="relative flex flex-col justify-center items-center min-h-[1200px] max-lg:mb-10 lg:my-20 max-lg:max-h-fit"
     >
       <Image
         ref={imageRef}
