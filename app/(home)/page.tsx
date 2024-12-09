@@ -34,7 +34,7 @@ export default function Home() {
         />
         <AboutMe />
       </SectionWrapper>
-      <SectionWrapper id="servizi">
+      <SectionWrapper id="servizi" className="lg:mb-96 max-md:my-24">
         <StandardHeader
           className="lg:-mb-36"
           title="Servizi"
