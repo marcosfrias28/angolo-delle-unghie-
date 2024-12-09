@@ -14,10 +14,7 @@ export function SectionWrapper({
   return (
     <section
       id={id}
-      className={cn(
-        "w-full h-fit max-w-[1920px] px-10 lg:my-40 max-md:px-4",
-        className
-      )}
+      className={cn("w-full h-fit max-w-[1920px] px-4 lg:my-20", className)}
     >
       {children}
     </section>

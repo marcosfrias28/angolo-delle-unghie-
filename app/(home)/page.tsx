@@ -55,7 +55,6 @@ export default function Home() {
         className="relative overflow-hidden p-2"
       >
         <StandardHeader
-          className="mt-20 mb-10"
           title="Stili che potrebbero piacerti"
           description="Scopri i miei stili preferiti e trova nuovi stili per le tue unghie."
           position="center"
