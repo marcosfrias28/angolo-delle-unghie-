@@ -5,20 +5,20 @@ import React from "react";
 import Header from "./Header";
 import ServiceCard from "./ServiceCard";
 import ActionButtons from "./ActionButtons";
-import Image from "next/image";
+import { Brush, ShieldCheck } from "lucide-react";
 
 interface CTASectionProps {}
 
 const CTASection: React.FC<CTASectionProps> = () => {
   const services = [
     {
-      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/948451c9cd8add0c7dc0bef71b0473d97863fd278817d8c452b8ceeb18b02e5b?placeholderIfAbsent=true&apiKey=d61f4ae53a074f4cb6bf4f3af87d0234",
+      icon: <ShieldCheck size={35} />,
       title: "Competenza Assicurata",
       description:
         "Scopri tecniche innovative per la cura delle unghie e tendenze all'avanguardia.",
     },
     {
-      icon: "https://cdn.builder.io/api/v1/image/assets/TEMP/948451c9cd8add0c7dc0bef71b0473d97863fd278817d8c452b8ceeb18b02e5b?placeholderIfAbsent=true&apiKey=d61f4ae53a074f4cb6bf4f3af87d0234",
+      icon: <Brush size={35} />,
       title: "Servizi Personalizzati",
       description:
         "Ogni trattamento è personalizzato per soddisfare le tue esigenze uniche.",
@@ -26,29 +26,16 @@ const CTASection: React.FC<CTASectionProps> = () => {
   ];
 
   return (
-    <section className="flex overflow-hidden max-lg:flex-col flex-row justify-center w-screen h-[50vh] min-h-fit">
-      <section className="flex flex-col flex-1 self-stretch w-full my-auto basis-0 px-16 max-lg:px-5 py-28 max-lg:py-24">
+    <section className="w-full px-16 max-lg:px-5 py-28 max-lg:py-24 flex flex-nowrap justify-center items-center">
+      <div className="w-1/2">
         <Header />
-        <div className="flex flex-col mt-8 w-full max-lg:max-w-full">
-          <div className="flex flex-wrap gap-6 items-start py-2 w-full max-lg:max-w-full">
-            {services.map((service, index) => (
-              <ServiceCard key={index} {...service} />
-            ))}
-          </div>
+        <div className="flex flex-wrap gap-6 items-start py-10 w-full max-lg:max-w-full">
+          {services.map((service, index) => (
+            <ServiceCard key={index} {...service} />
+          ))}
         </div>
         <ActionButtons />
-      </section>
-      <picture>
-        <source srcSet="/materials.jpg" type="image/jpeg" />
-        <Image
-          loading="lazy"
-          src="/materials.jpg"
-          width={1000}
-          height={800}
-          alt="Nail expert at work"
-          className="object-cover w-full lg:w-1/2 xl:w-1/4 "
-        />
-      </picture>
+      </div>
     </section>
   );
 };

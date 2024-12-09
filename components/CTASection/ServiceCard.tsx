@@ -4,7 +4,7 @@
 import React from "react";
 
 interface ServiceCardProps {
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
 }
@@ -15,14 +15,12 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   description,
 }) => {
   return (
-    <article className="flex flex-col flex-1 shrink basis-0 min-w-[240px]">
-      <img
-        loading="lazy"
-        src={icon}
-        alt=""
-        className="object-contain w-12 aspect-square"
-      />
-      <h3 className="mt-4 text-xl font-bold leading-snug">{title}</h3>
+    <article className="flex flex-col flex-1 shrink basis-0 min-w-[240px] my-10">
+      <div className="flex flex-nowrap gap-2 items-center">
+        {icon}
+        <h3 className="text-xl font-bold leading-snug">{title}</h3>
+      </div>
+
       <p className="mt-4 text-base leading-6">{description}</p>
     </article>
   );

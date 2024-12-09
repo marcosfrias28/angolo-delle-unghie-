@@ -7,7 +7,7 @@ interface ActionButtonsProps {}
 
 const ActionButtons: React.FC<ActionButtonsProps> = () => {
   return (
-    <div className="flex gap-6 items-center self-start mt-8 text-base text-black whitespace-nowrap">
+    <div className="flex gap-6 items-center mt-8 text-base text-black whitespace-nowrap justify-self-center">
       <button className="gap-2 self-stretch px-6 py-3 my-auto border border-black border-solid max-md:px-5">
         Scopri
       </button>
