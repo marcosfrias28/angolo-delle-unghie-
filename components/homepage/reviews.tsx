@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
 import Marquee from "@/components/ui/marquee";
+import { StandardHeader } from "../generic/standard-header";
 interface Review {
   name: string;
   body: string;
@@ -90,9 +91,13 @@ const ReviewsSection: React.FC = () => {
   return (
     <div className="relative flex h-fit w-full flex-col gap-20 my-20 items-center justify-center overflow-hidden">
       <div>
-        <h2 className="text-5xl md:text-6xl font-bold text-center text-balance max-md:max-w-[70%] mx-auto">
-          “Che Cosa Dicono i Nostri Clienti?”
-        </h2>
+        <StandardHeader
+          position="center"
+          description="Le più belle recensioni dei miei clienti, belle e brutte"
+          className="text-5xl md:text-6xl font-bold text-center text-balance max-md:max-w-[70%] mx-auto"
+        >
+          Alcune recensioni dei miei clienti
+        </StandardHeader>
       </div>
       <div>
         <Marquee pauseOnHover className="[--duration:20s] h-fit">

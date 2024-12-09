@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
+import { StandardHeader } from "../generic/standard-header";
 
 const domandeERisposteEstetista = [
   {
@@ -52,14 +53,15 @@ const domandeERisposteEstetista = [
 export function FaqsSection() {
   return (
     <div className="flex flex-col w-full relative">
-      <h2
+      <StandardHeader
+        position="center"
         className={cn(
-          `my-2 font-semibold text-center tracking-tight dark:text-white text-gray-900`,
+          `my-2 font-semibold text-center tracking-tight`,
           `title-tailwind-class mx-5`
         )}
       >
-        Frequently Asked Questions (FAQs)
-      </h2>
+        Domande frequenti (FAQs)
+      </StandardHeader>
       <div className={cn("w-full max-w-[70%] lg:max-w-[50%]", "mx-auto")}>
         <Accordion type="single" collapsible className="w-full mt-2">
           {domandeERisposteEstetista.map((faq) => (
