@@ -91,7 +91,6 @@ export default function AboutMe() {
         start: "top bottom",
         end: "center 60%",
         scrub: true,
-        markers: true,
       },
     });
   }, [isMobile]);
