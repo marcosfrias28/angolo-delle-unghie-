@@ -56,11 +56,13 @@ export const services = pgTable('services', {
 });
 
 // Reviews Table
-export const reviews = pgTable('reviews', {
-  name: text('name').notNull(),
-  rating: text('rating').notNull(), // keeping numeric for rating
-  body: text('body').notNull(),
-  createdAt: timestamp('created_at').defaultNow(),
+export const reviews = pgTable("reviews", {
+  id: serial("id").primaryKey(),
+  name: varchar("name"),
+  rating: varchar("rating"),
+  body: varchar("body"),
+  status: varchar("status"),
+  created_at: timestamp("created_at").defaultNow(),
 });
 
 // Type Inference

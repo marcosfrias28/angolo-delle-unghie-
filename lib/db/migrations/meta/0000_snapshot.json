@@ -1,5 +1,5 @@
 {
-  "id": "41660434-b64c-481c-8271-6914eaf39044",
+  "id": "2f822e14-633f-40d1-bc0a-a5b057520dba",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -151,23 +151,29 @@
           "primaryKey": true,
           "notNull": true
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "integer",
+        "name": {
+          "name": "name",
+          "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "rating": {
           "name": "rating",
-          "type": "numeric(3, 2)",
+          "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "comment": {
-          "name": "comment",
-          "type": "text",
+        "body": {
+          "name": "body",
+          "type": "varchar",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         },
         "created_at": {
           "name": "created_at",
@@ -178,21 +184,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "reviews_user_id_users_id_fk": {
-          "name": "reviews_user_id_users_id_fk",
-          "tableFrom": "reviews",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },

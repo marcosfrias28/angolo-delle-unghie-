@@ -22,9 +22,10 @@ CREATE TABLE IF NOT EXISTS "posts" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "reviews" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"user_id" integer NOT NULL,
-	"rating" numeric(3, 2) NOT NULL,
-	"comment" text NOT NULL,
+	"name" varchar,
+	"rating" varchar,
+	"body" varchar,
+	"status" varchar,
 	"created_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
@@ -57,12 +58,6 @@ END $$;
 --> statement-breakpoint
 DO $$ BEGIN
  ALTER TABLE "posts" ADD CONSTRAINT "posts_author_users_id_fk" FOREIGN KEY ("author") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
-EXCEPTION
- WHEN duplicate_object THEN null;
-END $$;
---> statement-breakpoint
-DO $$ BEGIN
- ALTER TABLE "reviews" ADD CONSTRAINT "reviews_user_id_users_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
