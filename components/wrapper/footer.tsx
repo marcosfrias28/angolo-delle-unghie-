@@ -46,9 +46,9 @@ export default function Footer() {
           L'Angolo Delle Unghie
         </h1>
       </Marquee>
-      <div className="mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-screen-2xl px-6">
         <div className="lg:grid lg:grid-cols-2">
-          <div className="border-b py-8 lg:order-last lg:border-b-0 lg:border-s lg:py-16 lg:ps-16">
+          <div className="py-8 lg:order-last lg:border-b-0 lg:border-s lg:py-16 lg:ps-16">
             <StandardHeading
               className="text-center text-white"
               size="small"
@@ -59,13 +59,14 @@ export default function Footer() {
             <ReviewForm />
           </div>
 
-          <div className="relative flex flex-col py-8 lg:py-16 justify-center lg:pe-16">
+          <div className="relative flex flex-col lg:py-16 lg:pe-16">
             <StandardHeading
-              className="text-white m-0 p-0"
+              className="text-white"
               size="small"
+              position="center"
               title="Informazioni"
             />
-            <div className="grid grid-cols-1 sm:grid-cols-2 center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 center -mt-10">
               <SocialLinks />
               <UsefulLinks />
             </div>

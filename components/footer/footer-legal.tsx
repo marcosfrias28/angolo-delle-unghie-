@@ -5,7 +5,7 @@ function FooterLegal() {
   ];
 
   return (
-    <div className="border-t pt-8 justify-self-end absolute bottom-0 w-full">
+    <div className="border-t py-8 max-lg:mt-10 justify-self-end lg:absolute bottom-0 w-full">
       <ul className="mb-8 flex flex-wrap gap-4 text-xs">
         {legalLinks.map(({ href, label }) => (
           <li key={label}>
