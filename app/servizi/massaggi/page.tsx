@@ -6,7 +6,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { unsplash } from "@/lib/utils/unsplash";
 import { Article } from "@/lib/types";
 import { set } from "zod";
 
@@ -31,8 +30,7 @@ export default function MassaggiPage() {
   const [images, setImages] = useState<Article[] | []>([]);
 
   const useImages = useCallback(async () => {
-    const data = await unsplash({ query: "massages", per_page: 12, page: 1 });
-    console.log(data);
+    console.log("data");
   }, []);
 
   const nextImage = () => {
