@@ -5,8 +5,8 @@ function FooterLegal() {
   ];
 
   return (
-    <div className="mt-8 border-t pt-8 justify-self-end absolute bottom-0 w-full">
-      <ul className="flex flex-wrap gap-4 text-xs">
+    <div className="border-t pt-8 justify-self-end absolute bottom-0 w-full">
+      <ul className="mb-8 flex flex-wrap gap-4 text-xs">
         {legalLinks.map(({ href, label }) => (
           <li key={label}>
             <a href={href} className="transition hover:opacity-75">
@@ -15,9 +15,7 @@ function FooterLegal() {
           </li>
         ))}
       </ul>
-      <p className="mt-8 text-xs text-white">
-        &copy; 2024. L'Angolo Delle Unghie.
-      </p>
+      <p className="text-xs text-white">&copy; 2024. L'Angolo Delle Unghie.</p>
     </div>
   );
 }

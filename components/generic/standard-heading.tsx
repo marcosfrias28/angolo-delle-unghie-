@@ -12,7 +12,7 @@ interface Props {
   size?: "small" | "medium" | "big" | "large";
 }
 
-export function StandardHeader({
+function StandardHeading({
   title,
   position = "left",
   description,
@@ -65,3 +65,5 @@ export function StandardHeader({
     </motion.header>
   );
 }
+
+export default StandardHeading;

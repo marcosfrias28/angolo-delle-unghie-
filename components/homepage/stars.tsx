@@ -14,7 +14,7 @@ const Stars = () => {
   if (!isBrowser) return null; // Se non è il browser, non eseguire il rendering
 
   return (
-    <div className="absolute inset-0 w-full h-full stars overflow-hidden">
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
       {[...Array(100)].map((_, i) => {
         let size = Math.random() * 2 + 3; // Dimensione random delle stelle (in px) (6 - 12)
         let opacity = Math.random() * 0.6 + 0.1; // Varie intensità di luminosità (0.2 - 0.8)
@@ -24,6 +24,7 @@ const Stars = () => {
         let boxShadow = `0 0 ${
           Math.random() * 6 + 2
         }px rgba(255, 255, 255, 0.8)`;
+
         let styles = {
           top: Math.random() * 100 + "vh",
           left: leftPosition + "vw",

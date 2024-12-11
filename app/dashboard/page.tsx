@@ -10,7 +10,7 @@ async function App() {
     redirect("/login");
   }
 
-  return <AdminAppointments user={user} />;
+  return null;
 }
 
 export default App;

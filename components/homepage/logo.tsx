@@ -58,8 +58,8 @@ const Logo: React.FC<HeroLogoProps> = ({
       <Image
         src={src}
         loading="eager"
-        width={width + (isMobile ? 100 : 0)}
-        height={height + (isMobile ? 100 : 0)}
+        width={width + (!isMobile ? 100 : 0)}
+        height={height + (!isMobile ? 100 : 0)}
         alt={alt}
       />
     </motion.div>

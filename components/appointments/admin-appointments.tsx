@@ -42,7 +42,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import getReviews from "@/lib/actions/reviews";
+// import getReviews from "@/lib/actions/reviews";
 import { signOut } from "@/app/(auth)/actions";
 
 interface Appointment {
@@ -80,8 +80,9 @@ export default function Dashboard({ user }: { user: User }) {
       const appointmentsData = await getAvailableAppointments();
       setAppointments(appointmentsData);
       if (user.role === "customer") {
-        const reviewsData = await getReviews(user.id);
-        setReviews(reviewsData);
+        // TODO: fix the reviews
+        // const reviewsData = await getReviews(user.id);
+        // setReviews(reviewsData);
       }
     } catch (error) {
       console.error("Error fetching data:", error);

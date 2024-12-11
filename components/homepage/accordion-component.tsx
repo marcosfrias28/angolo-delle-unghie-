@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
-import { StandardHeader } from "../generic/standard-header";
+import StandardHeading from "../generic/standard-heading";
 
 const domandeERisposteEstetista = [
   {
@@ -53,7 +53,7 @@ const domandeERisposteEstetista = [
 export function FaqsSection() {
   return (
     <div className="flex flex-col w-full relative">
-      <StandardHeader
+      <StandardHeading
         position="center"
         description="Se hai dei dubbi che non trovi in questa lista, non esitare a contattarmi."
         className={cn(
@@ -62,7 +62,7 @@ export function FaqsSection() {
         )}
       >
         Domande frequenti (FAQs)
-      </StandardHeader>
+      </StandardHeading>
       <div className={cn("w-full max-w-[70%] lg:max-w-[50%]", "mx-auto")}>
         <Accordion type="single" collapsible className="w-full mt-2">
           {domandeERisposteEstetista.map((faq) => (

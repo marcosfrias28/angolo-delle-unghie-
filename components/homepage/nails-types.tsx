@@ -205,14 +205,14 @@ const NailsTypes: React.FC = () => {
       </button>
 
       {/* Logo */}
-      <section
+      <picture
         className={cn(
           "absolute bottom-5 right-5 z-20 pointer-events-none",
           "flex flex-col items-center justify-center gap-10"
         )}
       >
         <Logo width={100} height={100} />
-      </section>
+      </picture>
     </section>
   );
 };
@@ -234,7 +234,7 @@ const NailType: React.FC<any> = ({ nailType, viewImage, index }: any) => {
           "w-full h-full grid mx-auto",
 
           // Spacing & Alignment
-          "place-content-center space-y-2 lg:space-y-8 md:px-20 max-md:pl-9",
+          "place-content-center space-y-2 lg:space-y-8 md:px-20 max-md:pl-12 max-md:pr-4",
 
           // Conditional order based on index
           {
@@ -263,7 +263,7 @@ const NailType: React.FC<any> = ({ nailType, viewImage, index }: any) => {
         >
           {nailType.name}
         </h2>
-        <p className="w-full text-xl lg:text-3xl text-black dark:text-roseGold-accent text-pretty">
+        <p className="w-full text-xl lg:text-2xl text-black dark:text-roseGold-accent text-pretty">
           {nailType.description}
         </p>
       </section>

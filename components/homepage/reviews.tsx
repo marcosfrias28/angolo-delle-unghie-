@@ -3,8 +3,9 @@
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
 import Marquee from "@/components/ui/marquee";
-import { StandardHeader } from "../generic/standard-header";
+import StandardHeading from "@/components/generic/standard-heading";
 import { ReviewForm } from "./review-form";
+import config from "@/config";
 
 interface Review {
   name: string;
@@ -94,13 +95,13 @@ const ReviewsSection: React.FC = () => {
 
   return (
     <section className="relative flex h-fit w-full flex-col gap-20 items-center justify-center overflow-hidden">
-      <StandardHeader
+      <StandardHeading
         position="center"
-        description="Le più belle recensioni dei miei clienti, belle e brutte"
+        description={`Dai un'occhiata a quello che le persone pensano su ${config.websiteName}.`}
         className="text-5xl md:text-6xl font-bold text-center text-balance max-md:max-w-[70%] mx-auto"
       >
-        Alcune recensioni dei miei clienti
-      </StandardHeader>
+        Alcune recensioni di clienti abituali
+      </StandardHeading>
 
       <div>
         <Marquee pauseOnHover className="[--duration:20s] h-fit">

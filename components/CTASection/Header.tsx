@@ -9,7 +9,7 @@ const Header: React.FC<HeaderProps> = () => {
   return (
     <header>
       <h4 className="font-semibold">Bellezza</h4>
-      <div className="flex flex-col mt-4 w-full max-md:max-w-full">
+      <article className="flex flex-col mt-4 w-full max-md:max-w-full">
         <h2 className="text-5xl font-bold leading-[58px] max-md:max-w-full max-md:text-4xl max-md:leading-[54px]">
           La tua esperta di unghie di fiducia
         </h2>
@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = () => {
           alta qualità. La mia passione per il lavoro si riflette in ogni
           trattamento.
         </p>
-      </div>
+      </article>
     </header>
   );
 };

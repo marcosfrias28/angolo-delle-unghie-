@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,29 +9,38 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { submitReview } from "@/lib/actions/reviews";
 import { StarRating } from "./star-rating";
 import { AnimatePresence, motion } from "framer-motion";
+import useReviewForm from "@/hooks/use-review-form";
 
 export function ReviewForm() {
-  const [isAnonymous, setIsAnonymous] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [rating, setRating] = useState(0);
-  const router = useRouter();
+  const {
+    state: { rating, isAnonymous, name, body, isSubmitting, error },
+    setBody,
+    setName,
+    setRating,
+    setIsAnonymous,
+    setIsSubmitting,
+    setError,
+  } = useReviewForm();
+
+  const [message, setMessage] = useState("");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setIsSubmitting(true);
-    setError(null);
 
     const formData = new FormData(event.currentTarget);
-    formData.set("rating", rating.toString());
+    formData.set("rating", `${rating}`);
+    setIsSubmitting(true);
+
     const result = await submitReview(formData);
 
     if (result.error) {
       setError(result.error);
     } else {
-      event.currentTarget.reset();
+      setMessage(result?.message || "");
       setRating(0);
-      router.refresh();
+      setBody("");
+      setName("");
+      setIsAnonymous(false);
     }
 
     setIsSubmitting(false);
@@ -50,6 +58,10 @@ export function ReviewForm() {
           className="text-black dark:text-white"
           id="body"
           name="body"
+          onChange={(e) => setBody(e.target.value)}
+          value={body}
+          maxLength={50}
+          minLength={10}
           required
         />
       </div>
@@ -63,10 +75,12 @@ export function ReviewForm() {
           >
             <Label htmlFor="name">Nome (opzionale)</Label>
             <Input
+              onChange={(e) => setName(e.target.value)}
               className="text-black dark:text-white"
               type="text"
               id="name"
               name="name"
+              value={name}
             />
           </motion.div>
         )}
@@ -80,7 +94,11 @@ export function ReviewForm() {
         />
         <Label htmlFor="isAnonymous">Invia in modo anonimo</Label>
       </div>
-      {error && <p className="text-red-500">{error}</p>}
+      {message ? (
+        <p className="text-green-500">{message}</p>
+      ) : (
+        <p className="text-red-500">{error}</p>
+      )}
       <Button type="submit" disabled={isSubmitting || rating === 0}>
         {isSubmitting ? "Invio in corso..." : "Invia recensione"}
       </Button>

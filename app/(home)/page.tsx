@@ -1,6 +1,6 @@
 import GalleryScroll from "@/components/GalleriaImmagini/gallery-scroll";
 import { FaqsSection } from "@/components/homepage/accordion-component";
-import { StandardHeader } from "@/components/generic/standard-header";
+import StandardHeading from "@/components/generic/standard-heading";
 import BentoGridSection from "@/components/homepage/bento-grid";
 import HeroSection from "@/components/homepage/hero-section";
 import CTASection from "@/components/CTASection/cta-section";
@@ -27,7 +27,7 @@ export default function Home() {
         <HeroSection />
       </section>
       <SectionWrapper id="chi-sono">
-        <StandardHeader
+        <StandardHeading
           title="Conosciamoci meglio!"
           description="Prima di tutto, ti racconto di me. E poi scopriamo come ti posso aiutare."
           position="center"
@@ -35,7 +35,7 @@ export default function Home() {
         <AboutMe />
       </SectionWrapper>
       <SectionWrapper id="servizi" className="lg:mb-96 max-md:my-24">
-        <StandardHeader
+        <StandardHeading
           className="lg:-mb-28"
           title="Servizi"
           description="Scopri cosa offro per la tua cura e bellezza."
@@ -43,8 +43,8 @@ export default function Home() {
         />
         <BentoGridSection />
       </SectionWrapper>
-      <SectionWrapper id="galleria" className="my-40 max-md:my-24">
-        <StandardHeader
+      <SectionWrapper id="galleria" className="mt-40 max-md:my-24">
+        <StandardHeading
           title="Lavori Realizzati Recentemente"
           description="Scopri le mie creazioni uniche di nail art."
           position="center"
@@ -55,19 +55,20 @@ export default function Home() {
         id="stili-unghie"
         className="relative overflow-hidden p-2"
       >
-        <StandardHeader
+        <StandardHeading
           title="Stili che potrebbero piacerti"
           description="Scopri i miei stili preferiti e trova nuovi stili per le tue unghie."
           position="center"
         />
         <NailsTypes />
       </SectionWrapper>
-      <section
+      <SectionWrapper
         id="banner"
-        className="w-full bg-roseGold-light dark:bg-roseGold-dark mt-40"
+        className="w-full pb-0 bg-roseGold-light dark:bg-rose/40 mt-40"
       >
         <CTASection />
-      </section>
+      </SectionWrapper>
+
       <section
         id="contact-reviews-footer"
         className="relative w-full h-fit min-h-screen flex flex-col gap-10"
