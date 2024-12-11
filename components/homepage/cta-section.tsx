@@ -4,6 +4,7 @@ import Link from "next/link";
 import { BorderBeam } from "../magicui/border-beam";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { ContactModal } from "../ui/contact-modal";
 
 const CTAtext = {
   cta: {
@@ -51,11 +52,10 @@ const CTASection = () => {
       >
         {CTAtext.cta.subtitle}
       </p>
-      <Link
-        href="/prenota"
+      <ContactModal
         className={cn(
           // Padding
-          "px-8 py-4",
+          "px-8 py-7",
           // Background colors
           "bg-rose dark:bg-roseGold hover:bg-[rgb(234,173,170)]",
           // Text colors
@@ -78,7 +78,7 @@ const CTASection = () => {
           colorFrom="rgb(183, 110, 121)"
           colorTo="rgb(255, 228, 225)"
         />
-      </Link>
+      </ContactModal>
     </motion.section>
   );
 };

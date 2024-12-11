@@ -36,7 +36,7 @@ export default function Home() {
       </SectionWrapper>
       <SectionWrapper id="servizi" className="lg:mb-96 max-md:my-24">
         <StandardHeader
-          className="lg:-mb-36"
+          className="lg:-mb-28"
           title="Servizi"
           description="Scopri cosa offro per la tua cura e bellezza."
           position="center"
@@ -47,6 +47,7 @@ export default function Home() {
         <StandardHeader
           title="Lavori Realizzati Recentemente"
           description="Scopri le mie creazioni uniche di nail art."
+          position="center"
         />
         <GalleryScroll />
       </SectionWrapper>

@@ -36,13 +36,13 @@ export function StandardHeader({
       viewport={{ once: true }}
       aria-labelledby={title}
       className={cn(
-        "dark:[filter:url(#blur-and-scale)] z-30",
+        "z-30",
         // Layout
         "flex flex-col max-w-full",
         // Text colors
         "text-rose dark:text-white",
         // Spacing
-        " py-6 px-3  max-md:pt-20",
+        " py-6 px-3 max-md:pt-20 lg:mb-10",
         // Positioning
         position === "left" && "items-start",
         position === "right" && "items-end",
@@ -52,13 +52,16 @@ export function StandardHeader({
     >
       <h2
         className={cn(
+          "dark:[filter:url(#blur-and-scale)]",
           "font-bold leading-tight max-md:max-w-full max-md:text-4xl max-lg:text-center",
           textSize()
         )}
       >
         {children ? children : title}
       </h2>
-      <p className="mt-6 text-lg max-md:max-w-full">{description}</p>
+      <p className="mt-6 text-xl max-md:max-w-full font-medium">
+        {description}
+      </p>
     </motion.header>
   );
 }

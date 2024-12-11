@@ -35,8 +35,20 @@ const Logo: React.FC<HeroLogoProps> = ({
   ];
 
   return images.map(({ src, alt, className: imageClass }, i) => (
-    <div
+    <motion.div
       key={i}
+      initial={{
+        opacity: 0,
+        scale: 0.1,
+      }}
+      animate={{
+        opacity: 1,
+        scale: 1,
+      }}
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+      }}
       className={cn(
         "w-full h-full items-center justify-center pointer-events-none z-0",
         imageClass,
@@ -50,7 +62,7 @@ const Logo: React.FC<HeroLogoProps> = ({
         height={height + (isMobile ? 100 : 0)}
         alt={alt}
       />
-    </div>
+    </motion.div>
   ));
 };
 

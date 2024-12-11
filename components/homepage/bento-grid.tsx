@@ -18,7 +18,7 @@ import { Icons } from "@/components/Icons";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const features = [
+const services = [
   {
     Icon: Icons.NailIcon,
     name: "Nails",
@@ -73,7 +73,7 @@ const features = [
 
 const BentoGridSection = () => {
   useGSAP(() => {
-    features.map((_, i) => {
+    services.map((_, i) => {
       const tl = gsap.timeline();
       gsap.set(".feature" + i, { y: 300, x: 0, opacity: 0 });
       tl.to(`.feature${i}`, {
@@ -92,7 +92,7 @@ const BentoGridSection = () => {
 
   return (
     <BentoGrid className="mx-auto">
-      {features.map((feature, i) => (
+      {services.map((feature, i) => (
         <BentoCard
           key={i}
           className={cn(feature.class, `feature${i} group`, "h-full")}

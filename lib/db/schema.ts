@@ -57,10 +57,9 @@ export const services = pgTable('services', {
 
 // Reviews Table
 export const reviews = pgTable('reviews', {
-  id: serial('id').primaryKey(),
-  userId: integer('user_id').references(() => users.id).notNull(), // changed numeric to integer
-  rating: numeric('rating', { precision: 3, scale: 2 }).notNull(), // keeping numeric for rating
-  comment: text('comment').notNull(),
+  name: text('name').notNull(),
+  rating: text('rating').notNull(), // keeping numeric for rating
+  body: text('body').notNull(),
   createdAt: timestamp('created_at').defaultNow(),
 });
 
