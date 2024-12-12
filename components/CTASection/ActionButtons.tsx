@@ -8,7 +8,7 @@ interface ActionButtonsProps {}
 
 const ActionButtons: React.FC<ActionButtonsProps> = () => {
   return (
-    <div className="flex gap-6 items-center mt-8 text-base text-black whitespace-nowrap justify-self-center">
+    <div className="flex gap-6 items-center mt-8 text-base text-black whitespace-nowrap">
       <ContactModal
         phoneNumber="393480463822"
         instagramUsername="angolodelleunghie_"
