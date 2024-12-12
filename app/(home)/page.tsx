@@ -43,7 +43,7 @@ export default function Home() {
         />
         <BentoGridSection />
       </SectionWrapper>
-      <SectionWrapper id="galleria" className="mt-40 max-md:my-24">
+      <SectionWrapper id="galleria" className="lg:mt-20 max-md:my-24">
         <StandardHeading
           title="Lavori Realizzati Recentemente"
           description="Scopri le mie creazioni uniche di nail art."
@@ -64,7 +64,7 @@ export default function Home() {
       </SectionWrapper>
       <SectionWrapper
         id="banner"
-        className="w-full pb-0 bg-roseGold-light dark:bg-rose/40 mt-40"
+        className="w-full max-w-[100%] pb-0 bg-roseGold-light dark:bg-rose/40 mt-40"
       >
         <CTASection />
       </SectionWrapper>
