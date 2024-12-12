@@ -94,7 +94,7 @@ const ReviewsSection: React.FC = () => {
   const secondRow = reviews.slice(Math.ceil(reviews.length / 2));
 
   return (
-    <section className="relative flex h-fit w-full flex-col gap-20 items-center justify-center overflow-hidden">
+    <section className="relative h-fit w-full items-center justify-center overflow-hidden">
       <StandardHeading
         position="center"
         description={`Dai un'occhiata a quello che le persone pensano su ${config.websiteName}.`}

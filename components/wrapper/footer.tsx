@@ -41,7 +41,7 @@ export default function Footer() {
       id="footer"
       className="dark:bg-black bg-roseGold text-white w-full relative"
     >
-      <Marquee className="pointer-events-none title-marquee absolute -top-40 text-center">
+      <Marquee className="w-full pointer-events-none title-marquee absolute -top-40 text-center">
         <h1 className="text-[150px] font-black mx-20 text-roseGold dark:text-black">
           L'Angolo Delle Unghie
         </h1>

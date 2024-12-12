@@ -55,7 +55,7 @@ export function ReviewForm() {
       <div>
         <Label htmlFor="body">La tua recensione</Label>
         <Textarea
-          className="text-black dark:text-white"
+          className="text-black dark:text-white [field-sizing:content] resize-none"
           id="body"
           name="body"
           onChange={(e) => setBody(e.target.value)}

@@ -26,8 +26,8 @@ const CTASection: React.FC<CTASectionProps> = () => {
   ];
 
   return (
-    <section className="w-full px-16 max-lg:px-5 py-28 max-lg:py-24 flex flex-nowrap justify-center items-center">
-      <div className="w-1/2">
+    <section className="w-full px-16 max-lg:px-5 py-28 max-lg:py-24">
+      <div className="max-lg:w-full w-1/2 mx-auto">
         <Header />
         <div className="flex flex-wrap gap-6 items-start py-10 w-full max-lg:max-w-full">
           {services.map((service, index) => (
