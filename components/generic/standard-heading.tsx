@@ -42,7 +42,7 @@ function StandardHeading({
         // Text colors
         "text-rose dark:text-white",
         // Spacing
-        " py-6 px-3 max-md:pt-20 lg:mb-10",
+        "py-6 px-3 max-lg:pb-16 max-lg:pt-28 lg:mb-10",
         // Positioning
         position === "left" && "items-start",
         position === "right" && "items-end",

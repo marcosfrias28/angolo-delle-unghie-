@@ -51,10 +51,7 @@ export default function Home() {
         />
         <GalleryScroll />
       </SectionWrapper>
-      <SectionWrapper
-        id="stili-unghie"
-        className="relative overflow-hidden p-2"
-      >
+      <SectionWrapper id="stili-unghie" className="relative overflow-hidden">
         <StandardHeading
           title="Stili che potrebbero piacerti"
           description="Scopri i miei stili preferiti e trova nuovi stili per le tue unghie."
