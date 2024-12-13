@@ -1,21 +1,20 @@
-function FooterLegal() {
-  const legalLinks = [
-    { href: "/termini-e-condizioni", label: "Termini e Condizioni" },
-    { href: "/privacy", label: "Informativa sulla Privacy" },
-  ];
+import Link from "next/link";
 
+function FooterLegal() {
   return (
-    <div className="border-t py-8 max-lg:mt-10 justify-self-end lg:absolute bottom-0 w-full">
-      <ul className="mb-8 flex flex-wrap gap-4 text-xs">
-        {legalLinks.map(({ href, label }) => (
-          <li key={label}>
-            <a href={href} className="transition hover:opacity-75">
-              {label}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <p className="text-xs text-white">&copy; 2024. L'Angolo Delle Unghie.</p>
+    <div className="flex flex-row flex-nowrap gap-5 items-center justify-center text-xs pt-8 max-lg:mt-10 mb-2 lg:absolute bottom-0 w-full">
+      <Link
+        href="/termini-e-condizioni"
+        className="transition hover:opacity-75"
+      >
+        Termini e Condizioni
+      </Link>
+      <Link href="/privacy" className="transition hover:opacity-75">
+        Informativa sulla Privacy
+      </Link>
+      <span className="pointer-events-none text-white">
+        &copy; 2024. L'Angolo Delle Unghie.
+      </span>
     </div>
   );
 }

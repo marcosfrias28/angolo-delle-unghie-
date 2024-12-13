@@ -49,7 +49,6 @@ export function ReviewForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 w-full mx-auto">
       <div>
-        <Label>Valutazione</Label>
         <StarRating rating={rating} onRatingChange={setRating} />
       </div>
       <div>

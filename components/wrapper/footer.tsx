@@ -41,32 +41,34 @@ export default function Footer() {
       id="footer"
       className="dark:bg-black bg-roseGold text-white w-full relative"
     >
-      <Marquee className="w-full pointer-events-none title-marquee absolute -top-40 text-center">
+      <Marquee className="w-full pointer-events-none title-marquee absolute -top-40 text-center z-10">
         <h1 className="text-[150px] font-black mx-20 text-roseGold dark:text-black">
           L'Angolo Delle Unghie
         </h1>
       </Marquee>
       <div className="mx-auto max-w-screen-2xl px-6">
-        <div className="lg:grid lg:grid-cols-2">
-          <div className="py-8 lg:order-last lg:border-b-0 lg:border-s lg:py-16 lg:ps-16">
+        <div className="flex flex-col lg:flex-row justify-between">
+          <div className="lg:w-1/2 py-8 lg:order-last lg:py-16 lg:ps-16 z-20">
             <StandardHeading
-              className="text-center text-white"
+              className="text-center mx-0 mb-10 p-0"
+              position="center"
               size="small"
               title="Hai provato i miei servizi?"
               description="Lascia una recensione! 😊"
-              position="center"
             />
             <ReviewForm />
           </div>
 
-          <div className="relative flex flex-col lg:py-16 lg:pe-16">
+          <div className="max-lg:w-full max-lg:h-[2px] w-[2px] my-10 h-auto bg-rose z-20"></div>
+
+          <div className="relative lg:order-first flex flex-col lg:py-16 mx-10 lg:w-1/2 z-20">
             <StandardHeading
-              className="text-white"
-              size="small"
+              className="text-white mx-0 mb-10 p-0"
               position="center"
+              size="small"
               title="Informazioni"
             />
-            <div className="grid grid-cols-1 sm:grid-cols-2 center -mt-10">
+            <div className="flex flex-row justify-around">
               <SocialLinks />
               <UsefulLinks />
             </div>
