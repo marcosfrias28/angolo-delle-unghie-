@@ -112,7 +112,7 @@ export function ContactModal({
           {children ? children : buttonText}
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] bg-white">
+      <DialogContent className="sm:max-w-[425px] bg-white dark:bg-[#f7f7f7]">
         <DialogHeader>
           <DialogTitle className="text-[#B76E79]">
             Parliamo del tuo trattamento
@@ -123,14 +123,14 @@ export function ContactModal({
             reindirizzat@ al mio profilo Instagram.
           </DialogDescription>
           <a
-            className="flex flex-nowrap items-center gap-2 group"
+            className="flex flex-nowrap items-center gap-2 group text-roseGold-light dark:text-black"
             target="_blank"
             referrerPolicy="no-referrer"
             href="https://www.instagram.com/angolodelleunghie_"
           >
             <FaInstagram
               size={30}
-              className="text-roseGold-light group-hover:text-rose transition-colors"
+              className="group-hover:text-rose transition-colors"
             />
             Instagram
           </a>
@@ -142,7 +142,7 @@ export function ContactModal({
                 {...register("name")}
                 placeholder="Il tuo nome"
                 className={cn(
-                  "border-[#E6BCB3] focus:ring-[#B76E79] focus:border-[#B76E79]",
+                  "border-[#E6BCB3] focus:ring-[#B76E79] focus:border-[#B76E79] dark:bg-neutral-900",
                   errors.name
                     ? "border-red-500"
                     : watchName.length >= 3
@@ -167,7 +167,7 @@ export function ContactModal({
             >
               <SelectTrigger
                 className={cn(
-                  "border-[#E6BCB3] focus:ring-[#B76E79] focus:border-[#B76E79]",
+                  "border-[#E6BCB3] focus:ring-[#B76E79] focus:border-[#B76E79] dark:bg-neutral-900",
                   errors.service
                     ? "border-red-500"
                     : watch("service")
@@ -199,7 +199,7 @@ export function ContactModal({
                 {...register("message")}
                 placeholder="Il tuo messaggio"
                 className={cn(
-                  "min-h-[100px] border-[#E6BCB3] focus:ring-[#B76E79] focus:border-[#B76E79] pr-16",
+                  "min-h-[100px] border-[#E6BCB3] focus:ring-[#B76E79] focus:border-[#B76E79] pr-16 dark:bg-neutral-900",
                   errors.message
                     ? "border-red-500"
                     : watchMessage.length >= 10
