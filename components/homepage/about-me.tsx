@@ -98,7 +98,7 @@ export default function AboutMe() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex flex-col justify-center items-center min-h-[1200px] max-lg:mb-10 lg:my-20 max-lg:max-h-fit"
+      className="relative flex flex-col w-full px-4 justify-center items-center min-h-[1200px] max-lg:mb-10 lg:my-20 max-lg:max-h-fit"
     >
       <Image
         ref={imageRef}
@@ -225,7 +225,7 @@ export default function AboutMe() {
             {features.map((feature, index) => (
               <div
                 key={feature.name}
-                className="max-md:p-2 p-3text-center transform transition-all duration-300 hover:scale-105"
+                className="max-md:p-2 p-3 text-center transform transition-all duration-300 hover:scale-105"
               >
                 <feature.icon
                   className={cn(

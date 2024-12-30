@@ -26,10 +26,13 @@ export default function Home() {
         <Meteors meteorQuantity={12} />
         <HeroSection />
       </section>
-      <SectionWrapper id="chi-sono">
+      <SectionWrapper
+        className={cn("w-full mx-auto p-0 m-0 max-w-full")}
+        id="chi-sono"
+      >
         <StandardHeading
           title="Conosciamoci meglio!"
-          description="Prima di tutto, ti racconto di me. E poi scopriamo come ti posso aiutare."
+          description="Prima di tutto, ti racconto di me."
           position="center"
         />
         <AboutMe />

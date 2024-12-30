@@ -11,7 +11,6 @@ import { StarRating } from "./star-rating";
 import { AnimatePresence, motion } from "framer-motion";
 import useReviewForm from "@/hooks/use-review-form";
 import cookie from "js-cookie";
-import Link from "next/link";
 
 export function ReviewForm() {
   const {

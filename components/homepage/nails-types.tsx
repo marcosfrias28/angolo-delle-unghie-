@@ -8,10 +8,11 @@ import { cn } from "@/lib/utils";
 import gsap from "gsap";
 import { useTheme } from "next-themes";
 import { ChevronsDown, Eye, EyeOff } from "lucide-react";
-import MurettoImage from "@/public/unghie/muretto.webp";
-import FrenchBabyBoomer from "@/public/unghie/french-baby-boomer.webp";
 import TrendNails from "@/public/unghie/trend-nails.webp";
-import UnghieNaturali from "@/public/unghie/unghie-naturali.webp";
+import UnghieNaturali from "@/public/unghie/unghie-naturali-2.webp";
+import FrenchBabyBoomer from "@/public/unghie/french-babyboomer.webp";
+import Muretto from "@/public/unghie/muretto.webp";
+import SpringNails from "@/public/unghie/spring-nails.webp";
 import { useMediaQuery } from "usehooks-ts";
 import Logo from "./logo";
 
@@ -26,13 +27,13 @@ interface nailType {
 const nailsTypes: nailType[] = [
   {
     name: "Unghie a muretto",
-    image: TrendNails,
+    image: Muretto,
     description:
       "Un French che è parte della ricostruzione, e non un disegno, è una tecnica di ricostruzione delle unghie con cui la nail artist non si limita a disegnare la smile line delle unghie con il gel bianco, o di altro colore, sopra l'unghia già ricostruita ma crea la smile line direttamente in struttura.",
   },
   {
     name: "French & Babyboomer",
-    image: TrendNails,
+    image: FrenchBabyBoomer,
     description:
       "Il french manicure rientra tra le prime tecniche di manicure che negli ultimi tempi ha riavuto una piccola rivincita su altri più vivaci e sfiziosi mentre, il baby boomer è l’ultima tendenza del manicure, molto sobrio e naturale come il precedente, ma con una sfumatura delicata",
   },
@@ -44,21 +45,15 @@ const nailsTypes: nailType[] = [
   },
   {
     name: "Unghie naturali",
-    image: TrendNails,
+    image: UnghieNaturali,
     description:
       "Svela la tua bellezza con unghie naturali, nude, semplici ed eleganti per ogni occasione. Esalta la tua femminilità con i miei servizi.",
   },
   {
     name: "Sprint Nails",
-    image: TrendNails,
+    image: SpringNails,
     description:
       "Fantasie, disegni, personalità, brillantini, animals… sono solo alcune delle parole chiave delle Sprint Nails.. sbizzarriamoci per avere le unghie dei tuoi sogni.",
-  },
-  {
-    name: "Card Nails",
-    image: TrendNails,
-    description:
-      "Ultimo arrivato ma ha subito rapito i cuori di tanti: tu scegli il prezzo e la fortuna sceglierà le unghie al posto tuo!",
   },
 ];
 
@@ -275,6 +270,7 @@ const NailType: React.FC<any> = ({ nailType, viewImage, index }: any) => {
           alt={nailType.name}
           loading="lazy"
           className={cn(
+            "object-cover object-center",
             "transition-all transform-gpu duration-300 ease-in-out",
             "w-full h-full"
           )}

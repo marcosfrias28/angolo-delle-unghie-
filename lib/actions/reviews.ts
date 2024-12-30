@@ -1,9 +1,9 @@
 "use server";
 
-import { eq } from 'drizzle-orm';
 import db from '../db/drizzle';
 import { reviews as reviewsdb } from '../db/schema';
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
 
 export async function getReviews() {
     try {
@@ -21,20 +21,23 @@ export async function getReviews() {
 }
 
 export async function submitReview(formData: FormData) {
-    const name = formData.get('name') as string || 'Anonim@';
+    let name = formData.get('name') as string;
     const body = formData.get('body') as string;
     const rating = formData.get('rating') as string;
     const isAnonymous = formData.get('isAnonymous') === 'on';
 
-    console.log(name, body, rating, isAnonymous);
-
     if (!body || Number(rating) < 1 || Number(rating) > 5) {
         return { error: 'Inserisci una recensione valida e una valutazione tra 1 e 5.' };
     }
+    if (isAnonymous) name = 'Anonim@';
 
     try {
+        const Cookies = cookies()
+        Cookies.set(name, `${name},${body},${rating}`, { expires: 365 });
+        console.log(Cookies.get(name));
+
         await db.insert(reviewsdb).values({
-            name: isAnonymous ? 'Anonim@' : name,
+            name,
             body,
             rating,
             status: 'idle',
