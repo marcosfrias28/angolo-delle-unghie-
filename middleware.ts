@@ -5,21 +5,6 @@ import { signToken, verifyToken } from '@/lib/auth/session';
 const protectedRoutes = '/dashboard';
 
 export async function middleware(request: NextRequest) {
-  ////////////////////////////////////////////////////////////////////////////////////
-  /*
-    Questo middleware controlla se l'utente ha accettato il banner e reindirizza
-    alla pagina di work-in-progress se non lo ha.
-  */
-
-  const hasAcceptedBanner = request.cookies.get('bannerAccepted');
-
-  // Se l'utente non ha accettato il banner, reindirizza a /work-in-progress
-  if (!hasAcceptedBanner && request.nextUrl.pathname !== '/work-in-progress') {
-    return NextResponse.redirect(new URL('/work-in-progress', request.url));
-  }
-
-  ////////////////////////////////////////////////////////////////////////////////////
-
 
   const { pathname } = request.nextUrl;
   const sessionCookie = request.cookies.get('session');
