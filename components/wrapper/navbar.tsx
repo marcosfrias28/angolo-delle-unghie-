@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { forwardRef, useContext, useEffect } from "react";
+import { forwardRef } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Button } from "../ui/button";
 import {
@@ -86,7 +86,7 @@ const components: { title: string; href: `#${string}`; description: string }[] =
 export default function NavBar() {
   const path = usePathname();
 
-  if (path.includes("/dashboard") || path === "/work-in-progress") {
+  if (path.includes("/dashboard")) {
     return null;
   }
 

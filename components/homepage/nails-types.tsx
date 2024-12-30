@@ -207,11 +207,11 @@ const NailsTypes: React.FC = () => {
       {/* Logo */}
       <picture
         className={cn(
-          "absolute bottom-5 right-5 z-20 pointer-events-none",
+          "absolute bottom-0 right-5 z-10 pointer-events-none",
           "flex flex-col items-center justify-center gap-10"
         )}
       >
-        <Logo width={100} height={100} />
+        <Logo width={20} height={20} />
       </picture>
     </section>
   );
@@ -263,7 +263,7 @@ const NailType: React.FC<any> = ({ nailType, viewImage, index }: any) => {
         >
           {nailType.name}
         </h2>
-        <p className="w-full text-xl lg:text-2xl text-black dark:text-roseGold-accent text-pretty">
+        <p className="w-full text-xl z-20 lg:text-2xl text-black dark:text-roseGold-accent text-pretty">
           {nailType.description}
         </p>
       </section>

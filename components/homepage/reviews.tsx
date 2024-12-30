@@ -56,7 +56,7 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
               "review-star",
               "w-4 h-4",
               index < rating
-                ? "text-yellow-400 fill-yellow-400"
+                ? "text-roseGold-light fill-roseGold-light"
                 : "text-gray-300"
             )}
             aria-hidden="true"

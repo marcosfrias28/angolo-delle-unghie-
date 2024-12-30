@@ -16,7 +16,11 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Footer() {
   const path = usePathname();
 
-  if (path.includes("accedi") || path.includes("profilo-utente")) {
+  if (
+    path.includes("login") ||
+    path.includes("dashboard") ||
+    path.includes("privacy")
+  ) {
     return null;
   }
 
@@ -50,7 +54,7 @@ export default function Footer() {
         <div className="flex flex-col lg:flex-row justify-between">
           <div className="lg:w-1/2 py-8 lg:order-last lg:py-16 lg:ps-16 z-20">
             <StandardHeading
-              className="text-center mx-0 mb-10 p-0"
+              className="text-center mx-0 mb-10 p-0 text-white dark:text-white"
               position="center"
               size="small"
               title="Hai provato i miei servizi?"
@@ -59,7 +63,7 @@ export default function Footer() {
             <ReviewForm />
           </div>
 
-          <div className="max-lg:w-full max-lg:h-[2px] w-[2px] my-10 h-auto bg-rose z-20"></div>
+          <div className="max-lg:w-full max-lg:h-[2px] w-[2px] my-10 h-auto dark:bg-rose bg-white z-20"></div>
 
           <div className="relative lg:order-first flex flex-col lg:py-16 mx-10 lg:w-1/2 z-20">
             <StandardHeading
