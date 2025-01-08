@@ -8,15 +8,10 @@ import { cookies } from 'next/headers';
 export async function getReviews() {
     try {
         const reviews = await db.select().from(reviewsdb);
-        return reviews.map(review => ({
-            body: review.body,
-            name: review.name,
-            rating: review.rating,
-            date: review.created_at!.toISOString().split('T')[0]
-        }));
+        return reviews.filter(review => review.status === 'accepted').map(review => review);
     } catch (error) {
         console.error('Errore nel recupero delle recensioni:', error);
-        throw new Error('Impossibile recuperare le recensioni.');
+        return [];
     }
 }
 

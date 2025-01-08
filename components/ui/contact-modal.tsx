@@ -141,6 +141,7 @@ export function ContactModal({
               <Input
                 {...register("name")}
                 placeholder="Il tuo nome"
+                required
                 className={cn(
                   "border-[#E6BCB3] focus:ring-[#B76E79] focus:border-[#B76E79] dark:bg-neutral-900",
                   errors.name
@@ -161,6 +162,7 @@ export function ContactModal({
           <div className="space-y-2">
             <Select
               value={watch("service")}
+              required
               onValueChange={(value) =>
                 setValue("service", value, { shouldValidate: true })
               }
@@ -198,6 +200,7 @@ export function ContactModal({
               <Textarea
                 {...register("message")}
                 placeholder="Il tuo messaggio"
+                required
                 className={cn(
                   "min-h-[100px] border-[#E6BCB3] focus:ring-[#B76E79] focus:border-[#B76E79] pr-16 dark:bg-neutral-900",
                   errors.message

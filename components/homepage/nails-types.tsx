@@ -9,10 +9,10 @@ import gsap from "gsap";
 import { useTheme } from "next-themes";
 import { ChevronsDown, Eye, EyeOff } from "lucide-react";
 import TrendNails from "@/public/unghie/trend-nails.webp";
-import UnghieNaturali from "@/public/unghie/unghie-naturali-2.webp";
+import UnghieNaturali from "@/public/unghie/unghie-naturali.webp";
 import FrenchBabyBoomer from "@/public/unghie/french-babyboomer.webp";
 import Muretto from "@/public/unghie/muretto.webp";
-import SpringNails from "@/public/unghie/spring-nails.webp";
+import SprintNails from "@/public/unghie/sprint-nails.webp";
 import { useMediaQuery } from "usehooks-ts";
 import Logo from "./logo";
 
@@ -51,7 +51,7 @@ const nailsTypes: nailType[] = [
   },
   {
     name: "Sprint Nails",
-    image: SpringNails,
+    image: SprintNails,
     description:
       "Fantasie, disegni, personalità, brillantini, animals… sono solo alcune delle parole chiave delle Sprint Nails.. sbizzarriamoci per avere le unghie dei tuoi sogni.",
   },
@@ -270,7 +270,8 @@ const NailType: React.FC<any> = ({ nailType, viewImage, index }: any) => {
           alt={nailType.name}
           loading="lazy"
           className={cn(
-            "object-cover object-center",
+            "object-cover",
+            index === 0 ? "object-top" : "object-center",
             "transition-all transform-gpu duration-300 ease-in-out",
             "w-full h-full"
           )}
