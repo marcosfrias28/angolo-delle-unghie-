@@ -286,7 +286,7 @@ const NailType: React.FC<any> = ({ nailType, viewImage, index }: any) => {
         loading="eager"
         className={cn(
           "hidden max-lg:block",
-          "transition-all transform-gpu duration-300 ease-in-out",
+          "transition-all transform-gpu duration-300 ease-in-out object-cover object-center",
           "w-full h-full",
           !viewImage ? "blur-3xl" : "",
           "absolute overflow-hidden -z-10"
