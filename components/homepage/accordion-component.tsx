@@ -58,7 +58,7 @@ export function FaqsSection() {
         description="Se hai dei dubbi che non trovi in questa lista, non esitare a contattarmi."
         className={cn(
           `my-2 font-semibold text-center tracking-tight`,
-          `title-tailwind-class mx-5`
+          `title-tailwind-class mx-5 z-0`
         )}
       >
         Domande frequenti (FAQs)

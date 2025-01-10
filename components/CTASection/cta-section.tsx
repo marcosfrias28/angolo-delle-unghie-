@@ -3,8 +3,8 @@
  */
 import React from "react";
 import Header from "./Header";
-import ServiceCard from "./ServiceCard";
-import ActionButtons from "./ActionButtons";
+import ServiceCard from "./service-card";
+import ActionButtons from "./action-buttons";
 import { Brush, ShieldCheck } from "lucide-react";
 
 interface CTASectionProps {}
