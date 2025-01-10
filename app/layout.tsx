@@ -52,7 +52,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <UserProvider userPromise={userPromise}>
-            <NavBar />
+            <NavBar userPromise={userPromise} />
             <BlurEffect />
             {children}
             <Toaster />

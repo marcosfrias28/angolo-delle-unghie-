@@ -2,21 +2,16 @@
 
 import Link from "next/link";
 import { useActionState } from "react";
-import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, TriangleIcon } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { signIn, signUp } from "./actions";
 import { ActionState } from "@/lib/auth/middleware";
 import Image from "next/image";
 import config from "@/config";
 
 export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
-  const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect");
-  const priceId = searchParams.get("priceId");
-  const inviteId = searchParams.get("inviteId");
   const [state, formAction, pending] = useActionState<ActionState, FormData>(
     mode === "signin" ? signIn : signUp,
     { error: "" }
@@ -42,9 +37,6 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <form className="space-y-6" action={formAction}>
-          <input type="hidden" name="redirect" value={redirect || ""} />
-          <input type="hidden" name="priceId" value={priceId || ""} />
-          <input type="hidden" name="inviteId" value={inviteId || ""} />
           <div>
             <Label
               htmlFor="email"
@@ -61,7 +53,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                 required
                 maxLength={50}
                 className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-roseGold-light focus:border-roseGold-light focus:z-10 sm:text-sm"
-                placeholder="Inserisci la tua email"
+                placeholder="mariorossi@example.it"
               />
             </div>
           </div>
@@ -85,10 +77,55 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                 minLength={8}
                 maxLength={100}
                 className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-roseGold-light focus:border-roseGold-light focus:z-10 sm:text-sm"
-                placeholder="Inserisci la tua password"
+                placeholder="********"
               />
             </div>
           </div>
+
+          {mode === "signup" && (
+            <>
+              <div>
+                <Label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium text-gray-700 ml-1"
+                >
+                  Conferma Password
+                </Label>
+                <div className="mt-1">
+                  <Input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    required
+                    minLength={8}
+                    maxLength={100}
+                    className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-roseGold-light focus:border-roseGold-light focus:z-10 sm:text-sm"
+                    placeholder="********"
+                  />
+                </div>
+              </div>
+              <div>
+                <Label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700 ml-1"
+                >
+                  Inserisci il tuo nome
+                </Label>
+                <div className="mt-1">
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    minLength={8}
+                    maxLength={100}
+                    className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-roseGold-light focus:border-roseGold-light focus:z-10 sm:text-sm"
+                    placeholder="Mario Rossi"
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           {state?.error && (
             <div className="text-red-500 text-sm">{state.error}</div>
@@ -130,9 +167,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
 
           <div className="mt-6">
             <Link
-              href={`${mode === "signin" ? "/register" : "/login"}${
-                redirect ? `?redirect=${redirect}` : ""
-              }${priceId ? `&priceId=${priceId}` : ""}`}
+              href={`${mode === "signin" ? "/register" : "/login"}`}
               className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-sm shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-roseGold-light"
             >
               {mode === "signin"

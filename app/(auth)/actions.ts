@@ -15,8 +15,7 @@ import {
   validatedActionWithUser,
 } from '@/lib/auth/middleware';
 import db from '@/lib/db/drizzle';
-import { and, eq, sql } from 'drizzle-orm';
-import { getUser } from '@/lib/db/queries';
+import { eq, sql } from 'drizzle-orm';
 
 const signInSchema = z.object({
   email: z.string().email().min(3).max(255),
@@ -57,11 +56,20 @@ export const signIn = validatedAction(signInSchema, async (data, formData) => {
 const signUpSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
-  inviteId: z.string().optional(),
+  confirmPassword: z.string().min(8),
+  name: z.string().min(1),
 });
 
 export const signUp = validatedAction(signUpSchema, async (data, formData) => {
-  const { email, password, inviteId } = data;
+  const { email, password, confirmPassword, name } = data;
+
+  if (password !== confirmPassword) {
+    return { error: "Passwords don't match." };
+  }
+
+  if (!name) {
+    return { error: 'Name is required.' };
+  }
 
   const existingUser = await db
     .select()

@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { forwardRef } from "react";
+import { forwardRef, ReactNode, use, useEffect, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Button } from "../ui/button";
 import {
@@ -25,6 +25,10 @@ import config from "@/config";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/all";
 import Logo from "../homepage/logo";
+import { InstagramLogoIcon } from "@radix-ui/react-icons";
+import { FaSquareFacebook } from "react-icons/fa6";
+import { User } from "@/lib/db/schema";
+import LogOutButton from "../generic/log-out";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -83,12 +87,19 @@ const components: { title: string; href: `#${string}`; description: string }[] =
     },
   ];
 
-export default function NavBar() {
-  const path = usePathname();
+export default function NavBar({
+  userPromise,
+}: {
+  userPromise: Promise<User | null>;
+}) {
+  let initialUser = use(userPromise);
+  let [user, setUser] = useState<User | null>(initialUser);
 
-  if (path.includes("/dashboard")) {
-    return null;
-  }
+  useEffect(() => {
+    setUser(initialUser);
+  }, [initialUser]);
+
+  const path = usePathname();
 
   const handleNavClick = (target: `#${string}`) => {
     gsap.to(window, {
@@ -144,7 +155,6 @@ export default function NavBar() {
             </div>
           </SheetContent>
         </Dialog>
-        <ModeToggle />
       </div>
       <NavigationMenu>
         <NavigationMenuList className="max-[825px]:hidden flex gap-3 w-[100%] justify-between">
@@ -180,8 +190,16 @@ export default function NavBar() {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-      <div className="flex items-center gap-2 max-[825px]:hidden">
-        <ModeToggle />
+      <div className="flex items-center gap-4">
+        <LogOutButton user={user} />
+        <div className="flex items-center gap-2">
+          <Link target="_blank" href={config.social.Instagram} passHref>
+            <Button variant="ghost" className="hover:bg-rose" size="icon">
+              <InstagramLogoIcon className="w-5 h-5" />
+            </Button>
+          </Link>
+          <ModeToggle />
+        </div>
       </div>
     </div>
   );
