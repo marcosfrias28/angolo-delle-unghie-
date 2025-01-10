@@ -19,6 +19,11 @@ import image18 from "@/public/lavori/18.webp"
 
 const config = {
   websiteName: "Angolo Delle Unghie",
+  social: {
+    Instagram: "https://www.instagram.com/angolodelleunghie_",
+    Facebook: "https://www.facebook.com/angolodelleunghie",
+    Pinterest: "https://www.pinterest.it/angolodelleunghie",
+  },
   websiteDescription:
     "Angolo Delle Unghie è una piattaforma web innovativa dedicata alla gestione e promozione dei servizi di estetica e nail art. Ideale per le onicotecniche e i professionisti del settore, offre strumenti personalizzati per organizzare appuntamenti, mostrare lavori creativi e connettersi con i clienti.",
   baseUrl: "https://angolodelleunghie.it",
