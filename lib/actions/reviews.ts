@@ -8,7 +8,7 @@ import { cookies } from 'next/headers';
 export async function getReviews() {
     try {
         const reviews = await db.select().from(reviewsdb);
-        return reviews.filter(review => review.status === 'accepted').map(review => review);
+        return reviews.map(review => review);
     } catch (error) {
         console.error('Errore nel recupero delle recensioni:', error);
         return [];
