@@ -40,7 +40,7 @@ const BentoCard = ({
   src: StaticImageData;
   Icon: any;
   description: string;
-  href: string;
+  href?: string;
   cta: string;
 }) => (
   <div
