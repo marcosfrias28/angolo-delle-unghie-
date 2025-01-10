@@ -10,7 +10,6 @@ import {
   SheetTrigger,
 } from "../ui/sheet";
 import ModeToggle from "../mode-toggle";
-import { BlocksIcon } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -25,6 +24,7 @@ import { usePathname } from "next/navigation";
 import config from "@/config";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/all";
+import Logo from "../homepage/logo";
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -149,7 +149,7 @@ export default function NavBar() {
       <NavigationMenu>
         <NavigationMenuList className="max-[825px]:hidden flex gap-3 w-[100%] justify-between">
           <Link href="/" className="pl-2 flex items-center" aria-label="Home">
-            <BlocksIcon aria-hidden="true" />
+            <Logo width={50} height={50} aria-hidden="true" />
             <span className="sr-only">Home</span>
           </Link>
         </NavigationMenuList>

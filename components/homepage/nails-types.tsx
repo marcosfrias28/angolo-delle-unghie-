@@ -206,7 +206,7 @@ const NailsTypes: React.FC = () => {
           "flex flex-col items-center justify-center gap-10"
         )}
       >
-        <Logo width={20} height={20} />
+        <Logo width={100} height={100} />
       </picture>
     </section>
   );
