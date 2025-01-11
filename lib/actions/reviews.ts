@@ -18,14 +18,12 @@ export async function getReviews() {
     }
 }
 
-export const moderateReview = async (data: { reviewsId: string[], action: 'accept' | 'reject' }) => {
-
-    const reviewsId = data.reviewsId;
-    const status = data.action === 'accept' ? 'accepted' : 'rejected';
+export const moderateReview = async (data: { reviewsId: string[], action: 'accepted' | 'rejected' | 'delete' }) => {
+    const { reviewsId, action: status } = data;
 
     try {
         const user = await getUser()
-        if (!user || user.role !== 'admin') {
+        if ((!user || user.role !== 'admin') && status !== 'delete') {
             return { error: 'Errore: Hai bisogno di essere Admin per modificare le recensioni...' };
         }
     } catch (error) {
@@ -33,12 +31,21 @@ export const moderateReview = async (data: { reviewsId: string[], action: 'accep
     }
 
     try {
-        reviewsId.map(async (reviewId: string) => {
-            await db.update(reviewsdb).set({ status }).where(eq(reviewsdb.id, Number(reviewId)));
-        });
-        revalidatePath('/');
-        revalidatePath('/dashboard');
-        return { success: true, message: 'Recensione moderata con successo.' };
+        if (status === 'delete') {
+            reviewsId.map(async (reviewId: string) => {
+                await db.delete(reviewsdb).where(eq(reviewsdb.id, Number(reviewId)));
+            });
+            revalidatePath('/');
+            revalidatePath('/dashboard');
+            return { success: true, message: 'Recensione/i eliminata/e con successo.' }
+        } else {
+            reviewsId.map(async (reviewId: string) => {
+                await db.update(reviewsdb).set({ status }).where(eq(reviewsdb.id, Number(reviewId)));
+            });
+            revalidatePath('/');
+            revalidatePath('/dashboard');
+            return { success: true, message: `Recensione/i ${status === 'accepted' ? 'Accettata/e' : 'Rifiutata/e'} con successo.` }
+        }
     } catch (error) {
         console.error('Errore durante la moderazione della recensione:', error);
         return { error: 'Errore internxzo: impossibile moderare la recensione.' };

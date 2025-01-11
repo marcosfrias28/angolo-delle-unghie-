@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { moderateReview } from "@/lib/actions/reviews";
 import TabContentWrapper from "../wrapper/tab-content-wrapper";
+import { toast } from "sonner";
 
 const AdminDashboard = ({ reviews: initialReviews }: { reviews: Review[] }) => {
   const [reviews] = useState(initialReviews);
@@ -20,10 +21,19 @@ const AdminDashboard = ({ reviews: initialReviews }: { reviews: Review[] }) => {
     );
   };
 
-  const handleBulkAction = async (action: "accept" | "reject") => {
-    await moderateReview({ reviewsId: selectedReviews, action });
+  const handleBulkAction = async (action: "accepted" | "rejected") => {
+    await moderateReview({ reviewsId: selectedReviews, action })
+      .then((res) => {
+        if (res.error) throw new Error(res.error);
+        toast.success(res.message);
+      })
+      .catch((e) => {
+        toast.error(e);
+      });
     setSelectedReviews([]);
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   return (
@@ -66,7 +76,7 @@ const AdminDashboard = ({ reviews: initialReviews }: { reviews: Review[] }) => {
 
       <div className="flex items-center justify-center gap-5 flex-nowrap">
         <Button
-          onClick={() => handleBulkAction("accept")}
+          onClick={() => handleBulkAction("accepted")}
           disabled={selectedReviews.length === 0}
           variant="ringHover"
           className={cn(
@@ -77,7 +87,7 @@ const AdminDashboard = ({ reviews: initialReviews }: { reviews: Review[] }) => {
           Accetta selezionati
         </Button>
         <Button
-          onClick={() => handleBulkAction("reject")}
+          onClick={() => handleBulkAction("rejected")}
           disabled={selectedReviews.length === 0}
           variant="destructive"
         >

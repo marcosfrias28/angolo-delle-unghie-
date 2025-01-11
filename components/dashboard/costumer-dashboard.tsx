@@ -24,7 +24,7 @@ const CostumerDashboard = ({ initialReviews }: CostumerDashboard) => {
   };
 
   const handleDeleteSelected = async () => {
-    await deleteReviews({ reviewsId: selectedReviews, action });
+    await moderateReview({ reviewsId: selectedReviews, action: "delete" });
     setSelectedReviews([]);
     window.location.reload();
   };
