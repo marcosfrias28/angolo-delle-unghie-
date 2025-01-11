@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { User } from '@/lib/db/schema';
-import { getUser } from '@/lib/db/queries';
+import { getUser } from '@/app/(auth)/actions';
 
 export type ActionState = {
   error?: string;

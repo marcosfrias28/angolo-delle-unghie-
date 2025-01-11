@@ -63,6 +63,7 @@ export const reviews = pgTable("reviews", {
   body: varchar("body"),
   status: varchar("status"),
   created_at: timestamp("created_at").defaultNow(),
+  user_id: integer("user_id").references(() => users.id),
 });
 
 // Type Inference

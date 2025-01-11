@@ -17,6 +17,8 @@ export function StarRating({ rating, onRatingChange }: StarRatingProps) {
       {[1, 2, 3, 4, 5].map((star) => (
         <Star
           key={star}
+          name="rating"
+          id="rating"
           className={cn(
             "w-8 h-8 cursor-pointer transition-colors",
             (hoverRating || rating) >= star

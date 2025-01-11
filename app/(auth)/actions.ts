@@ -7,7 +7,7 @@ import {
   type NewUser,
   ActivityType,
 } from '@/lib/db/schema';
-import { comparePasswords, hashPassword, setSession } from '@/lib/auth/session';
+import { comparePasswords, hashPassword, setSession, verifyToken } from '@/lib/auth/session';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import {
@@ -15,12 +15,46 @@ import {
   validatedActionWithUser,
 } from '@/lib/auth/middleware';
 import db from '@/lib/db/drizzle';
-import { eq, sql } from 'drizzle-orm';
+import { and, eq, isNull, sql } from 'drizzle-orm';
+
+
+export async function getUser() {
+  const sessionCookie = cookies().get('session');
+  if (!sessionCookie || !sessionCookie.value) {
+    return null;
+  }
+
+  const sessionData = await verifyToken(sessionCookie.value);
+  if (
+    !sessionData ||
+    !sessionData.user ||
+    typeof sessionData.user.id !== 'number'
+  ) {
+    return null;
+  }
+
+  if (new Date(sessionData.expires) < new Date()) {
+    return null;
+  }
+
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(and(eq(users.id, sessionData.user.id), isNull(users.deletedAt)))
+    .limit(1);
+
+  if (!user) {
+    return null;
+  }
+
+  return user as User;
+}
 
 const signInSchema = z.object({
   email: z.string().email().min(3).max(255),
   password: z.string().min(8).max(100),
 });
+
 
 export const signIn = validatedAction(signInSchema, async (data, formData) => {
   const { email, password } = data;
@@ -63,12 +97,14 @@ const signUpSchema = z.object({
 export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { email, password, confirmPassword, name } = data;
 
+  console.log(data);
+
   if (password !== confirmPassword) {
-    return { error: "Passwords don't match." };
+    return { error: "Le password non coincidono." };
   }
 
   if (!name) {
-    return { error: 'Name is required.' };
+    return { error: 'Il nome e\' richiesto.' };
   }
 
   const existingUser = await db
@@ -78,7 +114,7 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
     .limit(1);
 
   if (existingUser.length > 0) {
-    return { error: 'Failed to create user. Please try again.' };
+    return { error: 'E` possibile che questo utente sia in uso.' };
   }
 
   const passwordHash = await hashPassword(password);
@@ -87,15 +123,22 @@ export const signUp = validatedAction(signUpSchema, async (data, formData) => {
     email,
     passwordHash,
     role: 'costumer',
+    name
   };
 
-  const [createdUser] = await db.insert(users).values(newUser).returning();
+  try {
+    const [createdUser] = await db.insert(users).values(newUser).returning();
 
-  if (!createdUser) {
-    return { error: 'Failed to create user. Please try again.' };
+    if (!createdUser) {
+      return { error: 'Error interno creando utente...' };
+    }
+    await setSession(createdUser);
+
+  } catch (error) {
+    console.error('Errore durante la creazione dell\'utente:', error);
+    return { error: 'Errore interno: impossibile creare l\'utente.' };
   }
 
-  await setSession(createdUser);
   redirect('/dashboard');
 });
 

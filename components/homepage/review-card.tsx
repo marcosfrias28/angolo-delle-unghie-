@@ -1,5 +1,6 @@
 import { Review } from "@/lib/db/schema";
 import { cn } from "@/lib/utils";
+import { format } from "@formkit/tempo";
 import { Star } from "lucide-react";
 
 const StarRating: React.FC<{ rating: string }> = ({ rating }) => {
@@ -23,13 +24,24 @@ const StarRating: React.FC<{ rating: string }> = ({ rating }) => {
   );
 };
 
-const ReviewCard: React.FC<Review> = ({ name, body, rating, created_at }) => {
+interface ReviewCardProps extends Review {
+  className?: string;
+}
+
+const ReviewCard: React.FC<ReviewCardProps> = ({
+  name,
+  body,
+  rating,
+  created_at,
+  className,
+}) => {
   return (
     <figure
       className={cn(
         "relative w-[250px] lg:w-[500px] overflow-hidden rounded-xl border p-4",
         "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
-        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
+        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
+        className
       )}
     >
       <div className="flex flex-col">
@@ -44,7 +56,7 @@ const ReviewCard: React.FC<Review> = ({ name, body, rating, created_at }) => {
         {body}
       </blockquote>
       <time className="absolute bottom-3 right-3 text-sm text-black dark:text-white">
-        {created_at?.toLocaleDateString()}
+        {format(created_at ? created_at : new Date(), "long", "it")}
       </time>
     </figure>
   );

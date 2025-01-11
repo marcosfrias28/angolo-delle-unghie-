@@ -1,47 +1,92 @@
 "use server";
 
 import db from '../db/drizzle';
-import { reviews as reviewsdb } from '../db/schema';
+import { reviews as reviewsdb, users } from '../db/schema';
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
+import { eq } from 'drizzle-orm';
+import { verifyToken } from '../auth/session';
+import { getUser } from '@/app/(auth)/actions';
 
 export async function getReviews() {
     try {
         const reviews = await db.select().from(reviewsdb);
-        return reviews.map(review => review);
+        return reviews
     } catch (error) {
         console.error('Errore nel recupero delle recensioni:', error);
         return [];
     }
 }
 
-export async function submitReview(formData: FormData) {
-    let name = formData.get('name') as string;
-    const body = formData.get('body') as string;
-    const rating = formData.get('rating') as string;
-    const isAnonymous = formData.get('isAnonymous') === 'on';
+export const moderateReview = async (data: { reviewsId: string[], action: 'accept' | 'reject' }) => {
+
+    const reviewsId = data.reviewsId;
+    const status = data.action === 'accept' ? 'accepted' : 'rejected';
+
+    try {
+        const user = await getUser()
+        if (!user || user.role !== 'admin') {
+            return { error: 'Errore: Hai bisogno di essere Admin per modificare le recensioni...' };
+        }
+    } catch (error) {
+        return { error: 'Errore interno: impossibile moderare la recensione.' };
+    }
+
+    try {
+        reviewsId.map(async (reviewId: string) => {
+            await db.update(reviewsdb).set({ status }).where(eq(reviewsdb.id, Number(reviewId)));
+        });
+        revalidatePath('/');
+        revalidatePath('/dashboard');
+        return { success: true, message: 'Recensione moderata con successo.' };
+    } catch (error) {
+        console.error('Errore durante la moderazione della recensione:', error);
+        return { error: 'Errore internxzo: impossibile moderare la recensione.' };
+    }
+}
+
+export interface ReviewData {
+    name: string | null;
+    body: string;
+    rating: number;
+    isAnonymous: boolean | undefined;
+}
+
+export const submitReview = async (formData: ReviewData) => {
+    let { name, body, rating, isAnonymous } = formData;
+
+    let user_id, payload = null;
 
     if (!body || Number(rating) < 1 || Number(rating) > 5) {
         return { error: 'Inserisci una recensione valida e una valutazione tra 1 e 5.' };
     }
-    if (isAnonymous) name = 'Anonim@';
+
+    // Get the user_id from the session token
+    const header = cookies();
+    const session = header.get('session');
+    if (session?.value) payload = await verifyToken(session?.value);
+
+    const [user] = await db.select().from(users).where(eq(users.id, Number(payload?.user.id))).limit(1)
+
+    // If the user is not logged in, the review will be anonymous
+    if (user) [user_id, name] = [user.id, user.name];
+
+    if ((isAnonymous || !name) && !user.name) name = 'Anonim@';
 
     try {
-        const Cookies = cookies()
-        Cookies.set(name, `${name},${body},${rating}`, { expires: 365 });
-        console.log(Cookies.get(name));
-
         await db.insert(reviewsdb).values({
             name,
             body,
-            rating,
+            rating: rating.toString(),
             status: 'idle',
-            created_at: new Date() as unknown as Date,
+            created_at: new Date() as Date,
+            user_id,
         });
         revalidatePath('/');
+        revalidatePath('/dashboard');
         return { success: true, message: 'La tua recensione è stata inviata con successo.' };
     } catch (error) {
         console.error('Errore durante l\'invio della recensione:', error);
         return { error: 'Errore interno: impossibile inviare la recensione.' };
     }
-}
+};

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -117,7 +117,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
                     name="name"
                     type="text"
                     required
-                    minLength={8}
+                    minLength={3}
                     maxLength={100}
                     className="appearance-none rounded-sm relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 focus:outline-none focus:ring-roseGold-light focus:border-roseGold-light focus:z-10 sm:text-sm"
                     placeholder="Mario Rossi"

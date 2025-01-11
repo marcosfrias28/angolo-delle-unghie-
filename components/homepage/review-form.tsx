@@ -6,21 +6,27 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { submitReview } from "@/lib/actions/reviews";
 import { StarRating } from "./star-rating";
 import { AnimatePresence, motion } from "framer-motion";
 import useReviewForm from "@/hooks/use-review-form";
 import cookie from "js-cookie";
+import { ReviewData, submitReview } from "@/lib/actions/reviews";
+import { User } from "@/lib/db/schema";
+import Link from "next/link";
+import { Link1Icon } from "@radix-ui/react-icons";
 
-export function ReviewForm() {
+interface ReviewForm {
+  user: User | null;
+}
+
+export function ReviewForm({ user }: ReviewForm) {
   const {
     state: { rating, isAnonymous, name, body, isSubmitting, error },
     setBody,
     setName,
     setRating,
-    setIsAnonymous,
-    setIsSubmitting,
     setError,
+    setIsAnonymous,
   } = useReviewForm();
 
   const [isAccepted, setIsAccepted] = useState(false);
@@ -30,31 +36,6 @@ export function ReviewForm() {
     const consentCookie = cookie.get("cookieConsent");
     setIsAccepted(consentCookie === "accepted");
   }, []);
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    if (!isAccepted) {
-      cookie.set("cookieConsent", "accepted", { expires: 365 });
-    }
-    const formData = new FormData(event.currentTarget);
-    formData.set("rating", `${rating}`);
-    setIsSubmitting(true);
-
-    const result = await submitReview(formData);
-
-    if (result.error) {
-      setError(result.error);
-    } else {
-      setMessage(result?.message || "");
-      setRating(0);
-      setBody("");
-      setName("");
-      setIsAnonymous(false);
-    }
-
-    setIsSubmitting(false);
-  }
 
   async function handleWrittingReview(value: string) {
     if (value.length < 500) {
@@ -72,13 +53,32 @@ export function ReviewForm() {
     }
   }
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const newData = Object.fromEntries(formData) as unknown as ReviewData;
+    const result = await submitReview({ ...newData, rating });
+    if (result.error) {
+      setError(result.error);
+    } else if (result.message) {
+      setMessage(result.message);
+      setName("");
+      setBody("");
+      setRating(0);
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 w-full mx-auto">
-      <div>
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 w-full mx-auto flex flex-col"
+    >
+      <div className="flex flex-nowrap gap-1">
         <StarRating rating={rating} onRatingChange={setRating} />
+        <span>*</span>
       </div>
       <div>
-        <Label htmlFor="body">La tua recensione</Label>
+        <Label htmlFor="body">La tua recensione *</Label>
         <Textarea
           className="text-black dark:text-white [field-sizing:content] resize-none"
           id="body"
@@ -91,39 +91,42 @@ export function ReviewForm() {
         />
         <span className="text-white">{body.length}/500</span>
       </div>
-      <div className="flex items-center space-x-2">
-        <Checkbox
-          id="isAnonymous"
-          name="isAnonymous"
-          checked={isAnonymous}
-          onCheckedChange={(checked) => setIsAnonymous(checked as boolean)}
-        />
-        <Label htmlFor="isAnonymous">Invia in modo anonimo</Label>
-      </div>
-      <AnimatePresence>
-        {!isAnonymous && (
-          <motion.div
-            key="name"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-          >
-            <Label htmlFor="name">Nome (opzionale)</Label>
-            <Input
-              onChange={(e) => handleWrittingName(e.target.value)}
-              className="text-black dark:text-white"
-              type="text"
-              min={3}
-              max={50}
-              id="name"
-              name="name"
-              value={name}
-              required
+      {!user && (
+        <>
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="isAnonymous"
+              name="isAnonymous"
+              checked={isAnonymous}
+              onCheckedChange={(checked) => setIsAnonymous(checked as boolean)}
             />
-            <span className="text-white">{name.length}/50</span>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <Label htmlFor="isAnonymous">Invia in modo anonimo</Label>
+          </div>
+          <AnimatePresence>
+            {!isAnonymous && (
+              <motion.div
+                key="name"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+              >
+                <Label htmlFor="name">Nome</Label>
+                <Input
+                  onChange={(e) => handleWrittingName(e.target.value)}
+                  className="text-black dark:text-white"
+                  type="text"
+                  min={3}
+                  max={50}
+                  id="name"
+                  name="name"
+                  value={name}
+                />
+                <span className="text-white">{name.length}/50</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
+      )}
       {!isAccepted && (
         <Label className="text-yellow-400">
           ⚠️ Se mandi una recensione, Accetti la nostra
@@ -142,10 +145,24 @@ export function ReviewForm() {
       ) : (
         <p className="text-red-500">{error}</p>
       )}
-
+      <span className="text-white dark:text-gray-500 flex flex-nowrap gap-2">
+        <span className="text-white">*</span> Obbligatorio.
+      </span>
       <Button type="submit" disabled={isSubmitting || rating === 0}>
         {isSubmitting ? "Invio in corso..." : "Invia recensione"}
       </Button>
+      {!user && (
+        <span className="text-white dark:text-gray-500 flex flex-nowrap gap-2">
+          Vuoi salvare e gestire le tue recensioni?
+          <Link
+            href="/login"
+            className="underline text-blue-500 flex flex-nowrap items-center gap-1"
+          >
+            Accedi
+            <Link1Icon width={20} height={20} />
+          </Link>
+        </span>
+      )}
     </form>
   );
 }

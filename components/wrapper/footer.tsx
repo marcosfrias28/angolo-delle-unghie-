@@ -10,10 +10,15 @@ import StandardHeading from "@/components/generic/standard-heading";
 import SocialLinks from "../footer/social-links";
 import UsefulLinks from "../footer/useful-links";
 import FooterLegal from "../footer/footer-legal";
+import { User } from "@/lib/db/schema";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Footer() {
+interface Footer {
+  user: User | null;
+}
+
+export default function Footer({ user }: Footer) {
   const path = usePathname();
 
   if (
@@ -60,7 +65,7 @@ export default function Footer() {
               title="Hai provato i miei servizi?"
               description="Lascia una recensione! 😊"
             />
-            <ReviewForm />
+            <ReviewForm user={user} />
           </div>
 
           <div className="max-lg:w-full max-lg:h-[2px] w-[2px] my-10 h-auto dark:bg-rose bg-white z-20"></div>

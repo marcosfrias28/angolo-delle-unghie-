@@ -6,6 +6,7 @@ import config from "@/config";
 import { getReviews } from "@/lib/actions/reviews";
 import { Review } from "@/lib/db/schema";
 import ReviewCard from "./review-card";
+import { format } from "@formkit/tempo";
 
 const NoReviews: React.FC = () => {
   const reviews = [
@@ -15,6 +16,7 @@ const NoReviews: React.FC = () => {
       body: "Non ci sono recensioni al momento. Controlla più tardi!",
       rating: "5",
       status: "idle",
+      user_id: 1,
       created_at: new Date(),
     },
   ];
@@ -27,7 +29,10 @@ const NoReviews: React.FC = () => {
 };
 
 const ReviewsSection: React.FC = async () => {
-  const reviews = await getReviews();
+  const reviews = (await getReviews()).filter(
+    (review) => review.status === "accepted"
+  );
+
   return (
     <section className="relative w-full items-center justify-center overflow-hidden">
       <StandardHeading

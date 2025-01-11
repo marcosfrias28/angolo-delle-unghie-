@@ -7,8 +7,8 @@ import NavBar from "@/components/wrapper/navbar";
 import config from "@/config";
 import { UserProvider } from "@/lib/auth";
 import { cn } from "@/lib/utils";
-import { getUser } from "@/lib/db/queries";
 import CookieBanner from "@/components/footer/cookie-banner";
+import { getUser } from "./(auth)/actions";
 
 const LoraFont = Lora({ subsets: ["latin"], weight: ["500", "700"] });
 
