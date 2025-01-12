@@ -30,7 +30,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
           "relative w-[250px] lg:w-[500px] overflow-hidden rounded-xl border p-4",
           "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
           "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
-          "flex flex-col justify-between items-center",
+          "flex flex-col justify-around items-center pb-10",
           className
         )}
       >
@@ -58,13 +58,11 @@ const ReviewHeader: React.FC<{
   rating: string | null;
 }> = ({ name, rating }) => {
   return (
-    <div className="flex flex-col">
-      <div className="flex justify-between items-center">
-        <figcaption className="text-xl md:text-3xl font-bold text-roseGold dark:text-roseGold-dark">
-          {name}
-        </figcaption>
-        <StarRating rating={rating || "0"} />
-      </div>
+    <div className="flex justify-between items-center w-full min-w-full">
+      <figcaption className="text-xl md:text-3xl font-bold text-roseGold dark:text-roseGold-dark">
+        {name}
+      </figcaption>
+      <StarRating rating={rating || "0"} />
     </div>
   );
 };
