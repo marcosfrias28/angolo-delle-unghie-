@@ -19,10 +19,8 @@ export async function getAvailableAppointments() {
 }
 
 export async function getAppointments(user_id: number) {
-    console.log(process.env.POSTGRES_URL); // Dovrebbe stampare la stringa di connessione
     try {
         const appointmentss = await db.select().from(appointments).where(eq(appointments.userId, user_id))
-        console.log(appointmentss)
         return appointmentss.map(appointment => ({
             id: appointment.id,
             userId: appointment.userId,
@@ -79,7 +77,6 @@ export async function deleteAppointment(id: number) {
 
 export async function addAppointmentSlot(date: string, time: string) {
     try {
-        console.log(date, time)
         const appointmentDate = new Date(`${date}T${time}:00`)
         await db.insert(availableAppointments).values({
             appointmentDate,

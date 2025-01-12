@@ -124,8 +124,6 @@ export default function Dashboard({ user }: { user: User }) {
     id: number,
     status: "approved" | "rejected"
   ) => {
-    // Implement status change logic here
-    console.log(`Changing status of appointment ${id} to ${status}`);
     // After changing status, refetch data
     fetchData();
   };

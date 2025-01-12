@@ -97,8 +97,6 @@ const signUpSchema = z.object({
 export const signUp = validatedAction(signUpSchema, async (data, formData) => {
   const { email, password, confirmPassword, name } = data;
 
-  console.log(data);
-
   if (password !== confirmPassword) {
     return { error: "Le password non coincidono." };
   }
