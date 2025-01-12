@@ -35,7 +35,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
         )}
       >
         <ReviewHeader name={name} rating={rating} />
-        <ReviewBody body={body} />
+        <ReviewBody isDialog={false} body={body} />
         <ReviewFooter date={created_at} />
       </DialogTrigger>
       <DialogContent className="w-screen h-screen p-20 rounded-[50px]">
@@ -43,7 +43,7 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
           <ReviewHeader name={name} rating={rating} />
         </DialogHeader>
         <DialogDescription>
-          <ReviewBody body={body} />
+          <ReviewBody isDialog body={body} />
         </DialogDescription>
         <DialogFooter>
           <ReviewFooter date={created_at} />
@@ -75,9 +75,17 @@ const ReviewFooter: React.FC<{ date: Date | null }> = ({ date }) => {
   );
 };
 
-const ReviewBody: React.FC<{ body: string | null }> = ({ body }) => {
+const ReviewBody: React.FC<{ body: string | null; isDialog: boolean }> = ({
+  body,
+  isDialog,
+}) => {
   return (
-    <blockquote className="mt-2 text-xl text-ellipsis overflow-hidden max-h-36">
+    <blockquote
+      className={cn(
+        "mt-2 text-xl text-start",
+        !isDialog && "text-ellipsis overflow-hidden max-h-36"
+      )}
+    >
       “{body}”
     </blockquote>
   );
