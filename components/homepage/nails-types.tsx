@@ -50,10 +50,10 @@ const nailsTypes: nailType[] = [
       "Svela la tua bellezza con unghie naturali, nude, semplici ed eleganti per ogni occasione. Esalta la tua femminilità con i miei servizi.",
   },
   {
-    name: "Sprint Nails",
+    name: "American Nails",
     image: SprintNails,
     description:
-      "Fantasie, disegni, personalità, brillantini, animals… sono solo alcune delle parole chiave delle Sprint Nails.. sbizzarriamoci per avere le unghie dei tuoi sogni.",
+      "Fantasie, disegni, personalità, brillantini, animals… sono solo alcune delle parole chiave delle American Nails.. sbizzarriamoci per avere le unghie dei tuoi sogni.",
   },
 ];
 
