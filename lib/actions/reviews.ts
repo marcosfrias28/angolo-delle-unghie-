@@ -62,33 +62,20 @@ export interface ReviewData {
 export const submitReview = async (formData: ReviewData) => {
     let { name, body, rating, isAnonymous } = formData;
 
-    let user_id, payload = null;
-
     if (!body || Number(rating) < 1 || Number(rating) > 5) {
         return { error: 'Inserisci una recensione valida e una valutazione tra 1 e 5.' };
     }
-
-    // Get the user_id from the session token
-    const header = cookies();
-    const session = header.get('session');
-    if (session?.value) payload = await verifyToken(session?.value);
-
-    const [user] = await db.select().from(users).where(eq(users.id, Number(payload?.user.id))).limit(1)
-
-    // If the user is not logged in, the review will be anonymous
-    if (user) [user_id, name] = [user.id, user.name];
-
-    if ((isAnonymous || !name) && !user.name) name = 'Anonim@';
-
+    const user = await getUser();
     try {
-        await db.insert(reviewsdb).values({
-            name,
+        const newReview = {
+            name: user?.name || name || isAnonymous && 'Anonim@' || 'Anonim@',
             body,
             rating: rating.toString(),
             status: 'idle',
             created_at: new Date() as Date,
-            user_id,
-        });
+            user_id: user?.id || null
+        }
+        await db.insert(reviewsdb).values(newReview);
         revalidatePath('/');
         revalidatePath('/dashboard');
         return { success: true, message: 'La tua recensione è stata inviata con successo.' };

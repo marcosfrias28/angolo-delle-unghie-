@@ -5,7 +5,6 @@ import {
   User,
   users,
   type NewUser,
-  ActivityType,
 } from '@/lib/db/schema';
 import { comparePasswords, hashPassword, setSession, verifyToken } from '@/lib/auth/session';
 import { redirect } from 'next/navigation';
