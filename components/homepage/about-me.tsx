@@ -51,18 +51,13 @@ const features = [
 export default function AboutMe() {
   const sectionRef = useRef(null);
   const divRef = useRef(null);
-  const imageRef = useRef(null);
   const isMobile = useMediaQuery("(max-width: 991px)");
   const isInView = useInView(sectionRef, { once: true });
   const isInViewDiv = useInView(divRef, { once: true });
 
   useGSAP(() => {
     const section = sectionRef.current;
-    const image = imageRef.current;
-
     const tl = gsap.timeline();
-
-    gsap.set(image, { y: 100 });
 
     gsap.set(divRef.current, {
       y: isMobile ? 200 : 0,
@@ -70,17 +65,7 @@ export default function AboutMe() {
       opacity: 0.7,
     });
 
-    tl.to(image, {
-      y: 0,
-      ease: "power2.out",
-      duration: 1.2,
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-        end: "center 50%",
-        scrub: true,
-      },
-    }).to(divRef.current, {
+    tl.to(divRef.current, {
       opacity: 1,
       x: 0,
       y: 0,
@@ -101,14 +86,14 @@ export default function AboutMe() {
       className="relative flex flex-col w-full px-4 justify-center items-center min-h-[1200px] max-lg:mb-10 lg:my-20 max-lg:max-h-fit"
     >
       <Image
-        ref={imageRef}
         id="hero-nail"
-        src="/hand-nail-red.png"
+        src="/hand-nail-red.webp"
         alt="Mani con Unghie French"
         width={800}
-        height={800}
-        className="smax-md:hidden absolute bottom-0 -right-36 mask-gradient w-auto h-auto opacity-45"
+        height={1200}
+        className="smax-md:hidden absolute bottom-0 -right-28 mask-gradient opacity-45"
       />
+
       <ShineBorder
         ref={divRef}
         borderWidth={4}
@@ -155,7 +140,7 @@ export default function AboutMe() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className={cn(
                   //blur effect
-                  "[filter:url(#blur-and-scale-more)]",
+                  "[filter:url(#blur-and-scale)] lg:[filter:url(#blur-and-scale-more)]",
 
                   //display
                   "relative flex items-center justify-center",
