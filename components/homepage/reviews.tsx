@@ -46,14 +46,14 @@ const ReviewsSection: React.FC = async () => {
         <NoReviews />
       ) : (
         <div className="flex flex-col gap-[1rem] mx-auto mt-10">
-          <Marquee pauseOnHover className="[--duration:20s] h-64">
+          <Marquee pauseOnHover className="h-64">
             {reviews
               .slice(0, Math.ceil(reviews.length / 2))
               .map((review, i) => (
                 <ReviewCard key={`first-${i}`} {...review} />
               ))}
           </Marquee>
-          <Marquee reverse pauseOnHover className="[--duration:20s] h-64">
+          <Marquee pauseOnHover reverse className="h-64">
             {reviews.slice(Math.ceil(reviews.length / 2)).map((review, i) => (
               <ReviewCard key={`second-${i}`} {...review} />
             ))}
