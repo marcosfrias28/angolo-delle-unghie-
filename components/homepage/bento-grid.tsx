@@ -25,7 +25,6 @@ const services = [
     description:
       "Esprimi la tua personalità con unghie eleganti e originali! Dai forma alla bellezza con i nostri trattamenti di onicotecnica avanzata, per mani che catturano ogni sguardo. Clicca e scopri come rendere uniche le tue unghie!",
     // href: "/servizi/nails",
-    cta: "Scopri di più",
     src: unghie,
     class: "lg:row-start-1 lg:row-end-4 lg:col-start-2 lg:col-end-3 lg:mt-32",
   },
@@ -35,7 +34,6 @@ const services = [
     description:
       "Ritrova la tua bellezza naturale con i nostri esclusivi trattamenti viso e corpo. Dalla luminosità della pelle alla tonicità dei tuoi tessuti, regala alla tua pelle il lusso che merita. Clicca e scopri la tua nuova routine di bellezza!",
     // href: "/servizi/viso-e-corpo",
-    cta: "Scopri di più",
     src: visoecorpo,
     class: "lg:col-start-1 lg:col-end-2 lg:row-start-1 lg:row-end-3 lg:-mt-10",
   },
@@ -45,7 +43,6 @@ const services = [
     description:
       "Scopri l’essenza della bellezza con il servizio di estetica base! Trattamenti semplici ma efficaci per valorizzare il tuo aspetto naturale, lasciandoti fresca e radiosa. Clicca e inizia il tuo viaggio verso un benessere autentico!",
     // href: "/servizi/estetica-base",
-    cta: "Scopri di più",
     src: esteticabase,
     class: "lg:col-start-1 lg:col-end-2 lg:row-start-3 lg:row-end-4 lg:-mt-10",
   },
@@ -55,7 +52,6 @@ const services = [
     description:
       "Rilassa mente e corpo con massaggi professionali, pensati per sciogliere tensioni e stress. Scopri il piacere del benessere su misura e rigenerati con un’esperienza unica. Coccola la tua anima. Clicca qui per scoprire che tipo di massaggio fa per te.",
     // href: "/servizi/massaggi",
-    cta: "Scopri di più",
     src: massaggi,
     class: "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2 lg:mt-80",
   },
@@ -65,7 +61,6 @@ const services = [
     description:
       "La laminazione è un trattamento che migliora ciglia e sopracciglia naturali, rendendole più folte e definite. In particolare, nel caso delle ciglia, la laminazione le rende più scure e folte, dando loro una curvatura che in genere si ottiene con il mascara.",
     // href: "/servizi/laminazione",
-    cta: "Scopri di più",
     src: laminazione,
     class: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4 lg:mt-80",
   },
