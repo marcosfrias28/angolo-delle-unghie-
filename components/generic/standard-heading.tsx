@@ -36,13 +36,13 @@ function StandardHeading({
       viewport={{ once: true }}
       aria-labelledby={title}
       className={cn(
-        "z-30",
+        "relative",
         // Layout
         "flex flex-col max-w-full",
         // Text colors
         "text-rose dark:text-white",
         // Spacing
-        "py-6 px-3 max-lg:pb-16 max-lg:pt-28 lg:mb-10",
+        "py-6 px-3 max-lg:pb-8 max-lg:pt-24 lg:mb-10",
         // Positioning
         position === "left" && "items-start",
         position === "right" && "items-end",
@@ -52,8 +52,17 @@ function StandardHeading({
     >
       <h2
         className={cn(
-          "dark:[filter:url(#blur-and-scale)]",
-          "font-bold leading-tight max-md:max-w-full max-md:text-4xl max-lg:text-center",
+          "z-10",
+          "font-bold leading-tight max-md:max-w-full max-md:text-4xl text-center w-full",
+          textSize()
+        )}
+      >
+        {children ? children : title}
+      </h2>
+      <h2
+        className={cn(
+          "absolute left-1/2 -translate-x-1/2 z-0 blur-md",
+          "font-bold leading-tight max-md:max-w-full max-md:text-4xl text-center w-full",
           textSize()
         )}
       >

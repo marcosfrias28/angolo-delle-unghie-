@@ -46,7 +46,7 @@ export default function Home() {
         />
         <BentoGridSection />
       </SectionWrapper>
-      <SectionWrapper id="galleria" className="lg:mt-20 max-md:my-24">
+      <SectionWrapper id="galleria" className="max-md:mb-20">
         <StandardHeading
           title="Lavori Realizzati Recentemente"
           description="Scopri le mie creazioni uniche di nail art."

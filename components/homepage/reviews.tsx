@@ -40,7 +40,7 @@ const ReviewsSection: React.FC = async () => {
         description={`Dai un'occhiata a quello che le persone pensano su ${config.websiteName}.`}
         className="text-5xl md:text-6xl font-bold text-center text-balance max-md:max-w-[70%] mx-auto"
       >
-        Alcune recensioni di clienti abituali
+        Recensioni di clienti abituali
       </StandardHeading>
       {!reviews || reviews?.length === 0 ? (
         <NoReviews />

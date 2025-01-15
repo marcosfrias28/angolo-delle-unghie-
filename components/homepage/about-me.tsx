@@ -104,7 +104,7 @@ export default function AboutMe() {
         ref={imageRef}
         id="hero-nail"
         src="/hand-nail-red.png"
-        alt="Hands with nails french style"
+        alt="Mani con Unghie French"
         width={800}
         height={800}
         className="smax-md:hidden absolute bottom-0 -right-36 mask-gradient w-auto h-auto opacity-45"
