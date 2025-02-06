@@ -27,6 +27,10 @@ import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
 const services = [
   {
+    name: "Candidatura Modella",
+    value: "modella",
+  },
+  {
     name: "Nails",
     value: "nails",
   },

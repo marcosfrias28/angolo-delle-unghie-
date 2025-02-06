@@ -3,9 +3,7 @@
 import db from '../db/drizzle';
 import { reviews as reviewsdb, users } from '../db/schema';
 import { revalidatePath } from 'next/cache';
-import { cookies } from 'next/headers';
 import { eq } from 'drizzle-orm';
-import { verifyToken } from '../auth/session';
 import { getUser } from '@/app/(auth)/actions';
 
 export async function getReviews() {
