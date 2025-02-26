@@ -18,14 +18,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
-import { MessageCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
-import { ContactFormData, contactFormSchema } from "@/lib/types";
+import { ContactFormData } from "@/lib/types";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 
 const services = [
+  {
+    name: "Consulenza gratuita",
+    value: "consulenza",
+  },
   {
     name: "Candidatura Modella",
     value: "modella",
