@@ -20,8 +20,9 @@ import image18 from "@/public/lavori/18.webp"
 const config = {
   websiteName: "Angolo Delle Unghie",
   social: {
-    Instagram: "https://www.instagram.com/angolodelleunghie_",
+    Instagram: "https://www.instagram.com/miriampezzotta",
     Facebook: "https://www.facebook.com/angolodelleunghie",
+    Tiktok: "https://www.tiktok.com/@angolodelleunghie",
     Pinterest: "https://www.pinterest.it/angolodelleunghie",
   },
   websiteDescription:
@@ -29,6 +30,37 @@ const config = {
   baseUrl: "https://angolodelleunghie.it",
   websiteFavicon: "/angolodelleunghie-rose.svg",
 };
+
+export const services = [
+  {
+    name: "Consulenza gratuita",
+    value: "consulenza",
+  },
+  {
+    name: "Candidatura Modella",
+    value: "modella",
+  },
+  {
+    name: "Nails",
+    value: "nails",
+  },
+  {
+    name: "Trattamenti viso e corpo",
+    value: "viso-corpo",
+  },
+  {
+    name: "Estetica Base",
+    value: "estetica-base",
+  },
+  {
+    name: "Massaggi",
+    value: "massaggi",
+  },
+  {
+    name: "Laminazione ciglia e sopracciglia",
+    value: "laminazione",
+  },
+];
 
 export const galleryImagesSrc = [
   image1,

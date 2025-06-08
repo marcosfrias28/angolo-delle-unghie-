@@ -22,37 +22,7 @@ import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { ContactFormData } from "@/lib/types";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
-
-const services = [
-  {
-    name: "Consulenza gratuita",
-    value: "consulenza",
-  },
-  {
-    name: "Candidatura Modella",
-    value: "modella",
-  },
-  {
-    name: "Nails",
-    value: "nails",
-  },
-  {
-    name: "Trattamenti viso e corpo",
-    value: "viso-corpo",
-  },
-  {
-    name: "Estetica Base",
-    value: "estetica-base",
-  },
-  {
-    name: "Massaggi",
-    value: "massaggi",
-  },
-  {
-    name: "Laminazione ciglia e sopracciglia",
-    value: "laminazione",
-  },
-];
+import { services } from "@/config";
 
 interface ContactModalProps {
   phoneNumber?: string;

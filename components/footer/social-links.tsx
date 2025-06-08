@@ -1,22 +1,23 @@
+import config from "@/config";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa6";
 
 function SocialLinks() {
   const socialLinks = [
     {
-      href: "https://www.instagram.com/angolodelleunghie_/",
+      href: config.social.Instagram,
       label: "Instagram",
       icon: <FaInstagram className="size-5 mr-2 text-white dark:text-rose" />,
     },
     {
-      href: "https://www.facebook.com",
+      href: config.social.Facebook,
       label: "Facebook",
       icon: <FaFacebook className="size-5 mr-2 text-white dark:text-rose" />,
     },
-    {
-      href: "https://www.tiktok.com/",
-      label: "TikTok",
-      icon: <FaTiktok className="size-5 mr-2 text-white dark:text-rose" />,
-    },
+    // {
+    //   href: config.social.Tiktok,
+    //   label: "TikTok",
+    //   icon: <FaTiktok className="size-5 mr-2 text-white dark:text-rose" />,
+    // },
   ];
 
   return (
