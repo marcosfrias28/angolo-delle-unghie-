@@ -18,20 +18,63 @@ export const metadata: Metadata = {
     default: config.websiteName,
     template: `%s | ${config.websiteName}`,
   },
-  description:
-    "The Ultimate Nextjs 14 Starter Kit for quickly building your SaaS, giving you time to focus on what really matters",
-  openGraph: {
-    description:
-      "The Ultimate Nextjs 14 Starter Kit for quickly building your SaaS, giving you time to focus on what really matters",
-    images: [""],
-    url: config.baseUrl,
+  description: config.websiteDescription,
+  keywords: ["nail art", "estetica unghie", "ricostruzione unghie", "manicure", "pedicure", "trucco semipermanente", "corso onicotecnica", "benessere unghie", "cura delle mani"],
+  authors: [{ name: config.websiteName }],
+  creator: config.websiteName,
+  publisher: config.websiteName,
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: true,
   },
-  twitter: {
-    card: "summary_large_image",
+  openGraph: {
     title: config.websiteName,
     description: config.websiteDescription,
-    images: [""],
+    url: config.baseUrl,
+    siteName: config.websiteName,
+    images: [
+      {
+        url: `${config.baseUrl}/images/social-share.jpg`,
+        width: 1200,
+        height: 630,
+        alt: config.websiteName,
+      },
+    ],
+    locale: 'it_IT',
+    type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: config.websiteName,
+    description: config.websiteDescription,
+    images: [
+      {
+        url: `${config.baseUrl}/images/twitter-share.jpg`,
+        width: 1200,
+        height: 600,
+        alt: config.websiteName,
+      },
+    ],
+    creator: '@miriampezzotta',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: config.websiteFavicon,
+    shortcut: config.websiteFavicon,
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({
