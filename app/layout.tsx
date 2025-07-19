@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: config.websiteName,
     images: [
       {
-        url: `${config.baseUrl}/images/social-share.jpg`,
+        url: `${config.baseUrl}/images/social_share.jpg`,
         width: 1200,
         height: 630,
         alt: config.websiteName,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     description: config.websiteDescription,
     images: [
       {
-        url: `${config.baseUrl}/images/twitter-share.jpg`,
+        url: `${config.baseUrl}/images/twitter_share.jpg`,
         width: 1200,
         height: 600,
         alt: config.websiteName,

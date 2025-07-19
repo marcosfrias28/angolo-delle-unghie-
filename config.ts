@@ -25,9 +25,8 @@ const config = {
     Tiktok: "https://www.tiktok.com/@angolodelleunghie",
     Pinterest: "https://www.pinterest.it/angolodelleunghie",
   },
-  websiteDescription:
-    "Angolo Delle Unghie è una piattaforma web innovativa dedicata alla gestione e promozione dei servizi di estetica e nail art. Ideale per le onicotecniche e i professionisti del settore, offre strumenti personalizzati per organizzare appuntamenti, mostrare lavori creativi e connettersi con i clienti.",
-  baseUrl: "https://angolodelleunghie.it",
+  websiteDescription: "Ciao, sono Miriam Pezzotta, l'anima e le mani dietro Angolo Delle Unghie. Con amore e professionalità, trasformo le tue unghie in piccole opere d'arte, curando ogni dettaglio con precisione, creatività e passione. Dalla dry manicure più elegante alla ricostruzione più strutturata, ogni trattamento è pensato su misura per esaltare la tua unicità. Accanto alla mia specializzazione in onicotecnica, offro anche trattamenti viso e corpo rilassanti e personalizzati, laminazione ciglia e sopracciglia per valorizzare lo sguardo, ed estetica base per chi ama sentirsi impeccabile ogni giorno. Ogni servizio nasce con un obiettivo: farti sentire a casa, coccolata e valorizzata. Prenota il tuo momento di bellezza e lasciati accogliere in un ambiente intimo e curato, dove prendersi cura di sé diventa un piacere autentico.",
+  baseUrl: "https://www.angolodelleunghie.it",
   websiteFavicon: "/angolodelleunghie-rose.svg",
 };
 
