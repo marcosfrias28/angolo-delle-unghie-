@@ -21,6 +21,7 @@ import {
 import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import { ContactFormData } from "@/lib/types";
+import { useState } from "react";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa6";
 import { services } from "@/config";
 
@@ -51,15 +52,22 @@ export function ContactModal({
 
   const watchName = watch("name") || "";
   const watchMessage = watch("message") || "";
+  const [hasPromoCode, setHasPromoCode] = useState(false);
+  const [promoCode, setPromoCode] = useState("");
 
   const onSubmit = (data: ContactFormData) => {
     const serviceName =
       services.find((s) => s.value === data.service)?.name || data.service;
 
     // Format message for WhatsApp
-    const formattedMessage = encodeURIComponent(
-      `Nome: ${data.name}\nServizio: ${serviceName}\nMessaggio: ${data.message}`
-    );
+    let messageText = `Nome: ${data.name}\nServizio: ${serviceName}\nMessaggio: ${data.message}`;
+
+    // Add promo code if provided
+    if (hasPromoCode && promoCode.trim()) {
+      messageText += `\nCodice Sconto: ${promoCode}`;
+    }
+
+    const formattedMessage = encodeURIComponent(messageText);
 
     // Try opening WhatsApp first
     window.open(
@@ -194,6 +202,42 @@ export function ContactModal({
               <p className="text-red-500 text-sm">{errors.message.message}</p>
             )}
           </div>
+
+          {/* Promo Code Section */}
+          <div className="space-y-2">
+            <div className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                id="hasPromoCode"
+                checked={hasPromoCode}
+                onChange={(e) => {
+                  setHasPromoCode(e.target.checked);
+                  if (!e.target.checked) {
+                    setPromoCode("");
+                  }
+                }}
+                className="rounded"
+              />
+              <label
+                htmlFor="hasPromoCode"
+                className="text-sm font-medium text-black"
+              >
+                Ho un codice sconto
+              </label>
+            </div>
+
+            {hasPromoCode && (
+              <div className="mt-2">
+                <Input
+                  placeholder="Inserisci il tuo codice sconto"
+                  value={promoCode}
+                  onChange={(e) => setPromoCode(e.target.value)}
+                  className="border-[#E6BCB3] focus:ring-[#B76E79] focus:border-[#B76E79] dark:bg-neutral-900"
+                />
+              </div>
+            )}
+          </div>
+
           <Button
             type="submit"
             disabled={!isValid}
